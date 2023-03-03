@@ -22,7 +22,7 @@ subtitle                 : "Statistics, Mathematics, Computer Engineering, and D
 name                     : "SeokHwan Hong"
 description              : "dd"
 url                      : "https://seokhwanhong.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
+baseurl                  : "/seokhwanhong.github.io"
 repository               : "SeokHwanHong/SeokHwanHong.github.io"
 teaser                   : "/assets/images/White background.jpg"
 logo                     : "/assets/images/White background.jpg"
