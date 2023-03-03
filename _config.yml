@@ -23,7 +23,7 @@ name                     : "SeokHwan Hong"
 description              : "dd"
 url                      : "https://seokhwanhong.github.io"
 baseurl                  : "/seokhwanhong.github.io"
-repository               : "SeokHwanHong/SeokHwanHong.github.io/comments"
+repository               : "SeokHwanHong/SeokHwanHong.github.io"
 teaser                   : "/assets/images/White background.jpg"
 logo                     : "/assets/images/White background.jpg"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
