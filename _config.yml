@@ -15,12 +15,21 @@
 minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
+<<<<<<< HEAD
 locale                   : "ko-KR"
 title                    : "Storage for Study"
 title_separator          : " | "
 subtitle                 : "Statistics, Mathematics, Computer Engineering, and Data Science"
 name                     : "SeokHwan Hong"
 description              : "dd"
+=======
+locale                   : "en-US"
+title                    : "Site Title"
+title_separator          : "-"
+subtitle                 : # site tagline that appears below site title in masthead
+name                     : "Your Name"
+description              : "An amazing website."
+>>>>>>> 56ea4df87190cadf60d797a4cf64901db9bd9bc4
 url                      : "https://SeokHwanHong.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "SeokHwanHong/SeokHwanHong.github.io"
