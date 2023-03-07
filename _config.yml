@@ -17,48 +17,33 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 # Site Settings
 locale                   : "ko-KR"
 title                    : "Storage for Study"
-title_separator          : " | "
+title_separator          : "|"
 subtitle                 : "Statistics, Mathematics, Computer Engineering, and Data Science"
 name                     : "SeokHwan Hong"
 description              : "dd"
 url                      : "https://seokhwanhong.github.io"
-baseurl                  : "/seokhwanhong.github.io"
-repository               : "SeokHwanHong/SeokHwanHong.github.io"
+baseurl                  : # "/seokhwanhong.github.io"
+repository               : "SeokHwanHong/blog-comments"
 teaser                   : "/assets/images/White background.jpg"
 logo                     : "/assets/images/White background.jpg"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : true # true, false (default)
 words_per_minute         : 200
+
 comments:
   provider               : "utterances" # false (default), , "discourse", "facebook", "staticman", "staticman_v2", , "giscus", "custom"
-  disqus:
-    shortname            : #"SeokHwanHong's Note"
-  discourse:
-    server               : # https://meta.discourse.org/t/embedding-discourse-comments-via-javascript/31963 , e.g.: meta.discourse.org
-  facebook:
-    # https://developers.facebook.com/docs/plugins/comments
-    appid                :
-    num_posts            : 10 # 5 (default)
-    colorscheme          : # "light" (default), "dark"
   utterances:
     theme                : "Photon-Dark" # "github-light" (default), "github-dark"
     issue_term           : "pathname" # (default)
-  giscus:
-    repo_id              : # Shown during giscus setup at https://giscus.app
-    category_name        : # Full text name of the category
-    category_id          : # Shown during giscus setup at https://giscus.app
-    discussion_term      : # "pathname" (default), "url", "title", "og:title"
-    reactions_enabled    : # '1' for enabled (default), '0' for disabled
-    theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
-  staticman:
-    branch               : # "master"
-    endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"
+
 reCaptcha:
   siteKey                :
   secret                 :
+
 atom_feed:
   path                   : # blank (default) uses feed.xml
   hide                   : # true, false (default)
+
 search                   : # true, false (default)
 search_full_content      : # true, false (default)
 search_provider          : # lunr (default), algolia, google
@@ -252,16 +237,16 @@ tag_archive:
   type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
+jekyll-archives:
+  enabled:
+   - categories
+   - tags
+  layouts:
+  category: archive-taxonomy
+  tag: archive-taxonomy
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
 
 
 # HTML Compression
