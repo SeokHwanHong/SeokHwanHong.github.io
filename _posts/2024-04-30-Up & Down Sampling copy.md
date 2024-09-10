@@ -7,6 +7,7 @@ author_profiel: false # 홈페이지 프로필이 다른 페이지에도 뜨는�
 sidebar:              # 페이지 왼쪽에 카테고리 지정
     nav: "docs"       # sidebar의 주소 지정
 #search: false # 블로그 내 검색 비활성화
+use_math: true
 ---
 # 1. Definition : Down Sampling
  인코딩 진행 시 데이터의 수를 줄이는 과정, 또는 고해상도 데이터를 저해상도로
