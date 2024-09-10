@@ -28,7 +28,7 @@ sequential 계산을 줄이기 위해 CNN 기반 모델들(Extended Neural GPU, 
 #### - Attention
 
 
-<p align = "center"><img src = "images/attentionisallyouneed/selfattention.jpg">
+![image](/images/attentionisallyouneed/selfattention.jpg){: width="50%" height="50%"}{: .center}
 
 Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었으며 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능. 본 논문에서 순환과정(recurrence)을 피하는 대신 input과 output 사이의 global dependency를 찾는 attention mechanism만 사용. 또한 Transformer 구조는 더 많은 병렬처리가 가능해 최고 수준까지도 도달.
 
