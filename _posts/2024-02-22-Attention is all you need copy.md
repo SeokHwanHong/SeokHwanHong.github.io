@@ -27,8 +27,7 @@ sequential 계산을 줄이기 위해 CNN 기반 모델들(Extended Neural GPU, 
 
 #### - Attention
 
-
-![image](/images/attentionisallyouneed/selfattention.jpg){: width="50%" height="50%"}{: .center}
+![image](/images/attentionisallyouneed/selfattention.jpg){: width="60%" height="60%"}{: .align-center}
 
 Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었으며 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능. 본 논문에서 순환과정(recurrence)을 피하는 대신 input과 output 사이의 global dependency를 찾는 attention mechanism만 사용. 또한 Transformer 구조는 더 많은 병렬처리가 가능해 최고 수준까지도 도달.
 
@@ -36,12 +35,10 @@ Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 tr
 - Embeddings and Softmax
 - Positional Encoding
 
-- 장점
+#### - 장점
 1. 층당 전체 연산 수 감소
 2. 병렬화 가능 계산
 3. 신경망 내 장거리 의존성 간 경로 길이가 짧아져 학습이 용이
-
-
 
 #### - Self-Attention
 Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 집중하는 방식으로 작동하는 메커니즘. 기존 RNN 모델처럼 sequence를 순차적으로 처리하지 않고, 모든 위치 간의 관계를 동시에 고려해 학습하도록 작동. 
@@ -52,14 +49,19 @@ Query, Key, Value 의 시작값이 동일. 자기 자신과의 내적을 통해 
 
 - overall architecture
 
-<p align = "center"><img src = "images/attentionisallyouneed/model architecture.jpg">
+![image](/images/attentionisallyouneed/model%20architecture.jpg){width=400}{: .align-center}
 
 
 ## 3.1. Attention
 
 - Scaled Dot-Product Attention
 
-<p align = "center"><img src = "images/attentionisallyouneed/sdpa-1.jpg">
+![image](/images/attentionisallyouneed/sdpa.jpg){width = 200}
+
+<p align = 'center'>
+    <img src = '/images/attentionisallyouneed/sdpa.jpg' weight='200'>
+
+
 
 $Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V$ 
 
