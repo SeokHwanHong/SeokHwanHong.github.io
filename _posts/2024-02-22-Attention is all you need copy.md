@@ -26,11 +26,10 @@ RNN, LSTM, g-RNN 등이 sequence modeling 과 transductive 문제에서 좋은 �
 sequential 계산을 줄이기 위해 CNN 기반 모델들(Extended Neural GPU, ByteNet, ConvS2S 등)은 블록을 쌓으며 모든 입출력 위치에 대한 숨겨진 표현을 병렬적으로 계산함. 이 모델들은 임의의 입력 또는 출력 위치 간 신호를 연결하는데 필요한 연산량이 증가하므로 먼 위치 간의 의존성 학습이 난해해짐. 이런 단점을 보완하기 위해 Transformer를 도입. 단, attention의 가중치가 적용된 position의 평균을 이용하기 때문에 유효 해상도가 낮아지는 단점이 존재.
 
 #### - Attention
-![alt text](selfattention.jpg)
+![image](images/attentionisallyouneed/selfattention.jpg)
 
 Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었으며 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능. 본 논문에서 순환과정(recurrence)을 피하는 대신 input과 output 사이의 global dependency를 찾는 attention mechanism만 사용. 또한 Transformer 구조는 더 많은 병렬처리가 가능해 최고 수준까지도 도달.
 
-- 
 - Position-wise Feed-Forward Networks
 - Embeddings and Softmax
 - Positional Encoding
@@ -49,16 +48,17 @@ Query, Key, Value 의 시작값이 동일. 자기 자신과의 내적을 통해 
 
 # 3. Model Architecture
 - overall architecture
-![alt text](<model architecture.jpg>)
+![image](images/attentionisallyouneed/model architecture.jpg)
 
 ## 3.1. Attention
 
 
 
 - Scaled Dot-Product Attention
-![alt text](sdpa-1.jpg) 
+![image](images/attentionisallyouneed/sdpa-1.jpg) 
 
 $Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V$ 
+
 위 수식으로 Attention 매커니즘을 작동
 
 input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
@@ -76,12 +76,14 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 
 - Multi-Head Attention
-![alt text](mha-1.jpg) 
+![image](images/attentionisallyouneed/mha-1.jpg) 
 
 ## 3.1. Encoder & Decoder Stacks
 - Notation
 $(x_1, x_2, ... , x_n)$ : an input sequence of symbol representations
+
 $ \mathbf{z} = (z_1, z_2, ... , z_n)$ : a sequence of continuous representations
+
 $(y_1, y_2, ... , y_n)$ : an output sequence 
 
 - overall architecture
@@ -92,12 +94,6 @@ $(x_1, x_2, ... , x_n)$을 $(z_1, z_2, ... , z_n)$로 mapping
 #### 3.1.2. Decoder
 $\mathbf{z}$가 주어졌을 때, 한번에 하나씩 $(y_1, y_2, ... , y_n)$을 생성
 각 단계에서 모델은 autoregressive이며, 이전에 생성한 심볼은 다음 심볼을 생성할 때 추가 입력으로 사용.
-
-- Applications of Attention in our Model
-
-
-# 4. Why Self-Attention
-
 
 
 # 참고
