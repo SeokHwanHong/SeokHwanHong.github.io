@@ -26,7 +26,9 @@ RNN, LSTM, g-RNN 등이 sequence modeling 과 transductive 문제에서 좋은 �
 sequential 계산을 줄이기 위해 CNN 기반 모델들(Extended Neural GPU, ByteNet, ConvS2S 등)은 블록을 쌓으며 모든 입출력 위치에 대한 숨겨진 표현을 병렬적으로 계산함. 이 모델들은 임의의 입력 또는 출력 위치 간 신호를 연결하는데 필요한 연산량이 증가하므로 먼 위치 간의 의존성 학습이 난해해짐. 이런 단점을 보완하기 위해 Transformer를 도입. 단, attention의 가중치가 적용된 position의 평균을 이용하기 때문에 유효 해상도가 낮아지는 단점이 존재.
 
 #### - Attention
-![image](images/attentionisallyouneed/selfattention.jpg)
+
+
+<p align = "center"><img src = "./images/attentionisallyouneed/selfattention.jpg">
 
 Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었으며 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능. 본 논문에서 순환과정(recurrence)을 피하는 대신 input과 output 사이의 global dependency를 찾는 attention mechanism만 사용. 또한 Transformer 구조는 더 많은 병렬처리가 가능해 최고 수준까지도 도달.
 
@@ -47,15 +49,17 @@ Query, Key, Value 의 시작값이 동일. 자기 자신과의 내적을 통해 
 
 
 # 3. Model Architecture
+
 - overall architecture
-![image](images/attentionisallyouneed/model architecture.jpg)
+
+<p align = "center"><img src = "./images/attentionisallyouneed/model architecture.jpg">
+
 
 ## 3.1. Attention
 
-
-
 - Scaled Dot-Product Attention
-![image](images/attentionisallyouneed/sdpa-1.jpg) 
+
+<p align = "center"><img src = "./images/attentionisallyouneed/sdpa-1.jpg">
 
 $Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V$ 
 
@@ -71,15 +75,14 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 5. 마지막으로 4번의 결과값에 V를 곱함
 
 
-
-
-
-
 - Multi-Head Attention
-![image](images/attentionisallyouneed/mha-1.jpg) 
+
+<p align = "center"><img src = "./images/attentionisallyouneed/mha-1.jpg">
 
 ## 3.1. Encoder & Decoder Stacks
+
 - Notation
+
 $(x_1, x_2, ... , x_n)$ : an input sequence of symbol representations
 
 $ \mathbf{z} = (z_1, z_2, ... , z_n)$ : a sequence of continuous representations
@@ -98,20 +101,26 @@ $\mathbf{z}$가 주어졌을 때, 한번에 하나씩 $(y_1, y_2, ... , y_n)$을
 
 # 참고
 - attention is all you need
+
 https://brave-greenfrog.tistory.com/19
 
 - sequence model
+
 https://wooono.tistory.com/241
 https://dos-tacos.github.io/translation/transductive-learning/
 https://jadon.tistory.com/29
 
 - inductive problem
+
 https://velog.io/@kimdyun/Inductive-Transductive-Learning-%EC%B0%A8%EC%9D%B4%EC%A0%90
 
 - self-attention
+
 https://codingopera.tistory.com/43
 
 # 참고 논문
-BERT
-NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE
-Vision Transformer
+- BERT
+
+- NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE
+
+- Vision Transformer
