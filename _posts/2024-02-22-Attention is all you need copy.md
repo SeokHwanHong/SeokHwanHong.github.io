@@ -28,7 +28,7 @@ sequential 계산을 줄이기 위해 CNN 기반 모델들(Extended Neural GPU, 
 #### - Attention
 
 
-<p align = "center"><img src = "./images/attentionisallyouneed/selfattention.jpg">
+<p align = "center"><img src = "images/attentionisallyouneed/selfattention.jpg">
 
 Attention Mechanism은 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었으며 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능. 본 논문에서 순환과정(recurrence)을 피하는 대신 input과 output 사이의 global dependency를 찾는 attention mechanism만 사용. 또한 Transformer 구조는 더 많은 병렬처리가 가능해 최고 수준까지도 도달.
 
@@ -52,14 +52,14 @@ Query, Key, Value 의 시작값이 동일. 자기 자신과의 내적을 통해 
 
 - overall architecture
 
-<p align = "center"><img src = "./images/attentionisallyouneed/model architecture.jpg">
+<p align = "center"><img src = "images/attentionisallyouneed/model architecture.jpg">
 
 
 ## 3.1. Attention
 
 - Scaled Dot-Product Attention
 
-<p align = "center"><img src = "./images/attentionisallyouneed/sdpa-1.jpg">
+<p align = "center"><img src = "images/attentionisallyouneed/sdpa-1.jpg">
 
 $Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V$ 
 
@@ -77,7 +77,7 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 - Multi-Head Attention
 
-<p align = "center"><img src = "./images/attentionisallyouneed/mha-1.jpg">
+<p align = "center"><img src = "images/attentionisallyouneed/mha-1.jpg">
 
 ## 3.1. Encoder & Decoder Stacks
 
