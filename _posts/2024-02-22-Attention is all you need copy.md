@@ -59,7 +59,7 @@ Query, Key, Value 의 시작값이 동일. 자기 자신과의 내적을 통해 
 ![image](/images/attentionisallyouneed/sdpa.jpg){width = 200}
 
 <p align = 'center'>
-    <img src = '/images/attentionisallyouneed/sdpa.jpg' weight='200'>
+    <img src = '/images/attentionisallyouneed/sdpa.jpg' width='150'>
 
 
 
