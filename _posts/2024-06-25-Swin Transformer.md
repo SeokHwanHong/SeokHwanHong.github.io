@@ -62,36 +62,24 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 #### - Swin Transformer Block
 
 <div style="display: flex; justify-content: space-between;">
-  <figure style="text-align: center;">
-  <img src="/images/SwinTransformer/figure3-3.jpg" width="400"/>
-  <figcaption>[ figure4 : Swin Block ]</figcaption>
-  </figure>
-  
-  <figure style="text-align: center;">
-    <img src="/images/SwinTransformer/figure3-3-1.jpg" width="200">    
-    <figcaption>[ figure5 : ViT Block ] </figcaption>
-  </figure>
-</div>
-
-
-<div style="display: flex; justify-content: space-between;">
-  <figure style="position: relative; width: 400px; text-align: center;">
-    <img src="/images/SwinTransformer/figure3-3.jpg" width="400"/>
-    <figcaption style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); color: white; background-color: rgba(0, 0, 0, 0.5); padding: 5px;">
-      [ figure4 : Swin Block ]
+  <figure style="text-align: center; width: 400px;">
+    <img src="/images/SwinTransformer/figure3-3.jpg" height ="350"/>
+    <figcaption style="color: black; padding: 5px; white-space: nowrap;"> [ figure4 : Swin Block ]
     </figcaption>
   </figure>
   
-  <figure style="position: relative; width: 200px; text-align: center;">
-    <img src="/images/SwinTransformer/figure3-3-1.jpg" width="200"/>
-    <figcaption style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); color: white; background-color: rgba(0, 0, 0, 0.5); padding: 5px;">
-      [ figure5 : ViT Block ]
+  <figure style="text-align: center; width: 200px;">
+    <img src="/images/SwinTransformer/figure3-3-1.jpg" height="350"/>
+    <figcaption style="color: black; padding: 5px; white-space: nowrap;">[ figure5 : ViT Block ]
     </figcaption>
   </figure>
 </div>
 
 
 
+
+
+$\\$
 Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT Block와는 다르게 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
 
 #### - Computation Complexity

@@ -160,7 +160,7 @@ $p(\mathbf{x}^{(0)})$ : 모형 분포
 $r(\mathbf{x}^{(0)})$ : 2번째 분포 또는 제한된 양수 함수(bounded positive function)
 $\tilde{p}(\mathbf{x}^{(0)}) \propto p(\mathbf{x}^{(0)}) \: r(\mathbf{x}^{(0)})$ : 새로운 분포 
 
-분포의 곱은 계산량이 많고 어렵지만, 각 과정에서 $r(\mathbf{x}^{(0)})$ 을 작은 섭동(perturbation)으로 간주하거나 정확하게 계산되기때문에 diffusion 모형은 직관적이다.
+분포의 곱은 계산량이 많고 어렵지만, 각 과정에서 $r(\mathbf{x}^{(0)})$ 을 작은 섭동으로 간주하거나 정확하게 계산되기때문에 diffusion 모형은 직관적이다.
 
 ### 2.5.1. Modified Marginal Distributions
 $\tilde{p}(\mathbf{x}^{(0)})$ 를 계산하기 위해 각 중간 분포와 그에 대응하는 $r(\mathbf{x}^{(t)})$ 를 곱한다. 이에 대응되는 변형된 역과정 $\tilde{p}(\mathbf{x}^{(T)})$ 는 다음과 같이 정의할 수 있다.
@@ -170,16 +170,16 @@ $$
 여기서 $Z_T$ 는 $t$ 번째 중간 분포의 정규화 상수이다.
 
 ### 2.5.2. Modified Diffusion Steps
-역과정에서 Markov kernel $p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 은 다음과 같은 동치조건을 만족한다.
+역과정에서 Markov kernel $p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 은 다음과 같이 표현할 수 있다.
 $$
 p(\mathbf{x}^{(t)}) = \int d \mathbf{x}^{(t+1)} \: p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}}) \: p(\mathbf{x^{(t+1)}})
 $$
 
-본 논문에서는 섭동된(perturbed) Markov kernel $ \tilde{p}(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 을 만들기 원하는데, 이는 다음과 같이 유도할 수 있다.
+본 논문에서는 섭동된(perturbed) Markov kernel $ \tilde{p}(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 을 만드는 것을 목표이며 다음과 같이 유도할 수 있다.
 $$
 \begin{align}
 \tilde{p}(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \tilde{p} (\mathbf{x}^{(t+1)})\\
-\frac{p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})}{\tilde{Z_t}} &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \cdot \frac{p(\mathbf{x}^{(t+1)}) \: r(\mathbf{x}^{(t+1)})}{\tilde{Z_t}} \\
+\frac{p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})}{\tilde{Z_t}} &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \cdot \frac{p(\mathbf{x}^{(t+1)}) \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1}} \\
 p(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \cdot \frac{\tilde{Z}_{t} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t+1)})\\
 \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \frac{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t+1)})\\
 \end{align}
@@ -187,16 +187,16 @@ $$
 만약 $\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 식 $(12)$ 와 같다면, 식 $(11)$ 의 등식이 성립한다. 식 $(12)$ 가 정규화된 확률 분포가 아닐 수도 있기 때문에, 이에 대한 방안으로 다음과 같은 식을 이용한다.
 $$
 \begin{align}
-\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \frac{1}{\tilde{Z}_{t} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: r(\mathbf{x}^{(t+1)})\\
+\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \frac{1}{\tilde{Z}_{t}} \cdot \frac{r(\mathbf{x}^{(t+1)})} {r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \\
 \end{align}
 $$
-여기서 $\tilde{Z}_t (\mathbf{x}^{(t+1)})$ 은 정규화 상수이다. 그리고 $\frac{r(\mathbf{x}^{(t)})}{r(\mathbf{x}^{(t+1)})}$ 은 $ p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 섭동으로 간주된다. 이러한 작은 섭동은 정규분포의 평균에 영향은 미치지만 정규화 상수에는 영향이 없기때문에, 식 $(12)$ 와 $(13)$ 은 동치이다.
+여기서 $\tilde{Z}_t (\mathbf{x}^{(t+1)})$ 은 정규화 상수이다. $\frac{r(\mathbf{x}^{(t)})}{r(\mathbf{x}^{(t+1)})}$은  $\:p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 섭동으로 간주된다. 이러한 작은 섭동은 정규분포의 평균에 영향은 미치지만 정규화 상수에는 영향이 없기때문에, 식 $(12)$ 와 $(13)$ 은 동치이다.
 
 ### 2.5.3. Appling $r \: (\mathbf{x}^{(t)})$
 #### case 1 : $r(\mathbf{x}^{(t)})$ 가 충분히 부드러운 경우
-$r(\mathbf{x}^{(t)})$ 을 역과정의 kernel $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 작은 섭동으로 간주해 $\: \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 과 $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 가 동일한 분포를 따르지만 정규분포 kernel에서는 동조(perturbed)된 평균을, 이항분포 kernel에서는 동조된 flip rate를 가지게 된다.
+$r(\mathbf{x}^{(t)})$ 을 역과정 kernel인 $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 작은 섭동으로 간주해 $\: \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 과 $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 가 동일한 분포를 따르지만 정규분포 kernel에서는 동조(perturbed)된 평균을, 이항분포 kernel에서는 동조된 flip rate를 가지게 된다.
 
-#### case 2 : $r(\mathbf{x}^{(t)})$ 가 닫힌 형태(close form)로 정규분포나 이항분포와 곱해진 경우
+#### case 2 : $r(\mathbf{x}^{(t)})$ 가 닫힌 형태(closed form)로 정규분포나 이항분포와 곱해진 경우
 $r(\mathbf{x}^{(t)})$ 을 역과정 kernel $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 바로 곱할 수 있다. 이는 $r(\mathbf{x}^{(t)})$ 가 좌표축에 대한 부분집합의 delta 함수로 구성된 경우에 적용 가능하다.
 
 ### 2.5.4. Choosing $\: r \: (\mathbf{x}^{(t)})$
@@ -204,14 +204,14 @@ $r(\mathbf{x}^{(t)})$ 은 주로 diffusion 과정에서 천천히 변화하도�
 $$
 \begin{align}
 r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \\
-r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)})&{\frac{T-t}{T}} \\
+r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \cdot {\frac{T-t}{T}} \\
 \end{align}
 $$
-식 $(15)$ 의 경우 역과정에 대한 시작 분포에 영향이 없다. 즉, 역과정에서 $\tilde{p}(\mathbf{x}^{(T)})$ 으로부터 뽑은 최초의 표본들은 똑바르다(starightforward)는 것이다.
+식 $(15)$ 의 경우 $\tilde{p}(\mathbf{x}^{(T)})$에서 뽑은 표본들은 역과정에서 시작 분포의 영향이 없다.
 
 
 ## 2.6. Entropy of Reverse Process
-전진 과정을 알고있기 때문에, 상한과 하한을 다음과 같이 유도할 수 있다.
+전진 과정을 알고있기 때문에, 상한과 하한을 다음과 같이 유도할 수 있다. (Appendix A 참고)
 $$
 \begin{equation}
 \begin{split}
