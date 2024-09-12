@@ -1,7 +1,7 @@
 ---
 layout: single        # 문서 형식
-title: 'Swin Transformer 리뷰'         # 제목
-categories: Generative Model    # 카테고리
+title: Swin Transformer, Heirarchical Vision Transformer using Shifted Windows          # 제목
+categories: Segmentation   # 카테고리
 toc: true             # 글 목차
 author_profile: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
 sidebar:              # 페이지 왼쪽에 카테고리 지정
@@ -10,56 +10,77 @@ sidebar:              # 페이지 왼쪽에 카테고리 지정
 use_math: true
 ---
 # Keywords
-Transformer, Window, Shifted
+Transformer, Shifted Window
 
 
 # 1. Introduction
 #### - CNN
-컴퓨터 비전에서의 모델들은 주로 CNN 기반이 많았다. 그리고 CNN architecture들은 더 정교하고 더 복잡하고 더 크고 확장이 가능한 연결형태를 만듦으로써 convolution 형태를 진화시켜왔디. 다양한 vision task에서 cnn은 backbone network로 많이 사용되어왔고 많은 분야에서 향상된 성능을 보여왔다.
+컴퓨터 비전에서 주로 사용하는 모형들은 CNN 기반의 것들이 많았다. 더 깊고 더 복잡한 연결형태를 구성함으로써 convolution 형태를 진화시켜왔다. 그리고 다양한 vision task에서 backbone network로 많이 사용되었고 좋은 성능을 보여왔다.
 
 #### - NLP
-주로 transformer 기반으로 많이 사용한다. 성능이 좋아서 이를 컴퓨터 비전에도 적용하려는 시도가 있어왔다.
+주로 transformer 기반 모형을 많이 사용한다. 이를 컴퓨터 비전에도 적용하려는 시도가 있어왔다.
 
-#### - nlp에서의 성능을 vision에서도 적용이 가능한가
-이 논문에서 저자들은 컴퓨터 비전에서 일반적인 목적으로써 사용가능하도록 Transformer의 적용가능성을 확장시키고자한다. nlp에서 사용하는 transfomer를 vision에도 적용시키기에는 어려운데 scale과 text보다 image pixel이 더 많은 해상도(정보)를 포하는 어려움이 있다. 이들을 극복하고자 Swin Transformer 제안한다.
+#### - Transformer의 vision 적용 가능 여부
+NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려움이 있는데, 이는 text보다 image pixel에서 더 많은 해상도(정보)를 포함하기 때문이다. 이와 더불어 여러 문제들을 극복하고자 Swin Transformer 제안한다.
 
-#### - Swin Transformer 의 구조에 대한 간략한 설명
-계층적 feature map과 이미지 크기에 대한 선형 계산적 복잡도로 구성한다. 계층적 feature map 덕분에 dense prediction에 대한 고급 기술들 적용 가능하다. 선형 계산 복잡도는 이미지를 겹치지 않는 패치별로 잘라 부분마다 self-attention을 적용함으로써 계산이 가능하다. window마다 patch 수 고정함으로써 선형적인 계산 복잡도를 계산할 수 있다.
+#### - 전체 구조 요약
+전체 구조는 계층적 feature map과 이미지 크기에 대한 선형 계산적 복잡도로 구성된다. 계층적 feature map 으로 인해 dense prediction에 대한 여러 기술들을 적용 할 수 있다. 선형 복잡도 계산은 이미지를 겹치지 않도록 patch별로 잘라 부분마다 self-attention을 적용하고 window마다 patch 수를 고정해 선형적인 계산 복잡도를 계산할 수 있다.
 
 #### - Swin Transformer 의 구조 중 핵심 설계
-연속적인 self attention 층간 window partition의 shift 한다. 이를 통해 층간 연결성으로 인해 모델링 파워 강화되며 실제 세계에서의 연산량에 영향을 미친다. experiment 보면 모델의 파워는 비슷한데 연산량은 더 적다.
+연속적인 self attention 층 간 window partition을 이동(shift)한다. 이는 모형의 성능을 강화하며 실제 세계에서의 연산량에도 영향을 미친다. 
+
 
 
 
 # 2.Methods
 ## 2.1. Overall Architecture
-<p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure3.jpg">
+<figure style="text-align: center;">
+  <img src="/images/SwinTransformer/figure3.jpg" width = 1500>
+  <figcaption>[ figure1 : Overall Architecture ]</figcaption>
+</figure>
+
 
 #### - Input
-<p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure3-1.jpg" weight=500 height = 200>
+<figure style="text-align: center;">
+  <img src = "/images/SwinTransformer/figure3-1.jpg" weight=500 height = 200>
+  <figcaption>[ figure2 : Stage1 ]</figcaption>
+</figure>
 
-이미지들을 ViT의 patch들처럼 겹치지 않게 각각 RGB채널마다 나눈다. 이 때 각 패치들은 토큰으로 간주되고 이에 대한 feature map은 raw pixel RGB값의 결합이다. 여기서는 패치크기를 4x4로 설정해 각 패치마다 feature 차원은 4x4x3(RGB channel)로 구성 한다. 이를 linear embedding 층에 적용하는데 arbitrary dimension $C$로 사영(삽입)한다. 변형된 self-attention 계산(Swin Transformer block)을 이용한 여러 Transformer block들에 앞서 구성한 패치들을 적용한다. 이때 Transformer block들의 크기는 토큰의 개수인 $\frac{H}{4}$x$\frac{W}{4}$ 이고 이를 Stage1이라고 지칭한다.
-
+이미지들을 ViT의 patch들처럼 겹치지 않게 RGB채널로 나눈다. 이 때 각 patch는 토큰으로 간주되고 feature map은 raw pixel RGB값의 결합이다. 그리고 patch 크기를 4x4로 설정해 각 패치마다 4x4x3(RGB channel)으로 feature map을 구성한다. 이 feature map을 arbitrary dimension $C$로 사영(삽입)해 linear embedding 층에 적용한다. Swin Transformer block 을 이용한 여러 block들에 앞서 구성한 patch를 적용한다. 이때 block의 크기는 토큰의 개수인 $\frac{H}{4}$x$\frac{W}{4}$ 이고 이를 Stage1이라고 지칭한다.
 
 #### - Hierarchcial Feature Map
-<p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure3-2.jpg" weight=800 height = 200 >
+<figure style="text-align: center;">
+  <img src = "/images/SwinTransformer/figure3-2.jpg" weight=800 height = 200>
+  <figcaption>[ figure3 : Stage2 ~ 4 ]</figcaption>
+</figure>
 
+전체적으로 계층적인 feature map을 구성하기 위해 신경망이 깊어지면서 patch들을 합쳐 토큰의 수를 감소시킨다. Stage1에서 Stage2로 이동하면서 기존 패치들을 2x2로 합치고 4C 차원의 feature map을 구성한다. 따라서 output 차원은 2C가 된다. 동일하게 각 Stage를 이동할때마다 2x downsampling of resolution을 적용함으로써 Stage3와 Stage4의 해상도는 각각 $\frac{H}{16} \times \frac{W}{16} \times 4C$ 와 $\frac{H}{32} \times \frac{W}{32} \times 8C$ 로 층을 지날수록 감소한다. 이를 통해 일반적인 representation보다 더 계층적인 구조를 학습가능하고 차원이 감소한만큼 연산속도가 빨라진다.
 
-이제 전체적인 구성에서 계층적인 feature map을 구성해야 하므로 신경망이 깊어짐에 따라 patch들을 합쳐 토큰의 수를 감소시켜야한다. Stage1에서 Stage2로 이동하면서 기존 패치들을 2x2로 합침으로써 4C 차원의 feature map을 구성한다. 따라서 output 차원은 2C가 된다. 동일하게 각 Stage를 이동할때마다 2x downsampling of resolution을 적용해 Stage3와 Stage4의 해상도는 각각 $\frac{H}{16}$x$\frac{W}{16}$x$4C$, $\frac{H}{32}$x$\frac{W}{32}$x$8C$로 층을 지날수록 감소한다. 이 작업을 통해 제안한 architecture는 일반적인 representation보다 더 계층적인 것을 학습가능하고 차원이 감소한 만큼 연산속도에도 이점이 있다.
 
 
 ## 2.2. Shifted Window based Self-Attention
 #### - Swin Transformer Block
-<p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure3-3.jpg" weight=100 height = 200>
-<p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure3-3-1.jpg" weight=100 height = 200>
 
-Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT의 Transformer Block과의 차이점으로는 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
+<div style="display: flex; justify-content: space-between;">
+  <figure style="text-align: center;">
+  <img src="/images/SwinTransformer/figure3-3.jpg" width="400"/>
+  <figcaption>[ figure4 : Swin Block ]</figcaption>
+  </figure>
+  
+  <figure style="text-align: center;">
+    <img src="/images/SwinTransformer/figure3-3-1.jpg" width="200">    
+    <figcaption>[ figure5 : ViT Block ] </figcaption>
+  </figure>
+</div>
+
+Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT Block와는 다르게 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
 
 #### - Computation Complexity
-기존 ViT는 이미지 전체에 대해 self-attention을 수행하기때문에 연산량이 많이 요구된다. 반면에 Swin은 겹치지않는 window를 이용한 self-attention으로 보다 효율적인 연산이 가능하다. 각 window가 $M$x$M$ 개의 패치를 가지고 이미지의 크기가 $h$x$w$ 라고 가정하자.복잡도 계산시 Softmax 계산은 제외하였을 때, 각각 ViT와 Swin 내 MSA의 복잡도 크기는 다음과 같다. 
-
-$\Omega(MSA)$ = $4hwC^2 + 2(hw)^2C$,
-$\Omega(W$-$MSA)$ = $4hwC^2 + 2M^2hwC$
+ViT는 이미지 전체에 대해 self-attention을 수행하기때문에 많은 연산량이 요구된다. 반면에 Swin은 겹치지않는 window를 이용한 self-attention으로 효율적인 연산이 가능하다. 각 window가 $M \times M$ 개의 patch를 가지고 이미지의 크기가 $h \times w$ 라고 가정하면, 복잡도 계산 시 Softmax 계산은 제외하였을 때 각각 ViT와 Swin 내 MSA의 복잡도 크기는 다음과 같다. 
+$$
+\Omega(MSA) = 4hwC^2 + 2(hw)^2C, \\
+\Omega(W-MSA) = 4hwC^2 + 2M^2hwC
+$$
 
 이 때, ViT는 $hw$에 대해 quadratic한 식이 구성되지만 Swin은 window의 크기가 고정되어있으니 상수처럼 취급하고 $hw$의 크기에서만 선형적으로 증가하기 때문에 Swin의 연산량이 더 적다는 것을 알 수 있다.
 
@@ -68,7 +89,7 @@ window를 이용한 self-attention 모듈은 window 간 상호작용이 부족�
 
 <p align = "left"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure2.jpg">
 
-$l$번째 층에서는 왼쪽 위를 기준으로 $M$x$M$ 크기로 윈도우를 분할하고 $\lceil \frac{h}{M} \rceil$x$\lceil \frac{w}{M} \rceil$ 개의 window들에 대해 각각 독립적으로 self-attention을 시행한다. 다음 층인 $l+1$번째 층에서는 $(\lceil \frac{h}{M} \rceil+1)$x$(\lceil \frac{w}{M} \rceil+1)$ 개의 추가적인 window로 나누어 $l$번째 층과 동일하게 self-attention을 시행한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil$x$\lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 시행한다. 이를 그림으로 표현하면 다음과 같다.
+$l$번째 층에서는 왼쪽 위를 기준으로 $M$ x $M$ 크기로 윈도우를 분할하고 $\lceil \frac{h}{M} \rceil$ x $\lceil \frac{w}{M} \rceil$ 개의 window들에 대해 각각 독립적으로 self-attention을 시행한다. 다음 층인 $l+1$ 번째 층에서는 $(\lceil \frac{h}{M} \rceil+1)$ x $(\lceil \frac{w}{M} \rceil+1)$ 개의 추가적인 window로 나누어 $l$ 번째 층과 동일하게 self-attention을 시행한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil$ x $\lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 시행한다. 이를 그림으로 표현하면 다음과 같다.
 <p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure2-1.jpg">
 
 
