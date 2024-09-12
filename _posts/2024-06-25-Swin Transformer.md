@@ -35,15 +35,15 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 # 2.Methods
 ## 2.1. Overall Architecture
 <figure style="text-align: center;">
-  <img src="/images/SwinTransformer/figure3.jpg" width = 1500>
+  <img src="/images/SwinTransformer/figure3.jpg" width = 700>
   <figcaption>[ figure1 : Overall Architecture ]</figcaption>
 </figure>
 
 
 #### - Input
 <figure style="text-align: center;">
-  <img src = "/images/SwinTransformer/figure3-1.jpg" weight=500 height = 200>
-  <figcaption>[ figure2 : Stage1 ]</figcaption>
+  <img src = "/images/SwinTransformer/figure3-1.jpg" height = 200>
+  <figcaption style="text-align: center;">[ figure2 : Stage1 ]</figcaption>
 </figure>
 
 이미지들을 ViT의 patch들처럼 겹치지 않게 RGB채널로 나눈다. 이 때 각 patch는 토큰으로 간주되고 feature map은 raw pixel RGB값의 결합이다. 그리고 patch 크기를 4x4로 설정해 각 패치마다 4x4x3(RGB channel)으로 feature map을 구성한다. 이 feature map을 arbitrary dimension $C$로 사영(삽입)해 linear embedding 층에 적용한다. Swin Transformer block 을 이용한 여러 block들에 앞서 구성한 patch를 적용한다. 이때 block의 크기는 토큰의 개수인 $\frac{H}{4}$x$\frac{W}{4}$ 이고 이를 Stage1이라고 지칭한다.
@@ -75,47 +75,46 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
   </figure>
 </div>
 
-
-
-
-
-$\\$
-Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT Block와는 다르게 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
+Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT Block과는 다르게 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
 
 #### - Computation Complexity
-ViT는 이미지 전체에 대해 self-attention을 수행하기때문에 많은 연산량이 요구된다. 반면에 Swin은 겹치지않는 window를 이용한 self-attention으로 효율적인 연산이 가능하다. 각 window가 $M \times M$ 개의 patch를 가지고 이미지의 크기가 $h \times w$ 라고 가정하면, 복잡도 계산 시 Softmax 계산은 제외하였을 때 각각 ViT와 Swin 내 MSA의 복잡도 크기는 다음과 같다. 
+ViT는 이미지 전체에 대해 self-attention을 수행하기때문에 많은 연산량이 요구된다. 반면에 Swin은 겹치지않는 window를 이용한 self-attention이기 때문에 효율적으로 연산이 가능하다. 각 window가 $M \times M$ 개의 patch를 가지고 이미지의 크기가 $h \times w$ 라고 가정하면, 복잡도 계산 시 각각 ViT와 Swin 내 MSA의 복잡도 크기는 다음과 같다. (Softmax 계산은 제외)
+
 $$
 \Omega(MSA) = 4hwC^2 + 2(hw)^2C, \\
-\Omega(W-MSA) = 4hwC^2 + 2M^2hwC
+\Omega(W-MSA) = 4hwC^2 + 2M^2hwC 
 $$
 
-이 때, ViT는 $hw$에 대해 quadratic한 식이 구성되지만 Swin은 window의 크기가 고정되어있으니 상수처럼 취급하고 $hw$의 크기에서만 선형적으로 증가하기 때문에 Swin의 연산량이 더 적다는 것을 알 수 있다.
+이 때, ViT는 $hw$에 대한 이차식이 구성되지만 Swin은 window의 크기가 고정되어있으니 상수처럼 취급하고 $hw$의 크기에서만 선형적으로 증가하기 때문에 Swin의 연산량이 더 적다는 것을 알 수 있다.
 
-#### - Shifted winodw partitioning in succevie blocks
-window를 이용한 self-attention 모듈은 window 간 상호작용이 부족해 모델링 능력이 제한된다. 이를 보완하기 위해 연속된 Swin Transformer block을 번갈아 사용하는 naive한 shifted window partitioning은 다음과 같다.                                      
+#### - Shifted winodw partitioning in successive blocks
+window를 이용한 self-attention 모듈은 window 간 상호작용이 부족해 모델링 능력이 제한된다. 이를 보완하기 위해 연속된 Swin block을 번갈아 사용하는 naive shifted window partitioning은 다음과 같다.                                      
 
 <p align = "left"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure2.jpg">
 
-$l$번째 층에서는 왼쪽 위를 기준으로 $M$ x $M$ 크기로 윈도우를 분할하고 $\lceil \frac{h}{M} \rceil$ x $\lceil \frac{w}{M} \rceil$ 개의 window들에 대해 각각 독립적으로 self-attention을 시행한다. 다음 층인 $l+1$ 번째 층에서는 $(\lceil \frac{h}{M} \rceil+1)$ x $(\lceil \frac{w}{M} \rceil+1)$ 개의 추가적인 window로 나누어 $l$ 번째 층과 동일하게 self-attention을 시행한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil$ x $\lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 시행한다. 이를 그림으로 표현하면 다음과 같다.
+$l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈도우로 분할하고 window $\lceil \frac{h}{M} \rceil \times \lceil \frac{w}{M} \rceil$ 개에 각각 독립적으로 self-attention을 한다. 다음 층인 $l+1$ 번째 층에서는 추가적으로 window를 $(\lceil \frac{h}{M} \rceil+1) \times (\lceil \frac{w}{M} \rceil+1)$ 로 나누어 $l$ 번째 층과 동일하게 self-attention을 한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil \times \lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 한다. 이를 그림으로 표현하면 다음과 같다.
 <p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure2-1.jpg">
 
 
 #### - Cyclic Shift
 
-위와 같은 naive한 shift의 경우 window의 개수가 2x2에서 3x3로 증가함에 따라 연산량이 2.25배가 되어 윈도우의 크기가 커짐에 따라 연산량이 기하급수적으로 증가한다. 그래서 본 논문에서는 cyclic shift를 제안한다.
+위와 같은 naive shift의 경우 window의 개수가 2x2에서 3x3로 증가함에 따라 연산량이 2.25배가 되어 윈도우의 크기가 커짐에 따라 연산량이 기하급수적으로 증가한다. 그래서 이 연산량을 제한하고자 cyclic shift를 제안한다.
 
 <p align = "center"><img src = "E:\공부\Github\blog\images\SwinTransformer\figure4.jpg">
 
-위 그림에서 알 수 있듯이, 이는 기존 분할의 왼쪽 위 부분들을 오른쪽 하단으로 옮기는 것이다. 이 상태에서 self-attention을 시행하면 독립적으로 시행된 self-attetion이 다른 window에도 적용 가능하다.  여기서 A, B, C가 이동하여 window의 개수는 2x2로 유지된 상태로 self-attention이 시행된 것이므로, 중복 attention 연산을 제안하기 위해 masked self-attention을 진행한다.
+위 그림에서 알 수 있듯이, 이는 분할된 이미지의 왼쪽 위 부분들을 오른쪽 하단으로 옮기는 것이다. 이 상태에서 self-attention을 하면 독립적으로 시행된 self-attetion이 다른 window에도 가능하다. 여기서 A, B, C가 이동하여 window의 개수는 2x2로 유지된 상태로 self-attention이 시행된 것이므로, 중복 attention 연산을 제한하기 위해 masked self-attention을 진행한다.
 
 #### - Computation of Consecutive Blocks
-$\hat{z}^l = W$-$MSA (LN(z^{l-1}))+ z^{l-1}$,
-$z^l = MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}$,
-$\hat{z}^{l+1} = SW$-$MSA (LN(z^{l}))+ z^{l}$,
-$z^{l+1} = MLP(LN(\hat{z}^{l+1}))+ \hat{z}^{l+1}$,
+$$
+\begin{split}
+\hat{z}^l \: \: &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
+z^l \: \: &= MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}, \\
+\hat{z}^{l+1} &= SW-MSA (LN(z^{l}))+ z^{l}, \\
+z^{l+1} &= MLP(LN(\hat{z}^{l+1}))+ \hat{z}^{l+1}
+\end{split}
+$$
 
-여기서 $z^l$과 $\hat{z}^l$은 각각$l$번째 block에서 $MLP$ 모둘과 $(S)W$-$MSA$의 ouput feature이다.
-이렇게 겹치지않는 이웃한 window 간 연결을 이용한 shifted window 분할은 image classification, object detection, semantic segmentation 등 다양한 분야에서 효율적이라는 것을 알 수 있다.
+여기서 $z^l$과 $\hat{z}^l$은 각각$l$번째 block에서 $MLP$ 모듈과 $(S)W-MSA$의 ouput feature이다. 이렇게 겹치지않고 이웃한 window 간 연결을 이용한 shifted window 분할은 image classification, object detection, semantic segmentation 등 다양한 분야에서 효율적이라는 것을 알 수 있다.
 
 
 
