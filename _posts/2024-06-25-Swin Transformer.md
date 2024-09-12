@@ -48,7 +48,7 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 
 <figure style="text-align: center; display: inline-block; width: 100%;">
   <img src="/images/SwinTransformer/figure3-1.jpg" height="200">
-  <figcaption style="display: block; width: 100%; text-align: center;">[ figure2 : Stage1 ]</figcaption>
+  <figcaption style="display: block; width: 100%; text-align: center; font-size : 16px;">[ figure2 : Stage1 ]</figcaption>
 </figure>
 
 이미지들을 ViT의 patch들처럼 겹치지 않게 RGB채널로 나눈다. 이 때 각 patch는 토큰으로 간주되고 feature map은 raw pixel RGB값의 결합이다. 그리고 patch 크기를 4x4로 설정해 각 패치마다 4x4x3(RGB channel)으로 feature map을 구성한다. 이 feature map을 arbitrary dimension $C$로 사영(삽입)해 linear embedding 층에 적용한다. Swin Transformer block 을 이용한 여러 block들에 앞서 구성한 patch를 적용한다. 이때 block의 크기는 토큰의 개수인 $\frac{H}{4}$x$\frac{W}{4}$ 이고 이를 Stage1이라고 지칭한다.
