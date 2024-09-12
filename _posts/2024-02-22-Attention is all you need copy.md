@@ -26,10 +26,13 @@ CNN 기반 모델들(Extended Neural GPU, ByteNet, ConvS2S 등)은 sequential �
 
 #### - Attention
 
-<figure style="text-align: center;">
-  <img src = '/images/attentionisallyouneed/selfattention.jpg' width='350'>
-  <figcaption>[ figure1 : Self Attention ]</figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between;">
+  <figure style="text-align: center; width: 400px;">
+    <img src = '/images/attentionisallyouneed/selfattention.jpg' width='350'>
+    <figcaption style="color: black; padding: 5px; white-space: nowrap;"> [ figure4 : Swin Block ]
+    </figcaption>
+  </figure>
+</div>
 
 Attention Mechanism은 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능하기 때문에 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었다. 그래서 본 논문에서 순환과정(recurrence) 대신 input과 output 사이의 전체 구조 내 의존성(global denpendency)를 찾는 attention mechanism만 사용한다. 그리고 이는 더 많은 병렬처리가 가능해 동일 시간 동안 더 많은 연산이 가능하다. 전체 구조를 요약하면 다음과 같다.
 
