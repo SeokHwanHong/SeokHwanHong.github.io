@@ -25,7 +25,9 @@ Computer-Vision에서 Image Super-Resolution(SR)은 여러 어려움들을 해�
 ## 2.1. Single Image SR (SISR)
 주어진 단일 저해상도 이미지 $\mathbf{x} \in \mathbb{R}^{\mathbf{w} \times \mathbf{h} \times c}$ 에 대응하는 $\mathbf{y} \in \mathbb{R}^{w \times h \times c}$ 를 생성하는데, 여기서 $\mathbf{w} < w, \: \mathbf{h} < h $ 를 만족한다.  $x$와 $y$의 관계를 표현하면 다음과 같다.
 
-$$ \mathbf{x} = D(\mathbf{y};\Theta) = ((\mathbf{y} \otimes \mathbf{k}) \downarrow_{s} + \mathbf{n})_{JPEG_q} $$
+$$ 
+\mathbf{x} = D(\mathbf{y};\Theta) = ((\mathbf{y} \otimes \mathbf{k}) \downarrow_{s} + \mathbf{n})_{JPEG_q} 
+$$
 
 여기서 $D$는 degradation mapping으로 $D : \mathbb{R}^{w \times h \times c} \rightarrow \mathbb{R}^{\mathbf{w} \times \mathbf{h} \times c} $ 이고 $\Theta$는 blur $\mathbf{k}$, noise $\mathbf{n}$, scaling $s$, compression quality $q$ 등과 같은 degradation parameter들을 포함한다. 
 
@@ -69,7 +71,7 @@ Flow-based 방법은 optical flow algorithm을 이용해 SR 이미지를 생성�
 이미지 품질은 선명도, 대비, 노이즈 유무 등의 여러 특성들을 다루는 다면적인 개념이다. 따라서 생성한 이미지의 품질을 평가하는 것은 쉬운 일이 아니다. Image Quality Assessment(IQA)는 인간 관찰자의 지각 평가와 유사한 모든 지표를 의미하며, SR에서는 SR기술을 적용 후 이미지에서 인식되는 현실감 수준을 나타낸다. 여기서는 다음과 같은 notation을 사용한다.
 
 $$
-\mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} | i \le h, j \le w, k \le c  \}
+\mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} | i \le h, j \le w, k \le c \}
 $$ 
 
 이고 이는 $\mathbf{x}$ 의 모든 가능한 위치의 집합에서 정의된다.  
@@ -87,11 +89,11 @@ $$
 #### - Structural Similarity Index (SSIM)
 SSIM은 PSNR과 비슷하게 이미지 간 구조적 특징들의 차이점에 집중하는 평가방법이다. 이는 명도, 대비, 구조를 비교해 구조적 유사성에 집중한다. 이를 수식으로 표현하면 다음과 같다.
 
-$\mathbf{y}$ : 이미지,
+$\mathbf{y}$ : 이미지
 
-$\mu_{\mathbf{y}}$ : 이미지의 명도를 평균으로 표현, $\mu_{\mathbf{y}} = \frac{1}{N}\sum_{p \in \Omega_{\mathbf{y}}} \mathbf{y}_p$,
+$\mu_{\mathbf{y}}$ : 이미지의 명도를 평균으로 표현, $ \mu_{\mathbf{y}} = \frac{1}{N}\sum_{p \in \Omega_{\mathbf{y}}} \mathbf{y}_p$
 
-$\sigma_{\mathbf{y}}$ : 이미지의 대비를 표준편차로 표현, $\sigma_{\mathbf{y}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} [{\mathbf{y}_p - \mu_{\mathbf{y}}}]^2$, 
+$\sigma_{\mathbf{y}}$ : 이미지의 대비를 표준편차로 표현, $\sigma_{\mathbf{y}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} [{\mathbf{y}_p - \mu_{\mathbf{y}}}]^2$
 
 $S$ : 계산한 entity간 유사성을 위한 비교함수, $S(x,y,c) = \frac{2 \cdot x \cdot y + c}{x^2 + y^2 + c}$
 
@@ -105,9 +107,9 @@ $S$ : 계산한 entity간 유사성을 위한 비교함수, $S(x,y,c) = \frac{2 
 
 여기서 $c_1$과 $c_2$는 모두 0보다 크다.
 
-empirical covariance $\sigma_{\mathbf{y}, \mathbf{\hat{y}}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} ({\mathbf{y}_p - \mu_{\mathbf{y}}})({\mathbf{\hat{y}}_p - \mu_{\mathbf{\hat{y}}}})$,
+empirical covariance $\sigma_{\mathbf{y}, \mathbf{\hat{y}}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} ({\mathbf{y}_p - \mu_{\mathbf{y}}})({\mathbf{\hat{y}}_p - \mu_{\mathbf{\hat{y}}}})$
 
-구조적 비교를 위한 상관관계 $\mathcal{C}_s(\mathbf{y}, \mathbf{\hat{y}}) = \frac{\sigma_{\mathbf{y}, \mathbf{\hat{y}}} + c_3}{\sigma_{\mathbf{y}} \cdot \sigma_{\mathbf{\hat{y}}}+ c_3} $
+구조적 비교를 위한 상관관계 $ \mathcal{C}_s(\mathbf{y}, \mathbf{\hat{y}}) = \frac{\sigma_{\mathbf{y}, \mathbf{\hat{y}}} + c_3}{\sigma_{\mathbf{y}} \cdot \sigma_{\mathbf{\hat{y}}}+ c_3} $
 
 여기서 $c_3$ 은 0보다 크다.
 
