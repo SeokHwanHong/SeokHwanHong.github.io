@@ -1,6 +1,6 @@
 ---
 layout: single        # 문서 형식
-title: DeBlurGAN # 제목
+title: DeblurGAN # 제목
 categories: Generative Model    # 카테고리
 toc: true             # 글 목차
 author_profile: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
@@ -10,21 +10,16 @@ sidebar:              # 페이지 왼쪽에 카테고리 지정
 use_math: true
 ---
 # Keywords
-
-
-
-
+Blur, GAN, Critic Network
 
 
 # 1. Introduction
 ## 1.1. Image Deblurring
 #### - Notation
 일정하지않은 blur model의 일반적인 식은 다음과 같다.
-
 $$
 I_{B} = k(M) * I_{S} + N
 $$
-
 $I_{B}$ : blur 이미지
 $k_{M}$ : motion field $M$ 으로 결정되는 알 수 없는 blur kernel
 $I_{S}$ : 깔끔한 잠재적인 이미지
@@ -43,11 +38,9 @@ CNN을 기반으로 한 모형들을 이용해 미지의 blur kernel을 추정�
 ## 1.2. GANs
 ### 1.2.1. Vanilla GANs
 Vanilla GANs의 식은 다음과 같다.
-
 $$
 \min_{G} \max_{D} \underset{x \sim \mathbb{P}_r}{\mathbb{E}} [\log(D(x))] + \underset{\bar{x} \sim \mathbb{P}_g}{\mathbb{E}} [1-\log(D(\bar{x}))] 
 $$
-
 $\mathbb{P}_r$ : 실제 데이터의 분포
 $\mathbb{P}_g$ : 모형의 분포
 $z \sim P(z)$ : 간단한 잡음 분포의 표본, 입력값
@@ -57,30 +50,24 @@ $\bar{x} = G(z)$ : 실제 데이터와 유사한 데이터를 생성하는 생�
 
 #### - Wasserstein Distance
 Wasserstein 거리는 두 확률 분포 간 거리를 다음과 같이 정의한다.
-
 $$
 W(p,q) = \inf_{\gamma \in \Gamma(P,Q)} \underset{(x,y) \sim \gamma}{\mathbb{E}}[||x - y||]
 $$
-
 이는 두 분포간 차이가 얼마나 연속적으로 발생하는지 반영하며 겹치지 않는 경우에도 유의미한 값을 제시한다. 주로 이미지에서 스타일 변화나 왜곡을 측정하는데 사용되며 딥러닝에서는 비용함수로 많이 사용된다.
 
 #### - Loss Function
 
 Vanilla GANs을 학습시키는 과정에서 mode collapse, gradient 소실 등 여러 문제들이 발생한다. 이를 해결해고자 다음과 같은 WGAN(Wasserstein GANs) 을 제안한다.
-
 $$
 \min_{G} \max_{D \in \mathcal{D}} \underset{x \sim \mathbb{P}_r}{\mathbb{E}} [D(x)] - \underset{\bar{x} \sim \mathbb{P}_g}{\mathbb{E}} [D(\bar{x})]
 $$
-
 $\mathcal{D}$ : 1 - Lipschitz 함수의 집합 
 $\mathbb{P}_g$ : 모형의 분포
 
 여기서 중요한 아이디어는 Lipschitz 상수 $K$ 와 Wasserstein 거리 $W(P_r, P_{\theta})$ 에 대해 critic value가 $K \cdot W(P_r, P_{\theta})$ 로 근사하는 것이다. WGAN에 Lipschitz 제약을 강제하기 위해 여러 방법을 추가하는데, 그 중 gradient 제약 항을 추가하는 식은 다음과 같다.
-
 $$
 \lambda \underset{\bar{x} \sim P_{\bar{x}}}{\mathbb{E}} [(|| \nabla_{\bar{x}} D(\bar{x}) ||_2 -1)^2]
 $$
-
 이는 생성자 모형 선택에 있어 강건(robust)하고 hyperparameter 튜닝이 필요없다는 장점이 있다.
 
 ### 1.2.3. Conditional Adversarial Networks
