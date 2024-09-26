@@ -1,6 +1,6 @@
 ---
 layout: single        # 문서 형식
-title: Diffusion Models, Image Super-Resolution And Everthing  # 제목
+title: Diffusion Models, Image Super-Resolution And Everything  # 제목
 categories: Generative Model    # 카테고리
 toc: true             # 글 목차
 author_profiel: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
@@ -139,7 +139,9 @@ LPIPS는 $\varphi$ 를 이용해 이미지를 지각적 feature space 로 사영
 
 
 # 3. Diffusion Models 
+
 ## 3.1. Architecture 
+
 DMs 은 기존 생성모델들과의 차이점으로 순방향과 역방향의 반복적인 시간 단계에서 실행된다는 것이다. 순방향 $q$는 점진적으로 반복적으로 노이즈를 추가함으로써 입력 데이터의 품질을 저하시킨다. 역방향 $p$ 는 품질이 저하된 데이터의 노이즈를 걷어내고 역시간순으로 원본 이미지를 복원한다. 이는 다음 그림과 같이 표현할 수 있다.
 
 <figure style="text-align: center; display: inline-block; width: 100%;">
@@ -157,9 +159,11 @@ $\mathcal{D}$ : 저해상도-고해상도 image pair set, $\mathcal{D} = \{ \mat
 확률 변수 $\mathbf{z}_t$ : 이미지와 corruption space 간 상태인 현재 상태, 이 때 순방향 $\mathbf{z}_t$ 와 역방향 $\mathbf{z}_t$ 사이에는 명확한 구분이 없다.
 
 #### - Assumptions
+
 순방향에서는 $\mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_{t-1})$, 역방향에서는 $\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} | \mathbf{z}_{t})$ 이고 $t=0$ 일 때 초기 데이터 분포는 $\mathbf{z}_0 \sim q(\mathbf{x})$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations (SDEs)로 구분된다.
 
 ## 3.2. Denosing Diffusion Probabilistic Models (DDPMs)
+
 DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 diffusion을 활성화하기위해 2개의 Markov chain을 사용한다. 
 
 #### - Forward Diffusion
@@ -214,9 +218,11 @@ $$
 
 
 ## 3.3. Score-Based Generative Models (SGMs)
+
 SGMs는 DDPMs와 유사하게 이산형 diffusion 과정과 수학적 이론들을 사용한다. 분포 함수 $p(\mathbf{z})$ 를 직접 사용하는 대신 Stein score 함수를 이용하는데, 이는 로그 확률 분포 $\nabla_{\mathbf{z}} \log p(\mathbf{z})$ 의 gradient이다. 수학적으로 score 함수는 밀도 함수에 대한 모든 정보를 보존하며 더 쉽게 계산이 가능하다. 더욱이, 모형 훈련과 샘플링 절차의 분리는 더 유연하게 샘플링 방법과 훈련 목표를 정의할 수 있다.
 
 #### - Forward Diffusion
+
 $ 0 < \sigma_1 < ... < \sigma_T$ : 유한한 noise 단계 순서
 에 대해 순방향 diffusion은 DDPMs와 유사하게 Gaussian noise 분포를 다음과 같이 정의한다.
 

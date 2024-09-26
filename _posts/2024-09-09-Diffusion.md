@@ -60,9 +60,11 @@ $$
 #### - Forward Diffusion
 목표 : $T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta)$를 반복적으로 적용해 $q(\mathbf{x}^{(0)})$ 를 점진적으로 $\pi(\mathbf{y})$로 변환한다.
 time step $t = 0$ 부터 $t=T$까지 진행되는 diffusion 과정은 다음과 같다.
+
 $$
 q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = q(\mathbf{x}^{(0)}) \: \prod _{t=1}^{T} q(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)})
 $$
+
 여기서 $q(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)})$ 은 정규분포에서 공분산이 단위-공분산인 정규분포나 이항분포에서 독립 이항분포로의 변환에 해당한다.
 
 
@@ -70,6 +72,7 @@ $$
 ## 2.2. Reverse Trajectory 
 #### - Notation
 Forward Trajectory와 동일하게 구성하지만, 순서는 반대로 진행한다.
+
 $$ 
 p(\mathbf{x}^{(T)}) = \pi(\mathbf{x}^{(T)})
 $$
@@ -85,9 +88,11 @@ $$
 
 ## 2.3. Model Probability
 생성모델이 데이터에 부여하는 확률은 다음과 같다.
+
 $$
 p(\mathbf{x}^{(0)}) = \int d \mathbf{x}^{(1 \cdot \cdot \cdot T)} \: p(\mathbf{x} ^ {(1 \cdot \cdot \cdot T)})
 $$
+
 이를 Forward Trajectory와 Reverse Trajectory 를 적당히 이용하면 다음과 같이 전개할 수 있다.
 
 $$
@@ -105,6 +110,7 @@ $$
 ## 2.4. Training
 #### - Likelihood
 모형의 가능도는 다음과 같다.
+
 $$
 \begin{align}
 L &= \int d\mathbf{x}^{(0)} \: \log p(\mathbf{x}^{(0)}) \\
@@ -113,6 +119,7 @@ L &= \int d\mathbf{x}^{(0)} \: \log p(\mathbf{x}^{(0)}) \\
 $$
 
 Jensen 부등식을 이용해 전개하면 하한은 다음과 같다.
+
 $$
 \begin{align}
 L &>= \int d\mathbf{x}^{(0 \cdot \cdot \cdot T)} \: q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) \cdot \log [p(\mathbf{x}^{(T)}) \: \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} ] \\
@@ -130,9 +137,11 @@ K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{
 \end{split}
 \end{equation}
 $$
+
 여기서 entropy와 KL divergence는 분석적으로(수치적으로) 계산 가능하다. 그리고 이 하한의 미분값은 variational Bayesian 방법에서 로그 가능도의 하한의 미분값과 평행하다. 이 때, 전진과 후진과정이 동일하다면, quasi-static 과정에 해당하므로 $L = K$ 가 성립한다.
 
 로그가능도에 대한 하한을 최대로 하는 reverse Markov transition 을 찾도록 훈련을 진행하고 이는 다음과 같다.
+
 $$
 \begin{align}
 \hat{p} \:(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)}) = \argmax_{p(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)})} K 
@@ -150,7 +159,9 @@ $$
 
 3. Binomial Diffusion
 이산 공간(discrete state space)에서는 기울기 증가로 noise를 frozen 하는 것이 불가능하다. 그래서 frozen 대신 전진 schdule $\beta_{1 \cdot \cdot \cdot T}$ 로 각 diffusion 단계에 원래 신호의 상수인 $\frac{1}{T}$ 를 제거한다. 이는 다음과 같다.
-$$ \beta_t = (T - t + 1)^{-1}
+
+$$ 
+\beta_t = (T - t + 1)^{-1}
 $$
 
 
@@ -164,18 +175,22 @@ $\tilde{p}(\mathbf{x}^{(0)}) \propto p(\mathbf{x}^{(0)}) \: r(\mathbf{x}^{(0)})$
 
 ### 2.5.1. Modified Marginal Distributions
 $\tilde{p}(\mathbf{x}^{(0)})$ 를 계산하기 위해 각 중간 분포와 그에 대응하는 $r(\mathbf{x}^{(t)})$ 를 곱한다. 이에 대응되는 변형된 역과정 $\tilde{p}(\mathbf{x}^{(T)})$ 는 다음과 같이 정의할 수 있다.
+
 $$
 \tilde{p}(\mathbf{x}^{(t)}) = \frac{1}{\tilde{Z_T}} \: p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})
 $$
+
 여기서 $Z_T$ 는 $t$ 번째 중간 분포의 정규화 상수이다.
 
 ### 2.5.2. Modified Diffusion Steps
 역과정에서 Markov kernel $p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 은 다음과 같이 표현할 수 있다.
+
 $$
 p(\mathbf{x}^{(t)}) = \int d \mathbf{x}^{(t+1)} \: p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}}) \: p(\mathbf{x^{(t+1)}})
 $$
 
 본 논문에서는 섭동된(perturbed) Markov kernel $ \tilde{p}(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 을 만드는 것을 목표이며 다음과 같이 유도할 수 있다.
+
 $$
 \begin{align}
 \tilde{p}(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \tilde{p} (\mathbf{x}^{(t+1)})\\
@@ -184,12 +199,15 @@ p(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} 
 \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \frac{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t+1)})\\
 \end{align}
 $$
+
 만약 $\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 식 $(12)$ 와 같다면, 식 $(11)$ 의 등식이 성립한다. 식 $(12)$ 가 정규화된 확률 분포가 아닐 수도 있기 때문에, 이에 대한 방안으로 다음과 같은 식을 이용한다.
+
 $$
 \begin{align}
 \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \frac{1}{\tilde{Z}_{t}} \cdot \frac{r(\mathbf{x}^{(t+1)})} {r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \\
 \end{align}
 $$
+
 여기서 $\tilde{Z}_t (\mathbf{x}^{(t+1)})$ 은 정규화 상수이다. $\frac{r(\mathbf{x}^{(t)})}{r(\mathbf{x}^{(t+1)})}$은  $\:p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 섭동으로 간주된다. 이러한 작은 섭동은 정규분포의 평균에 영향은 미치지만 정규화 상수에는 영향이 없기때문에, 식 $(12)$ 와 $(13)$ 은 동치이다.
 
 ### 2.5.3. Appling $r \: (\mathbf{x}^{(t)})$
