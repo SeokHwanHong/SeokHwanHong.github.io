@@ -221,6 +221,9 @@ kramdown:
   syntax_highlighter_opts:
     block:
       line_numbers: true
+  math_engine: mathjax
+  math_engine_opts:
+    preview: false
 
 # Sass/SCSS
 sass:
