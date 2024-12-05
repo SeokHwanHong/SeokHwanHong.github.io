@@ -3,9 +3,6 @@ layout: single        # 문서 형식
 title: Diffusion Models, Image Super-Resolution And Everything  # 제목
 categories: Super-Resolution    # 카테고리
 tag: [DL, Image, Generative, Diffusion, Survey] # 해시태그
-toc: true             # 글 목차
-toc_sticky : true     # toc 고정
-toc_label: 목차       # toc 이름 설정
 author_profiel: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
 sidemathbf:              # 페이지 왼쪽에 카테고리 지정
     nav: "docs"       # sidemathbf의 주소 지정
