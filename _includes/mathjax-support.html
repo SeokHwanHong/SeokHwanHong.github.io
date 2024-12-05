@@ -13,7 +13,7 @@
   MathJax.startup = {
       messageStyle: "none", // 브라우저 콘솔에만 오류 표시
       ready: () => {
-          MathJax.startup.defaultReady();
+          MathJax.startup.defaultReady();s
           MathJax.startup.promise.then(() => {
               console.log("MathJax is ready!");
           }).catch((err) => {
