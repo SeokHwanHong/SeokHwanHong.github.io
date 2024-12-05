@@ -1,19 +1,9 @@
 # main links
 main:
-  - title : "Category"
-    url : /categories/
+  - title : "Study"
+    url : /Study/
   - title : "Tag"
     url : /tags/
-  - title : "Computer Vision"
-    url : /Computer Vision/
-  - title : "Statistics"
-    url : /Statistics/
-  - title : "Mathematics"
-    url : /Mathematics/
-  - title : "Machine Learning"
-    url : /Machine Learning/
-  - title : "Deep Learning"
-    url : /Deep Learning/
 
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
