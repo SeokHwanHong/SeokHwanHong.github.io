@@ -1,22 +1,30 @@
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        TeX: {
+<script type="text/javascript">
+  MathJax = {
+      tex: {
           equationNumbers: {
-            autoNumber: "AMS"
-          }
-        },
-        tex2jax: {
-        inlineMath: [ ['$', '$'] ],
-        displayMath: [ ['$$', '$$'] ],
-        processEscapes: true,
+              autoNumber: "AMS" // 자동 번호 지정 활성화
+          },
+          inlineMath: [['$', '$']], // 인라인 수식
+          displayMath: [['$$', '$$']], // 블록 수식
+      },
+      options: {
+          processEscapes: true // 이스케이프 처리 활성화
       }
-    });
-    MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
-          alert("Math Processing Error: "+message[1]);
-        });
-    MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
-          alert("Math Processing Error: "+message[1]);
-        });
-    </script>
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  };
+
+  // 수식 처리 오류 메시지 표시
+  MathJax.startup = {
+      messageStyle: "none", // 브라우저 콘솔에만 오류 표시
+      ready: () => {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => {
+              console.log("MathJax is ready!");
+          }).catch((err) => {
+              console.error("MathJax failed to start:", err);
+          });
+      }
+  };
+</script>
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
