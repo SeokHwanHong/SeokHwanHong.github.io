@@ -1,9 +1,11 @@
 # main links
 main:
-  - title : "Study"
-    url : /Study/
+  - title : "Category"
+    url : /categories/
   - title : "Tag"
     url : /tags/
+  - title : "Years"
+    url : /year-archive-grid/
 
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
