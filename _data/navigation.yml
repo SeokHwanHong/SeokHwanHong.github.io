@@ -8,10 +8,10 @@ main:
     url : /year-archive-grid/
 
 counts:
-  -title: "Category" 
-    use: True
-  -title: "Tag" 
-    use: True
+  - title: "Category" 
+    use: true
+  - title: "Tag" 
+    use: true
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
