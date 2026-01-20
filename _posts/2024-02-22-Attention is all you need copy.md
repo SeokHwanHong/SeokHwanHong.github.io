@@ -74,10 +74,11 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 Multi-head Attention(MHA) 는 서로 다른 공간에 있는 정보들을 하나로 병합한다.
 
-$$
+\[
 MultiHead(Q, K, V) = Concat(head_1,\: ... \:, head_h) W^O \\
 \: where \quad head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)
-$$
+\]
+
 여기서 모수 행렬은 각각 $ W_i^Q \in \mathbb{R}^{d_{model} \times d_k}, W_i^K \in \mathbb{R}^{d_{model} \times d_k}, W_i^V \in \mathbb{R}^{d_{model} \times d_v}, W_i^O \in \mathbb{R}^{hd_{v} \times d_model}$ 이다.
 $\:$ 본 논문에서는 평행한 attention layer를 $h = 8$, 차원들은 $d_k = d_v = d_{model} / h = 64$ 로 설정한다. 각 head마다 차원량이 감소하기때문에 전체 계산량은 full dimensionality 인 단일 head attention과 유사하다.
 
