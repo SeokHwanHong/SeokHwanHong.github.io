@@ -113,11 +113,11 @@ analytics:
 
 # Site Author
 author:
- name             : "SeokHwan Hong"
+ name: "SeokHwan Hong"
 #  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
 #  bio              : "I am an **amazing** person."
- location         : "Republic of Korea"
-#  email            : 
+ location: "Republic of Korea"
+ email: "angelsh0103@gmail.com"
  links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
