@@ -57,9 +57,9 @@ Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 
 
 #### - Attention sequence
 $$
-\begin{align}
+\begin{aligned}
     Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V
-\end{align}
+\end{aligned}
 $$ 
 
 input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
@@ -79,10 +79,10 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 Multi-head Attention(MHA) 는 서로 다른 공간에 있는 정보들을 하나로 병합한다.
 
 $$
-\begin{align}
+\begin{aligned}
     MultiHead(Q, K, V) = Concat(head_1,\: ... \:, head_h) W^O \\
     where \quad head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) 
-\end{align}
+\end{aligned}
 $$
 
 여기서 모수 행렬은 각각 $ W_i^Q \in \mathbb{R}^{d_{model} \times d_k}, W_i^K \in \mathbb{R}^{d_{model} \times d_k}, W_i^V \in \mathbb{R}^{d_{model} \times d_v}, W_i^O \in \mathbb{R}^{hd_{v} \times d_{model}}$ 이다.
@@ -110,9 +110,9 @@ $\mathbf{z}$가 주어졌을 때, 한번에 하나씩 $(y_1, y_2, ... , y_n)$을
 
 
 $$
-\begin{align}
+\begin{aligned}
     FFN(x) = max(0, xW_1 + b_1) W_2 + b_2
-\end{align}
+\end{aligned}
 $$
 
 이 선형변환은 여러 위치에서 동일하지만 층에서 층으로 이동할 때 다른 모수를 사용한다. 본 논문에서 입력값과 출력값의 차원을 $d_{model} = 512$, 내부 층에서는 $d_{ff} = 2048$ 을 사용한다.
@@ -124,10 +124,10 @@ $$
 recurrence와 convolution이 없고 모형이 순서를 인식하기 위해 positional encoding을 추가한다. 이는 enocder와 decoder의 stack의 처음에 추가하는 입력 embedding이고 차원은 다른 embedding들과 동일하게 $d_{model}$ 이다. 본 논문에서는 sine과 cosine 함수를 이용해 다음과 같이 사용한다.
 
 $$
-\begin{align}
+\begin{aligned}
     PE_{(pos, 2i)} = \sin (pos / 10000^{2i/d_{model}}) \\
     PE_{(pos, 2i+1)} = \cos (pos / 10000^{2i/d_{model}})
-\end{align}
+\end{aligned}
 $$
 
 여기서 $pos$ 는 위치를, $i$ 는 차원을 의미한다. 
