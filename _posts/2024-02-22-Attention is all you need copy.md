@@ -26,16 +26,6 @@ CNN 기반 모델들(Extended Neural GPU, ByteNet, ConvS2S 등)은 sequential �
 
 #### - Attention
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src="{{ '/images/attentionisallyouneed/selfattention.jpg' | relative_url }}" width="300">
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure1 : Self Attention ]</figcaption>
-</figure>
-
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src="{{ '/images/attentionisallyouneed/selfattention.jpg' | relative_url }}" width="300">
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure1 : Self Attention ]</figcaption>
-</figure>
-
 ![Figure1 : Self Attention](/images/attentionisallyouneed/selfattention.jpg){: .align-center width="300"}
 
 Attention Mechanism은 input과 output sequence에서 거리와 관계없이 의존성을 모델링 가능하기 때문에 다양한 작업에서 강력한 sequence modeling 및 transductive model의 필수적인 부분이 되었다. 그래서 본 논문에서 순환과정(recurrence) 대신 input과 output 사이의 전체 구조 내 의존성(global denpendency)를 찾는 attention mechanism만 사용한다. 그리고 이는 더 많은 병렬처리가 가능해 동일 시간 동안 더 많은 연산이 가능하다. 전체 구조를 요약하면 다음과 같다.
@@ -57,20 +47,13 @@ Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 
 
 - overall architecture
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "{{'/images/attentionisallyouneed/model%20architecture.jpg' | relative_url}}" width='450'>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure2 : Overall Architecture ]</figcaption>
-</figure>
-
-
+![Figure2 : Self Attention](/images/attentionisallyouneed/model%20architecture.jpg){: .align-center width="450"}
 
 ## 3.1. Attention
 
 #### - Scaled Dot-Product Attention
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "{{'/images/attentionisallyouneed/sdpa.jpg' | relative_url }}" width='150'>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure3 : Scaled Dot-Product Attention ]</figcaption>
-</figure>
+
+![Figure3 : Self Attention](/images/attentionisallyouneed/sdpa.jpg){: .align-center width="150"}
 
 #### - Attention sequence
 $Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V$ 
@@ -85,10 +68,8 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 
 #### - Multi-Head Attention
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "{{'/images/attentionisallyouneed/mha.jpg'  | relative_url}}">  
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure4 : Multi-Head Attention ]</figcaption>
-</figure>
+
+![Figure4 : Self Attention](/images/attentionisallyouneed/mha.jpg){: .align-center}
 
 
 Multi-head Attention(MHA) 는 서로 다른 공간에 있는 정보들을 하나로 병합한다.
