@@ -51,7 +51,7 @@ Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 
 - overall architecture
 
 <figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = '/images/attentionisallyouneed/model%20architecture.jpg' width='450'>
+    <img src = "{{'/images/attentionisallyouneed/model%20architecture.jpg' | relative_url}}" width='450'>
     <figcaption style="display: block; width: 100%; text-align: center;">[ Figure2 : Overall Architecture ]</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 
 
 #### - Scaled Dot-Product Attention
 <figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = '/images/attentionisallyouneed/sdpa.jpg' width='150'>
+    <img src = "{{'/images/attentionisallyouneed/sdpa.jpg' | relative_url }}" width='150'>
     <figcaption style="display: block; width: 100%; text-align: center;">[ Figure3 : Scaled Dot-Product Attention ]</figcaption>
 </figure>
 
@@ -79,7 +79,7 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 #### - Multi-Head Attention
 <figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = '/images/attentionisallyouneed/mha.jpg'>  
+    <img src = "{{'/images/attentionisallyouneed/mha.jpg'  | relative_url}}">  
     <figcaption style="display: block; width: 100%; text-align: center;">[ Figure4 : Multi-Head Attention ]</figcaption>
 </figure>
 
