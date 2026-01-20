@@ -62,6 +62,10 @@ $$
 \end{aligned}
 $$ 
 
+\[
+  \text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right)V
+\]
+
 input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 1. Q와 K의 내적
