@@ -1,27 +1,14 @@
-<script type="text/javascript">
-  MathJax = {
-      tex: {
-          inlineMath: [['$', '$']], // 인라인 수식
-          displayMath: [['$$', '$$']], // 블록 수식
-      },
-      options: {
-          processEscapes: true // 이스케이프 처리 활성화
-      }
-  };
-
-  // 수식 처리 오류 메시지 표시
-  MathJax.startup = {
-      messageStyle: "none", // 브라우저 콘솔에만 오류 표시
-      ready: () => {
-          MathJax.startup.defaultReady();s
-          MathJax.startup.promise.then(() => {
-              console.log("MathJax is ready!");
-          }).catch((err) => {
-              console.error("MathJax failed to start:", err);
-          });
-      }
+<!-- MathJax v3 -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
   };
 </script>
-<script type="text/javascript" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
