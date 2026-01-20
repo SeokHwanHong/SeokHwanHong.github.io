@@ -102,9 +102,10 @@ $\mathbf{z}$가 주어졌을 때, 한번에 하나씩 $(y_1, y_2, ... , y_n)$을
 ## 3.3. Position-wise Feed-Forward Networks
 각 encoder와 decoder에는 완전 연결 feed-forward network가 있는데 각 위치가 분리되고 동일하도록 구성되어있다. 이는 ReLU 를 포함하는 2개의 선형 결합으로 구성되어있고 다음과 같다.
 
-$$
-FFN(x) = max(0, xW_1 + b_1) W_2 + b_2
-$$
+
+\[
+    FFN(x) = max(0, xW_1 + b_1) W_2 + b_2
+\]
 
 이 선형변환은 여러 위치에서 동일하지만 층에서 층으로 이동할 때 다른 모수를 사용한다. 본 논문에서 입력값과 출력값의 차원을 $d_{model} = 512$, 내부 층에서는 $d_{ff} = 2048$ 을 사용한다.
 
@@ -113,10 +114,11 @@ $$
 
 ## 3.5. Positional Encoding
 recurrence와 convolution이 없고 모형이 순서를 인식하기 위해 positional encoding을 추가한다. 이는 enocder와 decoder의 stack의 처음에 추가하는 입력 embedding이고 차원은 다른 embedding들과 동일하게 $d_{model}$ 이다. 본 논문에서는 sine과 cosine 함수를 이용해 다음과 같이 사용한다.
-$$
-PE_{(pos, 2i)} = \sin (pos / 10000^{2i/d_{model}}) \\
-PE_{(pos, 2i+1)} = \cos (pos / 10000^{2i/d_{model}}) 
-$$
+\[
+    PE_{(pos, 2i)} = \sin (pos / 10000^{2i/d_{model}}) \\
+    PE_{(pos, 2i+1)} = \cos (pos / 10000^{2i/d_{model}}) 
+\]
+
 여기서 $pos$ 는 위치를, $i$ 는 차원을 의미한다. 
 삼각함수를 사용한 이유는 모델이 관련 위치들을 더 잘 학습할 것이라고 가정하기 때문이다. 
 
