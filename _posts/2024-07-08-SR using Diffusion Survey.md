@@ -224,7 +224,7 @@ $$
 \end{split}
 $$
 
-여기서 $(i)$ 는 두 항이 분포의 곱이기 때문에 성립하고, $(ii)$ 는 Jensen의 부등식으로 유도할 수 있다. 이 때 상수 $c$ 는 영향을 받지 않으므로 $\theta$ 를 최적화하는 데는 무관하다. $c$ 를 제외한 $$\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \| \| p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}))$$ 은 데이터 $$\mathbf{z}_0$$ 의 로그 가능도의 변분 하한이며, 이는 일반적으로 DDPM에 의해 최대화된다.
+여기서 $(i)$ 는 두 항이 분포의 곱이기 때문에 성립하고, $(ii)$ 는 Jensen의 부등식으로 유도할 수 있다. 이 때 상수 $c$ 는 영향을 받지 않으므로 $\theta$ 를 최적화하는 데는 무관하다. $c$ 를 제외한 $$\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \|| p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}))$$ 은 데이터 $$\mathbf{z}_0$$ 의 로그 가능도의 변분 하한이며, 이는 일반적으로 DDPM에 의해 최대화된다.
 
 
 ## 3.3. Score-Based Generative Models (SGMs)
