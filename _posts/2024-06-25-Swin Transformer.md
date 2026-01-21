@@ -73,8 +73,10 @@ Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window�
 ViT는 이미지 전체에 대해 self-attention을 수행하기때문에 많은 연산량이 요구된다. 반면에 Swin은 겹치지않는 window를 이용한 self-attention이기 때문에 효율적으로 연산이 가능하다. 각 window가 $M \times M$ 개의 patch를 가지고 이미지의 크기가 $h \times w$ 라고 가정하면, 복잡도 계산 시 각각 ViT와 Swin 내 MSA의 복잡도 크기는 다음과 같다. (Softmax 계산은 제외)
 
 $$
-\Omega(MSA) = 4hwC^2 + 2(hw)^2C, \\
-\Omega(W-MSA) = 4hwC^2 + 2M^2hwC 
+\begin{split}
+    \Omega(MSA) = 4hwC^2 + 2(hw)^2C, \\
+    \Omega(W-MSA) = 4hwC^2 + 2M^2hwC 
+\end{split}
 $$
 
 이 때, ViT는 $hw$에 대한 이차식이 구성되지만 Swin은 window의 크기가 고정되어있으니 상수처럼 취급하고 $hw$의 크기에서만 선형적으로 증가하기 때문에 Swin의 연산량이 더 적다는 것을 알 수 있다.
@@ -99,6 +101,7 @@ $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈
 위 그림에서 알 수 있듯이, 이는 분할된 이미지의 왼쪽 위 부분들을 오른쪽 하단으로 옮기는 것이다. 이 상태에서 self-attention을 하면 독립적으로 시행된 self-attetion이 다른 window에도 가능하다. 여기서 A, B, C가 이동하여 window의 개수는 2x2로 유지된 상태로 self-attention이 시행된 것이므로, 중복 attention 연산을 제한하기 위해 masked self-attention을 진행한다.
 
 #### - Computation of Consecutive Blocks
+
 $$
 \begin{split}
     \hat{z}^l \: \: &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
@@ -177,11 +180,9 @@ ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet�
 ![Table 10 : Results of Ablation study](/images/SwinTransformer/ablation1.jpg){: .align-center height="200"}
 
 1. Shifted Windows
-
 표의 상단은 shifted windows에 대한 성능을 비교한 결과를 보인다. 연속되는 층들에 대해 window간 연결을 할 때 shifted windows를 이용하는 것이 더 효율적이라는 것을 알 수 있다.
 
 2. Relative Position Bias
-
 표의 하단은 다양한 위치 임베딩 접근 방식을 비교한 결과를 보인다. Swin-T에서 상대 위치 편향을 사용했기 때문에 더 좋은 효과를 보인다. 또한 절대 위치 임베딩의 포함 여부가 이미지 분류 정확도를 향상시키지만, 객체 탐지 및 시맨틱 세그멘테이션 성능은 오히려 저하된다.
 
 
