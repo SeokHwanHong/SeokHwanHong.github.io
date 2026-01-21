@@ -82,28 +82,18 @@ $$
 #### - Shifted winodw partitioning in successive blocks
 window를 이용한 self-attention 모듈은 window 간 상호작용이 부족해 모델링 능력이 제한된다. 이를 보완하기 위해 연속된 Swin block을 번갈아 사용하는 naive shifted window partitioning은 다음과 같다.                                      
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/figure2.jpg" height = 200>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure6 : Shifted Window Partitioning ]</figcaption>
-</figure>
+![Figure6 : Shifted Window Partitioning](/images/SwinTransformer/figure2.jpg){: .align-center height="200"}
 
 
 $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈도우로 분할하고 window $\lceil \frac{h}{M} \rceil \times \lceil \frac{w}{M} \rceil$ 개에 각각 독립적으로 self-attention을 한다. 다음 층인 $l+1$ 번째 층에서는 추가적으로 window를 $(\lceil \frac{h}{M} \rceil+1) \times (\lceil \frac{w}{M} \rceil+1)$ 로 나누어 $l$ 번째 층과 동일하게 self-attention을 한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil \times \lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 한다. 이를 그림으로 표현하면 다음과 같다.
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/figure2-1.jpg" height = 200>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure7 : Efficient batch computation in Shifted Windows ]</figcaption>
-</figure>
-
+![Figure7 : Efficient batch computation in Shifted Windows](/images/SwinTransformer/figure2-1.jpg){: .align-center height="200"}
 
 #### - Cyclic Shift
 
 위와 같은 naive shift의 경우 window의 개수가 2x2에서 3x3로 증가함에 따라 연산량이 2.25배가 되어 윈도우의 크기가 커짐에 따라 연산량이 기하급수적으로 증가한다. 그래서 이 연산량을 줄이고자 cyclic shift를 제안한다.
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/figure4.jpg" height = 150>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure8 : Cyclic Shift ]</figcaption>
-</figure>
+![Figure8 : Cyclic Shift](/images/SwinTransformer/figure4.jpg){: .align-center height="150"}
 
 
 위 그림에서 알 수 있듯이, 이는 분할된 이미지의 왼쪽 위 부분들을 오른쪽 하단으로 옮기는 것이다. 이 상태에서 self-attention을 하면 독립적으로 시행된 self-attetion이 다른 window에도 가능하다. 여기서 A, B, C가 이동하여 window의 개수는 2x2로 유지된 상태로 self-attention이 시행된 것이므로, 중복 attention 연산을 제한하기 위해 masked self-attention을 진행한다.
@@ -111,10 +101,10 @@ $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈
 #### - Computation of Consecutive Blocks
 $$
 \begin{split}
-\hat{z}^l \: \: &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
-z^l \: \: &= MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}, \\
-\hat{z}^{l+1} &= SW-MSA (LN(z^{l}))+ z^{l}, \\
-z^{l+1} &= MLP(LN(\hat{z}^{l+1}))+ \hat{z}^{l+1}
+    \hat{z}^l \: \: &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
+    z^l \: \: &= MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}, \\
+    \hat{z}^{l+1} &= SW-MSA (LN(z^{l}))+ z^{l}, \\
+    z^{l+1} &= MLP(LN(\hat{z}^{l+1}))+ \hat{z}^{l+1}
 \end{split}
 $$
 
@@ -127,66 +117,45 @@ $$
 ## 3.1. Image Classification
 - #### Settings
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/settings_IC.jpg" height = 100>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 2 : Hyperparameters Settings for Image Classification ]</figcaption>
-</figure>
+![Table 2 : Hyperparameters Settings for Image Classification](/images/SwinTransformer/settings_IC.jpg){: .align-center height="100"}
+
 
 train dataset으로 IamgeNet-1K을 이용했다. settings2에서 fine-tuning 진행시 30epoch, batch size 1024, constant learning rate $10^{-5}$, weight decay $10^{-8}$ 로 진행하였다.
 
 - #### Results on Setting1
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result1.jpg" height = 400>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 3 : Comparison 1 of different backbones on ImageNet-1K ]</figcaption>
-</figure>
+![Table 3 : Comparison 1 of different backbones on ImageNet-1K](/images/SwinTransformer/result1.jpg){: .align-center height="400"}
 
 복잡도가 유사한 DeiT에 대해 Swin이 더 좋은 성능을 보인다. 또한 ConvNets 과 비교했을 때도 Swin이 조금 더 좋은 성능과 속도를 보인다. 
 
 - #### Results on Setting2
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result2.jpg" height = 200>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 4 : Comparison 2 of different backbones on ImageNet-1K ]</figcaption>
-</figure>
+![Table 4 : Comparison 2 of different backbones on ImageNet-1K](/images/SwinTransformer/result2.jpg){: .align-center height="200"}
 
 다른 모델들에 비해 Swin이 조금 더 좋은 성능과 속도를 보인다.
 
 ## 3.2. Object Detection
 - #### Settings
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/settings_OD.jpg" height = 150>
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 5 : Hyperparameters Settings for Object Detection on COCO ]</figcaption>
-</figure>
+![Table 5 : Hyperparameters Settings for Object Detection on COCO](/images/SwinTransformer/settings_OD.jpg){: .align-center height="150"}
 
 COCO 2017로 학습을 진행하였다. 시스템 수준 비교를 위해 instaboost, 강력한 다중 스케일 학습, 6배 스케줄 (epochs 72), soft-NMS, 그리고 ImageNet-22K 사전 학습 모델을 초기화로 사용하는 개선된 HTC (HTC++)를 사용한다.
 
 - #### Results on Various Frameworks
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result3.jpg" height = 200>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 6 : Result 1 on COCO Object Detection ]</figcaption>
-</figure>
+![Table 6 : Result 1 on COCO Object Detection](/images/SwinTransformer/result3.jpg){: .align-center height="200"}
 
 4가지 프레임워크에서 모두 기존 ResNe(X)t-50 보다 parameter 수가 많고 FLOPS는 비슷하지만, 이에 반해 높은 정확도을 보인다. 
 
 - #### Results on Various backbones with cascade Mask R-CNN
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result4.jpg" height = 200>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 7 : Result 2 on COCO Object Detection ]</figcaption>
-</figure>
-
+![Table 7 : Result 2 on COCO Object Detection](/images/SwinTransformer/result4.jpg){: .align-center height="200"}
 
 또한 Cascade Mask R-CNN을 backbone network로 이용했을 때 역시 다른 모델들에 비해 Swin이 높은 정확도를 보인다. 이 때 infernce speed에 대해, ResNe(X)t는 highly optimized Cudnn 함수를 이용했지만 Swin은 PyTorch 함수를 이용하였기에 최적화 성능에서 어느 정도 차이가 발생하였다. 
 
 - #### Results on System-level Comparsion
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result5.jpg" height = 300>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 8 : Result 3 on COCO Object Detection ]</figcaption>
-</figure>
+![Table 8 : Result 3 on COCO Object Detection](/images/SwinTransformer/result5.jpg){: .align-center height="300"}
 
 validation set에 대한 Average pooling 값과 FLOPs 를 비교한 표다. 기존 SOTA 모델들과 비교했을 때, Swin이 가장 우수한 성능을 보인다.
 
@@ -197,10 +166,7 @@ ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet�
 
 #### - Results 
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/result6.jpg" height = 300>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 9 : Results of Semantic Segmentation on ADE20K ]</figcaption>
-</figure>
+![Table 9 : Results of Semantic Segmentation on ADE20](/images/SwinTransformer/result6.jpg){: .align-center height="300"}
 
 평가지표로 mIOU를 이용하였다. 다른 모델들과 비교했을 때, Swin이 validation set과 test set에서 모두 가장 높은 점수를 보인다.
 
@@ -208,10 +174,7 @@ ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet�
 #### - Results on Relative Position Bias
 3.1 ~ 3.3 에서 수행한 작업들에 대해 Ablation Study를 진행하였다. 
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/ablation1.jpg" height = 200>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 10 : Results of Ablation study ]</figcaption>
-</figure>
+![Table 10 : Results of Ablation study](/images/SwinTransformer/ablation1.jpg){: .align-center height="200"}
 
 1. Shifted Windows
 
@@ -225,21 +188,13 @@ ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet�
 
 #### - Results on Shifted Winodws and Different self-attention methods
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/ablation2.jpg" height = 150>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 11 : Results of Ablation study 2 ]</figcaption>
-</figure>
-
+![Table 11 : Results of Ablation study 2](/images/SwinTransformer/ablation2.jpg){: .align-center height="150"}
 
 위 표는 여러 self-attention 계산 방법을 비교한 것이다. 본 논문에서 제시하는 Cyclic Shift는 더 깊은 층에서의 naive padding보다 더 좋은 성능을 보인다.
 
 또한 4 단계에 걸친 MSA에서 shifted window가 sliding window에 비해 대부분 더 좋은 성능을 보인다. 이를 바탕으로 각각 Image Classification, Object Detection, Semantic Segmentation에 적용한 결과는 다음 표와 같다.
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SwinTransformer/ablation3.jpg" height = 100>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Table 12 : Results of Ablation study 3 ]</figcaption>
-</figure>
-
+![Table 12 : Results of Ablation study 3](/images/SwinTransformer/ablation3.jpg){: .align-center height="100"}
 
 # 참고
 https://lcyking.tistory.com/entry/%EB%85%BC%EB%AC%B8%EB%A6%AC%EB%B7%B0-Swin-Transformer-Hierarchical-Vision-Transformer-using-Shifted-Windows
