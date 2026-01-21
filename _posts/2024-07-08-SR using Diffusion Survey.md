@@ -384,7 +384,7 @@ DDPMs와 유사하게, $$\mathbf{z}_{T} \approx \mathcal{N}(\mathbf{0}, \mathbf{
 $$
 \begin{split}
     &\mathbf{z}_t = \sqrt{\gamma_t} \cdot \mathbf{\hat{z}}_0 + \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \\
-    \Longleftrightarrow &\mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
+    \Longleftrightarrow \; &\mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
 \end{split}
 $$ 
 
