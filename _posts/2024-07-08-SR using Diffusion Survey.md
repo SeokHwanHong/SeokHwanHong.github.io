@@ -61,7 +61,7 @@ statistical, edge-based, patch-based, prediction-based, sparse representation te
 
 SRCNN, FSRCNN, ESPCNN 등 CNN 모형은 깊이와 feature map의 크기를 조절한다.
 
-**2.최근 모델 : attention 구조**
+**2. 최근 모델 : attention 구조**
 
 이미지 내 관심있는 부분에 집중한다. regression에 기초해 손실함수로는 주로 L1과 L2 정규화를 이용한다. 저배율에서는 효과적이지만 배율이 올라감에 따라 효율이 감소한다. 특히, 더 큰 upscaling에서 세부사항에 문제가 발생하고 지나치게 부드러운 결과를 생성하는 경향이 있는데, 이는 보통 생성모델을 통해 해결된다.
 
@@ -79,7 +79,7 @@ Flow-based 방법은 optical flow algorithm을 이용해 SR 이미지를 생성�
 
 $$
 \begin{split}
-    \mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} \| i \le h, j \le w, k \le c \}
+    \mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} \vert i \le h, j \le w, k \le c \}
 \end{split}
 $$ 
 
@@ -162,7 +162,7 @@ $\mathcal{D}$ : 저해상도-고해상도 image pair set, $\mathcal{D} = \{ \mat
 확률 변수 $\mathbf{z}_t$ : 이미지와 corruption space 간 상태인 현재 상태, 이 때 순방향 $\mathbf{z}_t$ 와 역방향 $\mathbf{z}_t$ 사이에는 명확한 구분이 없다.
 
 #### - Assumptions
-순방향에서는 $$\mathbf{z}_t \sim q(\mathbf{z}_t \| \mathbf{z}_{t-1})$$, 역방향에서는 $$\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} \| \mathbf{z}_{t})$$ 이고 $t=0$ 일 때 초기 데이터 분포는 $$\mathbf{z}_0 \sim q(\mathbf{x})$$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations(SDEs)로 구분된다.
+순방향에서는 $$\mathbf{z}_t \sim q(\mathbf{z}_t \vert \mathbf{z}_{t-1})$$, 역방향에서는 $$\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} \vert \mathbf{z}_{t})$$ 이고 $t=0$ 일 때 초기 데이터 분포는 $$\mathbf{z}_0 \sim q(\mathbf{x})$$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations(SDEs)로 구분된다.
 
 ## 3.2. Denosing Diffusion Probabilistic Models (DDPMs)
 DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 diffusion을 활성화하기위해 2개의 Markov chain을 사용한다. 
@@ -172,7 +172,7 @@ DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 
 
 $$
 \begin{split}
-    q(\mathbf{z}_t \| \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t \| \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \alpha_t \mathbf{I})
+    q(\mathbf{z}_t \vert \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \alpha_t \mathbf{I})
 \end{split}
 $$
 
@@ -180,7 +180,7 @@ $$
 
 $$
 \begin{split}
-    q(\mathbf{z}_t \| \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t \| \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t})\mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
+    q(\mathbf{z}_t \vert \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t})\mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
 \end{split}
 $$ 
 
@@ -188,7 +188,7 @@ $$
 
 $$
 \begin{split}
-    q(\mathbf{z}_t \| \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \sqrt{\gamma_t} \cdot \epsilon), \quad \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+    q(\mathbf{z}_t \vert \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \sqrt{\gamma_t} \cdot \epsilon), \quad \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
 \end{split}
 $$
 
@@ -197,19 +197,19 @@ $$
 
 $$
 \begin{split}
-    p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} \| \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),
+    p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} \vert \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),
 \end{split}
 $$ 
 
-여기서 $$\mu_{\theta}$$ 와 $$\Sigma_{\theta}$$ 은 학습가능하다. 유사하게 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{x})$$ 의 평균과 분산을 $$\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \; \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$$ 로 대체할 수 있다. 
+여기서 $$\mu_{\theta}$$ 와 $$\Sigma_{\theta}$$ 은 학습가능하다. 유사하게 $$p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}, \mathbf{x})$$ 의 평균과 분산을 $$\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \; \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$$ 로 대체할 수 있다. 
 
 #### - Optimization 
 순방향 과정을 학습하는 역방향 과정에서 다음과 같은 순방향 및 역방향 시퀀스의 결합 분포는 다음과 같다. 
 
 $$
 \begin{split}
-    & p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_T) \prod_{t=1}^{T}p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) \\
-    & q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_0) \prod_{t=1}^{T}q(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) \\
+    & p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_T) \prod_{t=1}^{T}p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}) \\
+    & q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_0) \prod_{t=1}^{T}q(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}) \\
 \end{split}
 $$
 
@@ -219,7 +219,7 @@ $$
 \begin{split}
     &\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \Vert p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
     &= -\mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} [\log p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})] + c \\
-    &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t})}{q(\mathbf{z}_t \| \mathbf{z}_{t-1})}] + c \\
+    &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t})}{q(\mathbf{z}_t \vert \mathbf{z}_{t-1})}] + c \\
     &\overset{(ii)}{\ge} \mathbb{E}[- \log p_{\theta} (\mathbf{z}_0)] + c
 \end{split}
 $$
@@ -274,7 +274,7 @@ DDPMs과 유사하게 SGMs를 조건부 SGMs로 바꿀 수 있는데, 이는 저
 
 $$
 \begin{split}
-    s_{\theta}(\mathbf{z}_t, \mathbf{x}, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \| \mathbf{x}) 
+    s_{\theta}(\mathbf{z}_t, \mathbf{x}, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \vert \mathbf{x}) 
 \end{split}
 $$
 
@@ -283,10 +283,10 @@ $$
 
 $$
 \begin{split}
-    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) - s_{\theta}(\mathbf{z}_t, t) \|^2 \right] \\
-    &\overset{(i)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{z}_0) - s_{\theta}(z_t, t) \|^2 \right] + c \\
-    &\overset{(ii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| -\frac{\mathbf{z}_t - \mathbf{z}_0}{\sigma_t} - \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
-    &\overset{(iii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \epsilon \sim \mathcal{N} (\mathbf{0}, \mathbf{I})}}{\mathbb{E}} \left[ \lambda(t) \| \epsilon + \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
+    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \vert \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) - s_{\theta}(\mathbf{z}_t, t) \vert^2 \right] \\
+    &\overset{(i)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \vert \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{z}_0) - s_{\theta}(z_t, t) \vert^2 \right] + c \\
+    &\overset{(ii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \vert -\frac{\mathbf{z}_t - \mathbf{z}_0}{\sigma_t} - \sigma_t s_{\theta}(\mathbf{z}_t, t) \vert^2 \right] + c \\
+    &\overset{(iii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \epsilon \sim \mathcal{N} (\mathbf{0}, \mathbf{I})}}{\mathbb{E}} \left[ \lambda(t) \vert \epsilon + \sigma_t s_{\theta}(\mathbf{z}_t, t) \vert^2 \right] + c \\
 \end{split}
 $$
 
@@ -348,7 +348,7 @@ $$
 
 $$
 \begin{split}
-    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| s_{\theta}(\mathbf{z}_t, t) - \nabla_{\mathbf{z}_t} \log q_t(\mathbf{z}_t \ \mathbf{z}_0) \|^2 \right] \\
+    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \vert s_{\theta}(\mathbf{z}_t, t) - \nabla_{\mathbf{z}_t} \log q_t(\mathbf{z}_t \ \mathbf{z}_0) \vert^2 \right] \\
 \end{split}
 $$
 
@@ -387,7 +387,7 @@ $$
 \end{split}
 $$ 
 
-$$\mathbf{z}_0$$ 을 사후분포에 대입해 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t})$$ 의 평균을 매개변수화하면 다음과 같은 결과를 얻을 수 있다.
+$$\mathbf{z}_0$$ 을 사후분포에 대입해 $$p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t})$$ 의 평균을 매개변수화하면 다음과 같은 결과를 얻을 수 있다.
 
 $$
 \begin{split}
@@ -406,14 +406,14 @@ $$
 대부분의 논문들이 denoise 모델 $$\varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)$$ 을 변형한 모델을 사용한다. 한 예시로는 SRDiff가 있는데, 이는 저해상도 이미지와 고해상도 이미지 간의 잔여 정보, 즉 차이를 예측한다. 
 
 ## 4.2. Guidance in Training
-SRDM의 backbone은 조건부 분포를 학습한다. 조건 $$\mathbf{x}$$ 는 DDPMs의 경우 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_t, \mathbf{x})$$ , SGMs와 SDEs의 경우 $$s_{\theta}(\mathbf{z}_t, \mathbf{x}, t)$$ 에 통합되어 역방향 diffusion 과정에 적용된다. 하지만 이러한 간단한 공식화는 조건부 정보를 무시하는 모델이 될 수도 있다. 이러한 문제들을 방지하기 위해 'guidance' 라는 원칙을 이용하는데, 이는 표본의 다양성을 감소시키는 대신 조건부 정보의 가중치를 조절하는 것이다. 
+SRDM의 backbone은 조건부 분포를 학습한다. 조건 $$\mathbf{x}$$ 는 DDPMs의 경우 $$p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_t, \mathbf{x})$$ , SGMs와 SDEs의 경우 $$s_{\theta}(\mathbf{z}_t, \mathbf{x}, t)$$ 에 통합되어 역방향 diffusion 과정에 적용된다. 하지만 이러한 간단한 공식화는 조건부 정보를 무시하는 모델이 될 수도 있다. 이러한 문제들을 방지하기 위해 'guidance' 라는 원칙을 이용하는데, 이는 표본의 다양성을 감소시키는 대신 조건부 정보의 가중치를 조절하는 것이다. 
 
 #### - Classifier Guidance
 Claasifier Guidance 는 분류기를 이용해 샘플링동안 분류기의 gradient와 DM의 score estimate를 병합해 diffusion 과정을 안내한다. 이는 mode coverage와 표본의 다양성 간 균형을 이루게 한다. 분류기는 정보 $$\mathbf{z}_t$$ 로부터 $$\mathbf{x}$$ 을 예측하기 위해 DM과 동시에 훈련된다. 조건 정보의 가중치가 주어졌을 때, score function은 다음과 같다.
 
 $$
 \begin{split}
-    \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \| \mathbf{x}) = \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) + \lambda \nabla_{\mathbf{z}_t} \log q(\mathbf{x} \| \mathbf{z}_t)
+    \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \vert \mathbf{x}) = \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) + \lambda \nabla_{\mathbf{z}_t} \log q(\mathbf{x} \vert \mathbf{z}_t)
 \end{split}
 $$ 
 
@@ -563,7 +563,7 @@ ILVR은 저해상도 이미지에서 저주파수 정보를 고해상도 이미�
 $$
 \begin{split}
     \mathbf{\hat{z}}_{t-1} &= f(\mathbf{z}_t, t) + g(\mathbf{z}_t, t) \cdot \varepsilon_t \\
-    \mathbf{z}_{t-1} &= (\mathbf{I} - \mathbf{P}) \cdot \mathbf{\hat{z}}_{t-1} + \mathbf{\hat{x}}, \quad \mathbf{\hat{x}} \sim q(\mathbf{z}_t \| \mathbf{z}_0 = \mathbf{x}) \\
+    \mathbf{z}_{t-1} &= (\mathbf{I} - \mathbf{P}) \cdot \mathbf{\hat{z}}_{t-1} + \mathbf{\hat{x}}, \quad \mathbf{\hat{x}} \sim q(\mathbf{z}_t \vert \mathbf{z}_0 = \mathbf{x}) \\
 \end{split}
 $$ 
 
@@ -612,35 +612,35 @@ $$
 \end{split}
 $$
 
-여기서 $$ \mathbf{A^{\dagger}} \in \mathbb{R}^{D \times d}$$ 는 $$ \mathbf{AA^{\dagger}A} \equiv \mathbf{A}$$ 를 만족하는 pseudo-inverse 이다(Moore&Penrose Generailized Inverse 참고). 목표는 null-space $$(\mathbf{I-A^{\dagger}A})\mathbf{\mathbf{y}} $$ 를 생성하는 적절한 $$\mathbf{\mathbf{y}}$$ 를 찾아 위 식의 $Realness$ 를 만족하는 range-space $$\mathbf{A^{\dagger}x}$$ 를 구성하는 것이다. 깔끔한 중간 상태 $$\mathbf{z}_{0 \| t}$$ 를 유도하기 위해 시간단계 $t$ 에 대해 $$\mathbf{z}_0$$ 으로부터의 rang-null space decompostion을 수행하고 이는 다음과 같이 정의한다.
+여기서 $$ \mathbf{A^{\dagger}} \in \mathbb{R}^{D \times d}$$ 는 $$ \mathbf{AA^{\dagger}A} \equiv \mathbf{A}$$ 를 만족하는 pseudo-inverse 이다(Moore&Penrose Generailized Inverse 참고). 목표는 null-space $$(\mathbf{I-A^{\dagger}A})\mathbf{\mathbf{y}} $$ 를 생성하는 적절한 $$\mathbf{\mathbf{y}}$$ 를 찾아 위 식의 $Realness$ 를 만족하는 range-space $$\mathbf{A^{\dagger}x}$$ 를 구성하는 것이다. 깔끔한 중간 상태 $$\mathbf{z}_{0 \vert t}$$ 를 유도하기 위해 시간단계 $t$ 에 대해 $$\mathbf{z}_0$$ 으로부터의 rang-null space decompostion을 수행하고 이는 다음과 같이 정의한다.
 
 $$
 \begin{split}
-    \mathbf{z}_{0 \| t} = \frac{1}{\sqrt{\mathbf{\bar{\alpha}}_t}} (\mathbf{z}_t - \epsilon_\theta(\mathbf{z}_t, t) \sqrt{1-\mathbf{\bar{\alpha}}_t})
+    \mathbf{z}_{0 \vert t} = \frac{1}{\sqrt{\mathbf{\bar{\alpha}}_t}} (\mathbf{z}_t - \epsilon_\theta(\mathbf{z}_t, t) \sqrt{1-\mathbf{\bar{\alpha}}_t})
 \end{split}
 $$ 
 
 여기서 $$\epsilon_t = \epsilon_{\theta}(\mathbf{z}_t,t)$$ 이다.
 
-이 때, $$\mathbf{Az_0} \equiv \mathbf{x}$$ 를 만족하는 $$\mathbf{z}_0$$ 를 생성하기 위해, range-space를 $$\mathbf{A^{\dagger}y}$$ 로 두고 null-space는 바꾸지않는다. 이를 이용해 rectified esimator인 $$\mathbf{\hat{z}}_{0 \| t}$$ 를 생성하는데, 이는 다음과 같다.
+이 때, $$\mathbf{Az_0} \equiv \mathbf{x}$$ 를 만족하는 $$\mathbf{z}_0$$ 를 생성하기 위해, range-space를 $$\mathbf{A^{\dagger}y}$$ 로 두고 null-space는 바꾸지않는다. 이를 이용해 rectified esimator인 $$\mathbf{\hat{z}}_{0 \vert t}$$ 를 생성하는데, 이는 다음과 같다.
 
 $$
 \begin{split}
-    \mathbf{\hat{z}}_{0 \| t} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}) \mathbf{z}_{0 \| t} 
+    \mathbf{\hat{z}}_{0 \vert t} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}) \mathbf{z}_{0 \vert t} 
 \end{split}
 $$
 
-마지막으로 $$\mathbf{z}_{t-1}$$ 을 $$p(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{\hat{z}}_{0 \| t})$$ 에서 sampling 함으로써 유도한다.
+마지막으로 $$\mathbf{z}_{t-1}$$ 을 $$p(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}, \mathbf{\hat{z}}_{0 \vert t})$$ 에서 sampling 함으로써 유도한다.
 
 $$
 \begin{split}
-    \mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0 \|t} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
+    \mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0 \vertt} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
 \end{split}
 $$ 
 
 여기서 $$\alpha_t = 1- \beta_t, \; \mathbf{\bar{\alpha}}_t = \prod_{i=0}^{t}\alpha_i$$ 이다.
 
-$$\mathbf{z}_{t-1}$$ 은 $$\mathbf{\hat{z}}_{0 \| t}$$ 의 noise가 추가된 버전이다. 이 노이즈는 range-space 와 null-space 간 불일치를 효과적으로 완화한다. 마지막으로 $$\mathbf{A}$$ 와 $$\mathbf{A^{\dagger}}$$ 를 정의하는 것에 따라 수행할 복원 작업이 달라진다. 
+$$\mathbf{z}_{t-1}$$ 은 $$\mathbf{\hat{z}}_{0 \vert t}$$ 의 noise가 추가된 버전이다. 이 노이즈는 range-space 와 null-space 간 불일치를 효과적으로 완화한다. 마지막으로 $$\mathbf{A}$$ 와 $$\mathbf{A^{\dagger}}$$ 를 정의하는 것에 따라 수행할 복원 작업이 달라진다. 
 
 
 ## 5.3. Posterior Estimation
@@ -648,30 +648,30 @@ $$\mathbf{z}_{t-1}$$ 은 $$\mathbf{\hat{z}}_{0 \| t}$$ 의 noise가 추가된 �
 
 $$
 \begin{split}
-    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{z}_t \| \mathbf{x}) = \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \| \mathbf{z}_t) + s_{\theta}(\mathbf{x}, t), 
+    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{z}_t \vert \mathbf{x}) = \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \vert \mathbf{z}_t) + s_{\theta}(\mathbf{x}, t), 
 \end{split}
 $$ 
 
-여기서 $$s_{\theta}(\mathbf{x}, t)$$ 는 사전훈련된 모델에서 추출 가능하지만 반면에 $$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 는 다루기 어렵다. 그래서 이에 대한 목표는 $$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 를 정확하게 추정하는 것이다.
+여기서 $$s_{\theta}(\mathbf{x}, t)$$ 는 사전훈련된 모델에서 추출 가능하지만 반면에 $$p_t(\mathbf{x} \vert \mathbf{z}_t)$$ 는 다루기 어렵다. 그래서 이에 대한 목표는 $$p_t(\mathbf{x} \vert \mathbf{z}_t)$$ 를 정확하게 추정하는 것이다.
 
 
 #### - MCG & DPS
-MCG와 DPS에서는 $$p_t(\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \; with \; \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \| \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \| \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
+MCG와 DPS에서는 $$p_t(\mathbf{x} \vert \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \; with \; \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \vert \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \vert \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
 
 $$
 \begin{split}
-    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \| \mathbf{z}_t) \approx \nabla_{\mathbf{z}_t} \log p (\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \approx - \frac{1}{\sigma^2} \nabla_{\mathbf{z}_t} \parallel \mathbf{x} - H(\mathbf{\hat{z}}_0 (\mathbf{z}_t)) \parallel_2^2,
+    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \vert \mathbf{z}_t) \approx \nabla_{\mathbf{z}_t} \log p (\mathbf{x} \vert \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \approx - \frac{1}{\sigma^2} \nabla_{\mathbf{z}_t} \parallel \mathbf{x} - H(\mathbf{\hat{z}}_0 (\mathbf{z}_t)) \parallel_2^2,
 \end{split}
 $$ 
 
 여기서 $H$ 는 순방향 measurement 연산자이다.
 
 #### - GDP
-$$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 의 조건부 확률이 더 높을수록 degradation 모델인 $$\mathcal{D}(\mathbf{z}_t)$ 를 $\mathbf{x}$$ 에 적용한 결과와의 거리가 감소하는 것에 집중한다. 이에 대한 heuristic 근사를 다음과 같이 제안한다.
+$$p_t(\mathbf{x} \vert \mathbf{z}_t)$$ 의 조건부 확률이 더 높을수록 degradation 모델인 $$\mathcal{D}(\mathbf{z}_t)$ 를 $\mathbf{x}$$ 에 적용한 결과와의 거리가 감소하는 것에 집중한다. 이에 대한 heuristic 근사를 다음과 같이 제안한다.
 
 $$
 \begin{split}
-    p_t(\mathbf{x} \| \mathbf{z}_t) \approx \frac{1}{Z} \exp (-[s \mathcal{L}(\mathcal{D}(\mathbf{z}_t), \mathbf{x})]) + \lambda \mathcal{Q}(\mathbf{z}_t),
+    p_t(\mathbf{x} \vert \mathbf{z}_t) \approx \frac{1}{Z} \exp (-[s \mathcal{L}(\mathcal{D}(\mathbf{z}_t), \mathbf{x})]) + \lambda \mathcal{Q}(\mathbf{z}_t),
 \end{split}
 $$
 
