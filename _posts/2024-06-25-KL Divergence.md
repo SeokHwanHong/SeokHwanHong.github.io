@@ -13,16 +13,23 @@ use_math: true
 # 1. Cross Entropy
 #### - Entropy
 엔트로피는 불확실성의 척도로 정보이론에서는 불확실성을 나타내며 엔트로피가 높다는 것은 정보가 많고 확률이 낮다는 것을 의미한다.
+
 $$
-H(x) = - \sum_{i=1}^{n}p(x_i)\log(p(x_i))
+\begin{aligned}
+    H(x) = - \sum_{i=1}^{n}p(x_i)\log(p(x_i)) \\
+\end{aligned}
 $$
 여기서 $p(x_i)$는 $i$번째 사건에 대한 확률이다.
 
 #### - Cross Entropy
 Cross Entropy는 실제 분포 $q$ 를 모를 때, 예측모형 $p$ 를 $q$ 와 근사하게 모델링하여 이 확률분포들의 차이를 구하기 위해 사용한다. 
+
 $$
-H_p(q) = - \sum_{i=1}^{n}q(x_i)log(p(x_i)) 
+\begin{aligned}
+    H_p(q) = - \sum_{i=1}^{n}q(x_i)log(p(x_i)) \\
+\end{aligned} 
 $$  
+
 머신러닝 모형에서 $q$ 를 실제 데이터를 이용해 확인할 수 있기 때문에 예측값과의 cross entropy를 계산할 수 있다. 
 
 # 2. Kullback-Leibler Divergence
@@ -30,12 +37,16 @@ Kullback-Leibler divergence(KL Divergence)는 두 확률분포의 차이를 계�
 
 #### - 이산확률변수
 $$
-D_{KL}(P||Q) = \sum_{i} P(i) \log \left[\frac{P(i)}{Q(i)} \right] = H_p(q) - H(q)
+\begin{aligned}
+    D_{KL}(P||Q) = \sum_{i} P(i) \log \left[\frac{P(i)}{Q(i)} \right] = H_p(q) - H(q) \\
+\end{aligned}
 $$
 
 #### - 연속확률변수
 $$
-D_{KL}(P||Q) = \int_{-\infty}^{\infty} p(x) \log \left[\frac{p(x)}{q(x)} \right] dx
+\begin{aligned}
+    D_{KL}(P||Q) = \int_{-\infty}^{\infty} p(x) \log \left[\frac{p(x)}{q(x)} \right] dx \\
+\end{aligned}
 $$
 
 #### - Entropy, Cross Entropy와의 연관성
@@ -46,8 +57,11 @@ $H_p(q)$는 $H(q)$ 보다 항상 크기때문에 KL divergence는 항상 0보다
 # 3. Jensen-Shannon Divergence
 #### - Definition
 위의 지표들과 동일하게 분포간 거리를 계산하는데 사용하는 함수로, KL divergence를 두 번 구해 평균을 낸 것이다. 그리고  KL divergence와 다르게 대칭성이 있다는 특징이 있으며 분포간 거리를 나타낸다.
+
 $$
-JSD(P||Q) = \frac{D_{KL}(P||M) + D_{KL}(Q||M)}{2}
+\begin{aligned}
+    JSD(P||Q) = \frac{D_{KL}(P||M) + D_{KL}(Q||M)}{2} \\
+\end{aligned}
 $$
 
 여기서 $M = \frac{P+Q}{2}$ 은 $P$와 $Q$의 혼합 분포다.

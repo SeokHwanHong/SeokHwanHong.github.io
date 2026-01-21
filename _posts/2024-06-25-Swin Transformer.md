@@ -35,27 +35,17 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 # 2.Methods
 ## 2.1. Overall Architecture
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-  <img src="/images/SwinTransformer/figure3.jpg" width = 700>
-  <figcaption style="display: block; width: 100%; text-align: center;">[ Figure1 : Overall Architecture ]</figcaption>
-</figure>
-
+![Figure1 : Overall Architecture](/images/SwinTransformer/figure3.jpg){: .align-center width="700"}
 
 #### - Input
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-  <img src="/images/SwinTransformer/figure3-1.jpg" height="200">
-  <figcaption style="display: block; width: 100%; text-align: center;">[ Figure2 : Stage1 ]</figcaption>
-</figure>
+![Figure2 : Stage1](/images/SwinTransformer/figure3-1.jpg){: .align-center height="200"}
 
 이미지들을 ViT의 patch들처럼 겹치지 않게 RGB채널로 나눈다. 이 때 각 patch는 토큰으로 간주되고 feature map은 raw pixel RGB값의 결합이다. 그리고 patch 크기를 4x4로 설정해 각 패치마다 4x4x3(RGB channel)으로 feature map을 구성한다. 이 feature map을 arbitrary dimension $C$로 사영(삽입)해 linear embedding 층에 적용한다. Swin Transformer block 을 이용한 여러 block들에 앞서 구성한 patch를 적용한다. 이때 block의 크기는 토큰의 개수인 $\frac{H}{4}$x$\frac{W}{4}$ 이고 이를 Stage1이라고 지칭한다.
 
 #### - Hierarchcial Feature Map
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-  <img src = "/images/SwinTransformer/figure3-2.jpg" height = 200>
-  <figcaption style="display: block; width: 100%; text-align: center;">[ Figure3 : Stage2 ~ 4 ]</figcaption>
-</figure>
+![Figure3 : Stage2 ~ 4](/images/SwinTransformer/figure3-2.jpg){: .align-center height="200"}
 
 전체적으로 계층적인 feature map을 구성하기 위해 신경망이 깊어지면서 patch들을 합쳐 토큰의 수를 감소시킨다. Stage1에서 Stage2로 이동하면서 기존 패치들을 2x2로 합치고 4C 차원의 feature map을 구성한다. 따라서 output 차원은 2C가 된다. 동일하게 각 Stage를 이동할때마다 2x downsampling of resolution을 적용함으로써 Stage3와 Stage4의 해상도는 각각 $\frac{H}{16} \times \frac{W}{16} \times 4C$ 와 $\frac{H}{32} \times \frac{W}{32} \times 8C$ 로 층을 지날수록 감소한다. 이를 통해 일반적인 representation보다 더 계층적인 구조를 학습가능하고 차원이 감소한만큼 연산속도가 빨라진다.
 
