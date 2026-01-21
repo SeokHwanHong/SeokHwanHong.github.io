@@ -34,7 +34,9 @@ $$
 화질저하(degradation)는 보통 알 수 없으므로 $D$의 매개변수인  $\theta$ 의 inverse mapping을 결정하는 것이 주요 과제이다. 이는 보통 SR 모델로 구현된다. 그리고 원래 HR 이미지인 $\mathbf{y}$와 예측한 SR 이미지인 $\hat{\mathbf{y}}$ 간 차이를 최소화 하는 것을 목표로 하고 이를 다음과 같이 표현할 수 있다.
 
 $$
-\theta = \argmin_{\theta} \mathcal{L}(\hat{\mathbf{y}}, \mathbf{y}) + \lambda \: \phi(\theta)
+\begin{split}
+    \theta = \argmin_{\theta} \mathcal{L}(\hat{\mathbf{y}}, \mathbf{y}) + \lambda \: \phi(\theta)
+\end{split}
 $$
 
 여기서 $\mathcal{L}$은 원래(실제) HR 이미지인 $\mathbf{y}$와 예측한 SR 이미지인 $\hat{\mathbf{y}}$ 간 손실함수, $\lambda$는 balancing parameter, $\phi(\theta)$는 regularization term이다.
@@ -71,7 +73,7 @@ Flow-based 방법은 optical flow algorithm을 이용해 SR 이미지를 생성�
 이미지 품질은 선명도, 대비, 노이즈 유무 등의 여러 특성들을 다루는 다면적인 개념이다. 따라서 생성한 이미지의 품질을 평가하는 것은 쉬운 일이 아니다. Image Quality Assessment(IQA)는 인간 관찰자의 지각 평가와 유사한 모든 지표를 의미하며, SR에서는 SR기술을 적용 후 이미지에서 인식되는 현실감 수준을 나타낸다. 여기서는 다음과 같은 notation을 사용한다.
 
 $$
-\mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} | i \le h, j \le w, k \le c \}
+\mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} \| i \le h, j \le w, k \le c \}
 $$ 
 
 이고 이는 $\mathbf{x}$ 의 모든 가능한 위치의 집합에서 정의된다.  
@@ -93,7 +95,7 @@ $\mathbf{y}$ : 이미지
 
 $\mu_{\mathbf{y}}$ : 이미지의 명도를 평균으로 표현, $ \mu_{\mathbf{y}} = \frac{1}{N}\sum_{p \in \Omega_{\mathbf{y}}} \mathbf{y}_p$
 
-$\sigma_{\mathbf{y}}$ : 이미지의 대비를 표준편차로 표현, $\sigma_{\mathbf{y}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} [{\mathbf{y}_p - \mu_{\mathbf{y}}}]^2$
+$$\sigma_{\mathbf{y}}$$ : 이미지의 대비를 표준편차로 표현, $$ \sigma_{\mathbf{y}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} [{\mathbf{y}_p - \mu_{\mathbf{y}}}]^2 $$
 
 $S$ : 계산한 entity간 유사성을 위한 비교함수, $S(x,y,c) = \frac{2 \cdot x \cdot y + c}{x^2 + y^2 + c}$
 
@@ -101,15 +103,15 @@ $S$ : 계산한 entity간 유사성을 위한 비교함수, $S(x,y,c) = \frac{2 
 
 이제 고해상도 이미지 $\mathbf{y}$ 와 SR 이미지 $\mathbf{\hat{y}}$에 대한 표현은 다음과 같다.
 
-명도 $\mathcal{C}_l(\mathbf{y}, \mathbf{\hat{y}}) = S(\mu_{\mathbf{y}},\mu_\mathbf{\hat{y}}, c_1)$,
+명도 $$\mathcal{C}_l(\mathbf{y}, \mathbf{\hat{y}}) = S(\mu_{\mathbf{y}},\mu_\mathbf{\hat{y}}, c_1)$$,
 
-채도 $\mathcal{C}_c(\mathbf{y}, \mathbf{\hat{y}}) = S(\mu_{\mathbf{y}},\mu_\mathbf{\hat{y}}, c_2)$
+채도 $$\mathcal{C}_c(\mathbf{y}, \mathbf{\hat{y}}) = S(\mu_{\mathbf{y}},\mu_\mathbf{\hat{y}}, c_2)$$
 
 여기서 $c_1$과 $c_2$는 모두 0보다 크다.
 
-empirical covariance $\sigma_{\mathbf{y}, \mathbf{\hat{y}}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} ({\mathbf{y}_p - \mu_{\mathbf{y}}})({\mathbf{\hat{y}}_p - \mu_{\mathbf{\hat{y}}}})$
+empirical covariance $$\sigma_{\mathbf{y}, \mathbf{\hat{y}}} = \frac{1}{N-1}\sum_{p \in \Omega_{\mathbf{y}}} ({\mathbf{y}_p - \mu_{\mathbf{y}}})({\mathbf{\hat{y}}_p - \mu_{\mathbf{\hat{y}}}})$$
 
-구조적 비교를 위한 상관관계 $ \mathcal{C}_s(\mathbf{y}, \mathbf{\hat{y}}) = \frac{\sigma_{\mathbf{y}, \mathbf{\hat{y}}} + c_3}{\sigma_{\mathbf{y}} \cdot \sigma_{\mathbf{\hat{y}}}+ c_3} $
+구조적 비교를 위한 상관관계 $$ \mathcal{C}_s(\mathbf{y}, \mathbf{\hat{y}}) = \frac{\sigma_{\mathbf{y}, \mathbf{\hat{y}}} + c_3}{\sigma_{\mathbf{y}} \cdot \sigma_{\mathbf{\hat{y}}}+ c_3} $$
 
 여기서 $c_3$ 은 0보다 크다.
 
@@ -131,7 +133,9 @@ Consistency는 비결정론적 SR 방법인 GAN이나 DM같은 생성모델의 �
 LPIPS는 사전학습된 CNN 모델 $\varphi$ 를 이용하는데 저해상도에서 고해상도까지의 feature map을 $L$개 생성해 이들간 유사성을 순차적으로 계산한다. 주어진 $l$ 번째 feature map 의 높이와 길이인 $h_l$과 $w_l$, 그리고 scaling vector $\alpha \in \mathbb{R}^{C_{l}}$ 에 대해, LPIPS metric은 다음과 같다.
 
 $$
-\mathbf{LPIPS}(\mathbf{y}, \mathbf{\hat{y}}) = \sum_{l=1}^{L} \sum_{p}{\frac{||\alpha_l \odot (\varphi^{l}(\mathbf{\hat{y}}) - \varphi^{l}(\mathbf{y}) )_{p} ||_{2}^{2}}{h_l \cdot w_l}}
+\begin{split}
+    \mathbf{LPIPS}(\mathbf{y}, \mathbf{\hat{y}}) = \sum_{l=1}^{L} \sum_{p}{\frac{||\alpha_l \odot (\varphi^{l}(\mathbf{\hat{y}}) - \varphi^{l}(\mathbf{y}) )_{p} ||_{2}^{2}}{h_l \cdot w_l}}
+\end{split}
 $$
 
 LPIPS는 $\varphi$ 를 이용해 이미지를 지각적 feature space 로 사영하고, 원본 고해상도 이미지와 생성한 고해상도 이미지의 대응하는 패치 간 차이을 $\alpha_l$로 scaling 하여 평가한다. 이는 PSNR이나 SSIM 과 같은 방법들에 비해 인간의 지각과 더 잘 일치하므로 인간 중심의 평가가 가능케한다.
@@ -144,11 +148,7 @@ LPIPS는 $\varphi$ 를 이용해 이미지를 지각적 feature space 로 사영
 
 DMs 은 기존 생성모델들과의 차이점으로 순방향과 역방향의 반복적인 시간 단계에서 실행된다는 것이다. 순방향 $q$는 점진적으로 반복적으로 노이즈를 추가함으로써 입력 데이터의 품질을 저하시킨다. 역방향 $p$ 는 품질이 저하된 데이터의 노이즈를 걷어내고 역시간순으로 원본 이미지를 복원한다. 이는 다음 그림과 같이 표현할 수 있다.
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure1.jpg" height = 500>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 1 : Principle of DMs ]</figcaption>
-</figure>
-
+![Figure 1 : Principle of DMs](/images/SRDM Survey/figure1.jpg){: .align-center height="500"}
 
 #### - Notation 
 
@@ -160,7 +160,7 @@ $\mathcal{D}$ : 저해상도-고해상도 image pair set, $\mathcal{D} = \{ \mat
 
 #### - Assumptions
 
-순방향에서는 $\mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_{t-1})$, 역방향에서는 $\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} | \mathbf{z}_{t})$ 이고 $t=0$ 일 때 초기 데이터 분포는 $\mathbf{z}_0 \sim q(\mathbf{x})$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations (SDEs)로 구분된다.
+순방향에서는 $\mathbf{z}_t \sim q(\mathbf{z}_t \| \mathbf{z}_{t-1})$, 역방향에서는 $\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} \| \mathbf{z}_{t})$ 이고 $t=0$ 일 때 초기 데이터 분포는 $\mathbf{z}_0 \sim q(\mathbf{x})$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations (SDEs)로 구분된다.
 
 ## 3.2. Denosing Diffusion Probabilistic Models (DDPMs)
 
@@ -170,36 +170,45 @@ DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 
 데이터의 분포를 사전분포로 변환하는데 이는 다음과 같이 표현할 수 있다.
 
 $$
-q(\mathbf{z}_t | \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t | \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \alpha_t \mathbf{I})
+\begin{split}
+    q(\mathbf{z}_t \| \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t \| \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \alpha_t \mathbf{I})
+\end{split}
 $$
 
-여기서 초모수 $\alpha_t$는 각 단계마다 포함된 noise의 분산을 의미하고 범위는 $0 < \alpha_{1:T} < 1$이다. 주로 Gaussian kernel 을 이용하지만 다른 것도 사용가능하다. 위 식을 하나의 계산으로 축약하면 다음과 같다.
+여기서 초모수 $\alpha_t$ 는 각 단계마다 포함된 noise의 분산을 의미하고 범위는 $0 < \alpha_{1:T} < 1$ 이다. 주로 Gaussian kernel 을 이용하지만 다른 것도 사용가능하다. 위 식을 하나의 계산으로 축약하면 다음과 같다.
 
 $$
-q(\mathbf{z}_t | \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t})\mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
+\begin{split}
+    q(\mathbf{z}_t \| \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t \| \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t})\mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
+\end{split}
 $$ 
 
 따라서 $\mathbf{z}_t$는 이전 시간 단계에서 발생해야 할 일과 상관없이 다음과 같이 직접 sampling 이 가능하다.
 
 $$
-q(\mathbf{z}_t | \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \sqrt{\gamma_t} \cdot \epsilon), \quad \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+\begin{split}
+    q(\mathbf{z}_t \| \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \sqrt{\gamma_t} \cdot \epsilon), \quad \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+\end{split}
 $$
 
 #### - Backward Diffusion
 역방향 diffusion의 목표는 순방향 diffusion의 역을 직접 학습하고, SR 에서 고해상도 이미지인 사전분포 $\mathbf{z}_0$ 와 유사한 분포를 생성하는 것이다. 실제로 $p$의 매개화된 형태를 학습하기 위해 CNN을 사용한다. 순방향 diffusion에서 $q(\mathbf{z}_T) \approx \mathcal{N}(\mathbf{0}, \mathbf{I})$ 으로 근사하기때문에, 학습가능한 transition kernel의 형태는 다음과 같다.
 
 $$
-p_{\theta}(\mathbf{z}_{t-1} | \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} | \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),$$ 
+\begin{split}
+    p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} \| \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),
+\end{split}
+$$ 
 
-여기서 $\mu_{\theta}$와 $\Sigma_{\theta}$은 학습가능하다. 유사하게 $p_{\theta}(\mathbf{z}_{t-1} |\mathbf{z}_{t}, \mathbf{x})$ 의 평균과 분산을 $\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \: \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$ 로 대체할 수 있다. 
+여기서 $\mu_{\theta}$와 $ \Sigma_{\theta}$ 은 학습가능하다. 유사하게 $p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{x})$ 의 평균과 분산을 $\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \: \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$ 로 대체할 수 있다. 
 
 #### - Optimization 
 순방향 과정을 학습하는 역방향 과정에서 다음과 같은 순방향 및 역방향 시퀀스의 결합 분포는 다음과 같다. 
 
 $$
 \begin{split}
-& p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_T) \prod_{t=1}^{T}p_{\theta}(\mathbf{z}_{t-1} |\mathbf{z}_{t}) \\
-& q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_0) \prod_{t=1}^{T}q(\mathbf{z}_{t-1} |\mathbf{z}_{t}) \\
+    & p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_T) \prod_{t=1}^{T}p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) \\
+    & q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) = p(\mathbf{z}_0) \prod_{t=1}^{T}q(\mathbf{z}_{t-1} \| \mathbf{z}_{t}) \\
 \end{split}
 $$
 
@@ -207,10 +216,10 @@ $$
 
 $$
 \begin{split}
-&\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})||p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
-&= -\mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} [\log p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})] + c \\
-&\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} | \mathbf{z}_{t})}{q(\mathbf{z}_t | \mathbf{z}_{t-1})}] + c \\
-&\overset{(ii)}{\ge} \mathbb{E}[- \log p_{\theta} (\mathbf{z}_0)] + c
+    &\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) || p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
+    &= -\mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} [\log p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})] + c \\
+    &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t})}{q(\mathbf{z}_t \| \mathbf{z}_{t-1})}] + c \\
+    &\overset{(ii)}{\ge} \mathbb{E}[- \log p_{\theta} (\mathbf{z}_0)] + c
 \end{split}
 $$
 
@@ -238,36 +247,44 @@ $$
 s_{\theta} \approx \nabla_{\mathbf{z}} \log q(\mathbf{\mathbf{z}_t})
 $$
 
-NCSN에서 sampling하는 것은 $s_{\theta}(\mathbf{z}_t,t)$ 를 사용해 반복적인 접근 방식으로 중간 상태 $\mathbf{z}_t$ 를 생성하는 것을 포함한다. 이 과정은 diffusion 에서의 sampling 을 위한 반복과는 다르며, 오직 $\mathbf{z}_t$ 생성에만 집중한다. 즉, $\mathbf{z}_t$ 는 반복적으로 샘플링되어야 하지만, DDPM은 $z_{t+1}$로부터 직접 $z_{t}$ 를 예측하는 것이 주요 차이점이다. 
+NCSN에서 sampling하는 것은 $$ s_{\theta} (\mathbf{z}_t,t) $$ 를 사용해 반복적인 접근 방식으로 중간 상태 $\mathbf{z}_t$ 를 생성하는 것을 포함한다. 이 과정은 diffusion 에서의 sampling 을 위한 반복과는 다르며, 오직 $\mathbf{z}_t$ 생성에만 집중한다. 즉, $\mathbf{z}_t$ 는 반복적으로 샘플링되어야 하지만, DDPM은 $z_{t+1}$로부터 직접 $z_{t}$ 를 예측하는 것이 주요 차이점이다. 
 
 * Annealed Langevin Dynamics (ALD)
 
 Annealed Langevin Dynamics (ALD) 는 반복 생성을 수행하는 알고리즘이다. 알고리즘 순서는 다음과 같다.
 
-1. 초기 상태 $\mathbf{z}_t^{(N)} \sim \mathcal{N}(\mathbf{0},\mathbf{I})$ 과 해당 시간 단계 $t$ 에서의 단계 크기(step size)를 $\alpha$ > 0 을 이용해 $\mathbf{z}_{t-1}^{(i)}$ 에서 $\mathbf{z}_{t-1}^{(i+1)}$ 로 얼마나 이동하는지 총 $N$ 번을 반복해 추정한다. 
-2. 각 $0 < t \le T$ 동안 $\mathbf{z}_{t-1}^{(0)} = \mathbf{z}_t^{(N)} \approx \mathbf{z}_t$ 초기화하는데, 이는 이전 중간 상태 최신 추정치이다.
-3.  $\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$에 대해 다음과 같은 업데이트 규칙을 사용한다.
+1. 초기 상태 $$\mathbf{z}_t^{(N)} \sim \mathcal{N}(\mathbf{0},\mathbf{I})$$ 과 해당 시간 단계 $t$ 에서의 단계 크기(step size)를 $\alpha$ > 0 을 이용해 $$\mathbf{z}_{t-1}^{(i)}$$ 에서 $$\mathbf{z}_{t-1}^{(i+1)}$$ 로 얼마나 이동하는지 총 $N$ 번을 반복해 추정한다. 
 
-$ Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I}) $
-$ Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)}$
+2. 각 $0 < t \le T$ 동안 $$\mathbf{z}_{t-1}^{(0)} = \mathbf{z}_t^{(N)} \approx \mathbf{z}_t$$ 초기화하는데, 이는 이전 중간 상태 최신 추정치이다.
 
-4. $\alpha_t \rightarrow 0$ 과 $N \rightarrow \infin$ 일 때 $\mathbf{z}_{0}^{(N)}$ 가 $q(\mathbf{z}_0)$ 로 수렴할 때까지 진행한다.
-
-DDPMs과 유사하게 SGMs를 조건부 SGMs로 바꿀 수 있는데, 이는 저해상도 이미지와 같은 조건 $\mathbf{x}$를 추가함으로써 가능하다. 이를 수식으로 표현하면 다음과 같다.
-
-$$
-s_{\theta}(\mathbf{z}_t, \mathbf{x}, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{x}) 
-$$
-
-#### - Optimization
-역방향 diffusion 을 구체적으로 공식화하지 않고, $s_{\theta}(\mathbf{z}_t, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) $ 로 근사함으로써 NCSN을 훈련시킬 수 있다. 점수 추정은 Denoising Score Matching 방법을 사용하여 수행할 수 있다.
+3.  $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
 
 $$
 \begin{split}
-&\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) - s_{\theta}(\mathbf{z}_t, t) \|^2 \right] \\
-&\overset{(i)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{z}_0) - s_{\theta}(z_t, t) \|^2 \right] + c \\
-&\overset{(ii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| -\frac{\mathbf{z}_t - \mathbf{z}_0}{\sigma_t} - \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
-&\overset{(iii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \epsilon \sim \mathcal{N} (\mathbf{0}, \mathbf{I})}}{\mathbb{E}} \left[ \lambda(t) \| \epsilon + \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
+    Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
+    Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
+\end{split}
+$$
+
+4. $\alpha_t \rightarrow 0$ 과 $N \rightarrow \infinite$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
+
+DDPMs과 유사하게 SGMs를 조건부 SGMs로 바꿀 수 있는데, 이는 저해상도 이미지와 같은 조건 $$\mathbf{x}$$ 를 추가함으로써 가능하다. 이를 수식으로 표현하면 다음과 같다.
+
+$$
+\begin{split}
+    s_{\theta}(\mathbf{z}_t, \mathbf{x}, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \| \mathbf{x}) 
+\end{split}
+$$
+
+#### - Optimization
+역방향 diffusion 을 구체적으로 공식화하지 않고, $$s_{\theta}(\mathbf{z}_t, t) \approx \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) $$ 로 근사함으로써 NCSN을 훈련시킬 수 있다. 점수 추정은 Denoising Score Matching 방법을 사용하여 수행할 수 있다.
+
+$$
+\begin{split}
+    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) - s_{\theta}(\mathbf{z}_t, t) \|^2 \right] \\
+    &\overset{(i)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \sigma_t^2 \| \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{z}_0) - s_{\theta}(z_t, t) \|^2 \right] + c \\
+    &\overset{(ii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| -\frac{\mathbf{z}_t - \mathbf{z}_0}{\sigma_t} - \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
+    &\overset{(iii)}{=} \underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \epsilon \sim \mathcal{N} (\mathbf{0}, \mathbf{I})}}{\mathbb{E}} \left[ \lambda(t) \| \epsilon + \sigma_t s_{\theta}(\mathbf{z}_t, t) \|^2 \right] + c \\
 \end{split}
 $$
 
@@ -281,35 +298,55 @@ DDPMs와 SGMs에서는 시간 단계를 유한한 이산형으로 가정했다�
 #### - Forward Diffusion
 SDEs의 순방향 Diffusion은 다음과 같다.
 
-$$ \mathrm{d} \mathbf{z} = f(\mathbf{z},t)\mathrm{d}t + g(t)\mathrm{d}\mathbf{w}$$ 여기서 $f$와 $g$는 각각 drift와 diffusion 함수이고 $\mathbf{w}$는 Standard Wiener Process 이다. 이 일반화된 식은 DDPMs와 SGMs 모두에 대한 일정한 representation을 제공한다. DDPMs에 대한 SDE는 다음과 같다.
-$$ \mathrm{d} \mathbf{z} = -\frac{1}{2} \alpha(t) \mathbf{z} \mathrm{d}t + \sqrt{\alpha(t)} \mathrm{d} \mathbf{w}, 
-$$ 여기서 $T$가 무한대로 가면 $\alpha(\frac{t}{T}) = T_{\alpha_t}$ 이다.
+$$ 
+\begin{split}
+    \mathrm{d} \mathbf{z} = f(\mathbf{z},t)\mathrm{d}t + g(t)\mathrm{d}\mathbf{w}
+\end{split}
+$$ 
 
-그리고 SGMs에 대한 SDE는 다음과 같다.
-$$ \mathrm{d} \mathbf{z} = \sqrt{\frac{\mathrm{d}[\sigma(t)^2]}{\mathrm{d}t}}   \mathrm{d} \mathbf{w}, 
-$$ 여기서 $T$가 무한대로 가면 $\sigma(\frac{t}{T}) = \sigma_t$ 이다.
-아래부터는 $q_t(\mathbf{z})$를 diffusion 과정 중 $\mathbf{z}_t$의 분포라 한다.
+여기서 $f$ 와 $g$ 는 각각 drift와 diffusion 함수이고 $$\mathbf{w}$$ 는 Standard Wiener Process 이다. 이 일반화된 식은 DDPMs와 SGMs 모두에 대한 일정한 representation을 제공한다. DDPMs에 대한 SDE는 다음과 같다.
+
+$$ 
+\begin{split}
+    \mathrm{d} \mathbf{z} = -\frac{1}{2} \alpha(t) \mathbf{z} \mathrm{d}t + \sqrt{\alpha(t)} \: \mathrm{d} \mathbf{w}, 
+\end{split}
+$$ 
+
+여기서 $T$가 무한대로 가면 $\alpha(\frac{t}{T}) = T_{\alpha_t}$ 이다. 그리고 SGMs에 대한 SDE는 다음과 같다.
+
+$$ 
+\begin{split}
+    \mathrm{d} \mathbf{z} = \sqrt{\frac{\mathrm{d}[\sigma(t)^2]}{\mathrm{d}t}} \: \mathrm{d} \mathbf{w}, 
+\end{split}
+$$ 
+
+여기서 $T$가 무한대로 가면 $\sigma(\frac{t}{T}) = \sigma_t$ 이다. 아래부터는 $q_t(\mathbf{z})$를 diffusion 과정 중 $\mathbf{z}_t$의 분포라 한다.
 
 #### - Backward Diffusion
 $Anderson$ 이 제안한 역방향 SDE는 다음과 같다. 
+
 $$ 
-\mathrm{d} \mathbf{z} = [f(\mathbf{z}, t) - g(t)^2 \nabla_{\mathbf{z}} \log q_{t}(\mathbf{z})] \mathrm{d}t + g(t)d\mathbf{\tilde{w}},
+\begin{split}
+    \mathrm{d} \mathbf{z} = [f(\mathbf{z}, t) - g(t)^2 \nabla_{\mathbf{z}} \log q_{t}(\mathbf{z})] \mathrm{d}t + g(t)d\mathbf{\tilde{w}},
+\end{split}
 $$ 
 
-여기서 $\mathbf{\tilde{w}}$는 역방향에서의 Standard Wiener Process, $\mathrm{d}t$는 음의 무한소(infinitesimal) 시간 단계이다. 이 때,  방정식의 해는 점진적으로 noise를 데이터로 변환하는 diffusion 과정으로 볼 수 있다. 
+여기서 $$\mathbf{\tilde{w}}$$ 는 역방향에서의 Standard Wiener Process, $$\mathrm{d}t$$ 는 음의 무한소(infinitesimal) 시간 단계이다. 이 때,  방정식의 해는 점진적으로 noise를 데이터로 변환하는 diffusion 과정으로 볼 수 있다. 
 
 #### - Optimization
 SGMs와 유사하게 score model을 다음과 같이 정의한다.
 
 $$
-s_{\theta}(\mathbf{z}_t, t) \approx \nabla_{\mathbf{z}} \log q_t(\mathbf{z})
+\begin{split}
+    s_{\theta}(\mathbf{z}_t, t) \approx \nabla_{\mathbf{z}} \log q_t(\mathbf{z})
+\end{split}
 $$ 
 
 추가적으로 SGMs의 Optimization을 위한 score 함수를 다음과 같이 확장한다.
 
 $$
 \begin{split}
-&\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| s_{\theta}(\mathbf{z}_t, t) - \nabla_{\mathbf{z}_t} \log q_t(\mathbf{z}_t \ \mathbf{z}_0) \|^2 \right] \\
+    &\underset{\substack{t \sim \mathcal{U}(1, T) \\ \mathbf{z}_0 \sim q(\mathbf{z}_0) \\ \mathbf{z}_t \sim q(\mathbf{z}_t | \mathbf{z}_0)}}{\mathbb{E}} \left[ \lambda(t) \| s_{\theta}(\mathbf{z}_t, t) - \nabla_{\mathbf{z}_t} \log q_t(\mathbf{z}_t \ \mathbf{z}_0) \|^2 \right] \\
 \end{split}
 $$
 
@@ -317,11 +354,7 @@ $$
 
 ## 3.5. Relation to other Image SR Generative Models
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure2.jpg" height = 500>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 2 : Conceptual Overview of Generative Models ]</figcaption>
-</figure>
-
+![Figure 2 : Conceptual Overview of Generative Models](/images/SRDM Survey/figure2.jpg){: .align-right height="500"}
 
 #### - Generative Adversarial Networks (GANs)
 DMs 에서는 discriminator 를 사용하지 않지만, 최대한 현실과 비슷한 데이터를 생성하기 위하여 반복적으로 noise를 추가 및 제거해 discriminator와 비슷한 효과를 낸다.
@@ -342,33 +375,43 @@ NF는 VAEs와 DMs와 마찬가지로 데이터의 로그 가능도를 기반으�
 SR에서는 주로 DDPMs를 사용한다. 왜냐하면 DDPMs가 더욱 직관적인 접근이고 진입장벽이 낮기 때문이다. 그리고 SGM은 맞춤형 해답을 만드는 유연성이 있지만 고려해야할 다양한 설계 변수들로 인해 구조가 복잡해진다. 
 
 #### - SR3 
-DDPMs와 유사하게, $\mathbf{z}_{T} \approx \mathcal{N}(\mathbf{0}, \mathbf{I})$ 이 될 때까지 저해상도 이미지에 Gaussian noise를 추가해 정제 단계 $T$ 번 동안 목표인 고해상도 이미지 $\mathbf{z}_0$ 을 반복적으로 생성한다. 여기서 noise $\epsilon_{t}$ 를 예측하기 위한 denoising model $\varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) $ 을 추가하는데, 여기서 입력값들 $\mathbf{x}$는 저해상도 이미지, noise의 분산 $\gamma_t$, 그리고 $\mathbf{z}_t$ 는 nosiy target 이미지다. $\varphi_{\theta}$ 를 이용한 $\epsilon_t$ 예측으로 다음과 같이 근사할 수 있다.
+DDPMs와 유사하게, $$\mathbf{z}_{T} \approx \mathcal{N}(\mathbf{0}, \mathbf{I})$$ 이 될 때까지 저해상도 이미지에 Gaussian noise를 추가해 정제 단계 $T$ 번 동안 목표인 고해상도 이미지 $$\mathbf{z}_0$$ 을 반복적으로 생성한다. 여기서 noise $\epsilon_{t}$ 를 예측하기 위한 denoising model $$\varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) $$ 을 추가하는데, 여기서 입력값들 $$\mathbf{x}$$ 는 저해상도 이미지, noise의 분산 $\gamma_t$, 그리고 $$\mathbf{z}_t$$ 는 nosiy target 이미지다. $$\varphi_{\theta}$$ 를 이용한 $\epsilon_t$ 예측으로 다음과 같이 근사할 수 있다.
 
 $$
-\mathbf{z}_t = \sqrt{\gamma_t} \cdot \mathbf{\hat{z}}_0 + \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \\
-\Longleftrightarrow \mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
+\begin{split}
+    \mathbf{z}_t = \sqrt{\gamma_t} \cdot \mathbf{\hat{z}}_0 + \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \\
+    \Longleftrightarrow \mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
+\end{split}
 $$ 
 
-$\mathbf{z}_0$ 을 사후분포에 대입해 $p_{\theta}(\mathbf{z}_{t-1} | \mathbf{z}_{t})$ 의 평균을 매개변수화하면 다음과 같은 결과를 얻을 수 있다.
+$$\mathbf{z}_0$$ 을 사후분포에 대입해 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t})$$ 의 평균을 매개변수화하면 다음과 같은 결과를 얻을 수 있다.
 
 $$
-\mu_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} [\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)]
+\begin{split}
+    \mu_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} [\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)]
+\end{split}
 $$ 
 
-편의성을 위해 분산 $\Sigma_{\theta}$ 를 $(1-\alpha_t)$ 로 단순화하였다. 결과적으로 $ \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I}) $ 를 이용한 각 정제 단계는 다음과 같이 표현할 수 있다.
+편의성을 위해 분산 $\Sigma_{\theta}$ 를 $(1-\alpha_t)$ 로 단순화하였다. 결과적으로 $$ \epsilon \sim \mathcal{N}(\mathbf{0}, \mathbf{I}) $$ 를 이용한 각 정제 단계는 다음과 같이 표현할 수 있다.
+
 $$
-\mathbf{z}_{t-1} = \frac{1}{\sqrt{\alpha_t}}[\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)] + \sqrt{1-\alpha_t} \cdot \epsilon_t
+\begin{split} 
+    \mathbf{z}_{t-1} = \frac{1}{\sqrt{\alpha_t}}[\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)] + \sqrt{1-\alpha_t} \cdot \epsilon_t
+\end{split}
 $$
-대부분의 논문들이 denoise 모델 $\varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)$ 을 변형한 모델을 사용한다. 한 예시로는 SRDiff가 있는데, 이는 저해상도 이미지와 고해상도 이미지 간의 잔여 정보, 즉 차이를 예측한다. 
+
+대부분의 논문들이 denoise 모델 $$\varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)$ $을 변형한 모델을 사용한다. 한 예시로는 SRDiff가 있는데, 이는 저해상도 이미지와 고해상도 이미지 간의 잔여 정보, 즉 차이를 예측한다. 
 
 ## 4.2. Guidance in Training
-SRDM의 backbone은 조건부 분포를 학습한다. 조건 $\mathbf{x}$는 DDPMs의 경우 $p_{\theta}(\mathbf{z}_{t-1} | \mathbf{z}_t, \mathbf{x})$, SGMs와 SDEs의 경우 $s_{\theta}(\mathbf{z}_t, \mathbf{x}, t)$ 에 통합되어 역방향 diffusion 과정에 적용된다. 하지만 이러한 간단한 공식화는 조건부 정보를 무시하는 모델이 될 수도 있다. 이러한 문제들을 방지하기 위해 'guidance' 라는 원칙을 이용하는데, 이는 표본의 다양성을 감소시키는 대신 조건부 정보의 가중치를 조절하는 것이다. 
+SRDM의 backbone은 조건부 분포를 학습한다. 조건 $$\mathbf{x}$$ 는 DDPMs의 경우 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_t, \mathbf{x})$$ , SGMs와 SDEs의 경우 $$s_{\theta}(\mathbf{z}_t, \mathbf{x}, t)$$ 에 통합되어 역방향 diffusion 과정에 적용된다. 하지만 이러한 간단한 공식화는 조건부 정보를 무시하는 모델이 될 수도 있다. 이러한 문제들을 방지하기 위해 'guidance' 라는 원칙을 이용하는데, 이는 표본의 다양성을 감소시키는 대신 조건부 정보의 가중치를 조절하는 것이다. 
 
 #### - Classifier Guidance
 Claasifier Guidance 는 분류기를 이용해 샘플링동안 분류기의 gradient와 DM의 score estimate를 병합해 diffusion 과정을 안내한다. 이는 mode coverage와 표본의 다양성 간 균형을 이루게 한다. 분류기는 정보 $\mathbf{z}_t$ 로부터 $\mathbf{x}$ 을 예측하기 위해 DM과 동시에 훈련된다. 조건 정보의 가중치가 주어졌을 때, score function은 다음과 같다.
 
 $$
-\nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t | \mathbf{x}) = \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) + \lambda \nabla_{\mathbf{z}_t} \log q(\mathbf{x} | \mathbf{z}_t)
+\begin{split}
+    \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t \| \mathbf{x}) = \nabla_{\mathbf{z}_t} \log q(\mathbf{z}_t) + \lambda \nabla_{\mathbf{z}_t} \log q(\mathbf{x} \| \mathbf{z}_t)
+\end{split}
 $$ 
 
 여기서 $\lambda \in \mathbb{R}^{+}$ 는 가중치를 조절하는 초모수다. 
@@ -385,11 +428,7 @@ $\lambda > 1$ 인 경우, DM은 조건부 정보를 우선시하여 무조건부
 
 ## 4.3. State Domains 
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure4.jpg" height = 250>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 3 : Topolgy of DMs ]</figcaption>
-</figure>
-
+![Figure 3 : Topolgy of DMs](/images/SRDM Survey/figure4.jpg){: .align-right height="250"}
 
 #### - Latent space
 1. Latent Score-Based Generative Models(LSGM)
@@ -414,7 +453,7 @@ diffusion 과정은 모든 wavelet bands 와 직접적으로 상호작용하거�
 #### - Residual space
 1. SRDiff
 SRDiff 는 생성과정을 잔차 공간, 즉 upsample 된 저해상도 이미지와 고해상도 이미지 간의 차이에 집중한 첫 논문이다. 이를 이용해 DM은 잔차에 대한 세부사항에 집중하고 수렴속도가 증가하며 학습과정을 안정화할 수 있다는 장점이 생긴다. 
-Whang $et \: al.$ 도 이미지의 blur를 제거하기 위해 predict-and-refine 을 이용해 기초적인 요소로써 잔차 예측을 사용한다. 그러나 SRDiff와 달리 CNN을 사용해 SR을 예측하며, 이 예측값과 고해상도 값 사이의 잔차를 DM으로 예측한다.
+Whang $$ et \: al. $$ 도 이미지의 blur를 제거하기 위해 predict-and-refine 을 이용해 기초적인 요소로써 잔차 예측을 사용한다. 그러나 SRDiff와 달리 CNN을 사용해 SR을 예측하며, 이 예측값과 고해상도 값 사이의 잔차를 DM으로 예측한다.
 
 2. ResDiff
 ResDiff는 위 방법과 더불어 역방향 diffusion 에서 SR 예측과 고주파 정보를 통합한다. 
@@ -434,11 +473,8 @@ ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건�
 1. CDPMSR
 저해상도 이미지의 noise를 제거하는 조건을 대한 대안으로 사전 학습된 SR 모델로부터 사전분포를 학습해 참조 이미지를 예측하는 방법이 있다. CDPMSR은 기존 standard SR 모델을 사용해 얻어진 예측된 SR 참조 이미지로 noise 제거 과정에 조건을 부여한다.
 
-2. $Pandey \: et \: al.$
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure5.jpg" height = 250>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 4 : Overview of DiffusueVAE ]</figcaption>
-</figure>
+2. $$Pandey \: et \: al.$$
+![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-right height="250"}
 
 본 논문에서는 DiffuseVAE를 사용해 예측된 조건을 변화시키는 아이디어를 도입했다. 이는 확률적 예측을 생성하는 VAE가 DM의 조건 정보로 통합되어 두 모델의 이점을 모두 활용할 수 있다. 'generator-refiner framework' 라고 불리는 두 단계 접근법을 사용한다. 첫 번째에서는 훈련 데이터에 대해 학습하고, 두 번째 단계에서 DM 이 VAE 에 의해 생성된 다양하고 흐릿한 재구성을 사용해 조건화된다. 이 방법의 핵심은 VAE 의 저차원 잠재 공간 내에서 생성된 샘플들이 다양하다는 것이다. 즉, 샘플링 속도와 다양성에 강점이 있다. 
 
@@ -463,10 +499,7 @@ Cold Diffusion은 DDPMs의 손상 공간을 조정하는 방법을 제안한다.
 
 3. Image-to-Image Schrödinger Bridge (I2ISB)
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure6.jpg" height = 250>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 5 : Comparison of the standard corruption space and I2ISB ]</figcaption>
-</figure>
+![Figure 5 : Comparison of the standard corruption space and I2ISB](/images/SRDM Survey/figure6.jpg){: .align-right height="250"}
 
 
 I2ISB는 위 방법들과 비슷하지만 사전분포에 대해 어떠한 가정도 하지 않는다. diffusion 과정에서 깨끗한 이미지는 최초의 상태를 유지하지만 화질이 낮아진 이미지는 순방향과 역방향 모두에서 마지막 상태를 유지한다. 이 접근법은 저화질의 이미지가 깨끗하게 유지되어 원본 이미지로의 추적이 용이하다는 장점이 있다. 또한 더 적은 단계를 거치기 때문에 효율성이 높다는 장점도 있다. 하지만 훈련 시 pair인 data에만 특정되어, 비지도 학습 기반의 SR에 적합하지않다. 
@@ -476,18 +509,17 @@ InDI는 직접적인 mapping을 통해 두 품질 공간 사이의 간극을 효
 
 ## 4.6. Color Shifting
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure7.jpg" height = 225>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 6 : Example of Color Shifting ]</figcaption>
-</figure>
+![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-right height="225"}
 
 color shifting 은 계산량이 제한된 hardware로 작은 batch size나 짧은 학습 시간으로 학습을 진행할 때 많은 계산량때문에 발생한다. StableSR에서 color normalization을 이용해 이를 해결하는데, 다음과 같이 표현할 수 있다.
 
 $$
-\mathbf{\hat{z}}_0 = \frac{\mathbf{z}_0 - \mu_{\mathbf{z}_0}^{c}}{\sigma_{\mathbf{z}_0}^{c}} \cdot \sigma_{\mathbf{x}}^{c} + \mu_{\mathbf{x}}^{c}, 
+\begin{split}
+    \mathbf{\hat{z}}_0 = \frac{\mathbf{z}_0 - \mu_{\mathbf{z}_0}^{c}}{\sigma_{\mathbf{z}_0}^{c}} \cdot \sigma_{\mathbf{x}}^{c} + \mu_{\mathbf{x}}^{c},
+\end{split} 
 $$ 
 
-여기서 $c \in \{ r, g, b\}$ 는 color channel, $\sigma_{\mathbf{z}_0}^{c}$ 과 $\mu_{\mathbf{z}_0}^{c} (\sigma_{\mathbf{x}}^{c}$ 과 $\mu_{\mathbf{x}}^{c})$ 은 각각 예측 이미지 $\mathbf{z}_0$ 의 $c$번째 channel( 또는 입력 이미지 $\mathbf{x}$)의 이미지와 분산이다. 
+여기서 $c \in \{ r, g, b\}$ 는 color channel, $$\sigma_{\mathbf{z}_0}^{c}, \mu_{\mathbf{z}_0}^{c} (\sigma_{\mathbf{x}}^{c} $$ 과 $$\mu_{\mathbf{x}}^{c})$$ 은 각각 예측 이미지 $$\mathbf{z}_0$$ 의 $c$ 번째 channel (또는 입력 이미지 $$ \mathbf{x} $$) 의 이미지와 분산이다. 
 
 
 # 5. Diffusion-based Zero-shot SR
@@ -507,8 +539,8 @@ ILVR은 저해상도 이미지에서 저주파수 정보를 고해상도 이미�
 
 $$
 \begin{split}
-\mathbf{\hat{z}}_{t-1} &= f(\mathbf{z}_t, t) + g(\mathbf{z}_t, t) \cdot \varepsilon_t \\
-\mathbf{z}_{t-1} &= (\mathbf{I} - \mathbf{P}) \cdot \mathbf{\hat{z}}_{t-1} + \mathbf{\hat{x}}, \quad \mathbf{\hat{x}} \sim q(\mathbf{z}_t | \mathbf{z}_0 = \mathbf{x}) \\
+    \mathbf{\hat{z}}_{t-1} &= f(\mathbf{z}_t, t) + g(\mathbf{z}_t, t) \cdot \varepsilon_t \\
+    \mathbf{z}_{t-1} &= (\mathbf{I} - \mathbf{P}) \cdot \mathbf{\hat{z}}_{t-1} + \mathbf{\hat{x}}, \quad \mathbf{\hat{x}} \sim q(\mathbf{z}_t \| \mathbf{z}_0 = \mathbf{x}) \\
 \end{split}
 $$ 
 
@@ -518,7 +550,9 @@ $$
 분해 기반 방법은 SR을 선형결합(linear image reverse(LIR) problem)의 관점에서 식을 구성하고 이는 다음과 같다.
 
 $$
-\mathbf{x} = \mathbf{Ay} + b 
+\begin{split}
+    \mathbf{x} = \mathbf{Ay} + b 
+\end{split}
 $$ 
 
 여기서 $A$ 는 degradation operator, $b$ 는 contiminating noise 이다.
@@ -528,81 +562,97 @@ SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에
 
 2. Denosing Diffusion Null-space Model (DDNM)
 
-<figure style="text-align: center; display: inline-block; width: 100%;">
-    <img src = "/images/SRDM Survey/figure8.jpg" height = 175>    
-    <figcaption style="display: block; width: 100%; text-align: center;">[ Figure 6 : Example of Color Shifting ]</figcaption>
-</figure>
+![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-right height="175"}
 
 DDNM은 위 식(LIR problem)에 대한 또다른 접근 방법을 보인다. range-null space decompostion을 이용해 zero-shot 을 진행한다. 기존 image IR problem을 변형해, noise가 없는 공간에서는 다음과 같이 표현할 수 있다.
 
 $$
-\mathbf{x} = \mathbf{Ay}
+\begin{split}
+    \mathbf{x} = \mathbf{Ay}
+\end{split}
 $$ 
 
-여기서 $\mathbf{y} \in \mathbb{R}^{D \times 1}$ 은 선형화된 고해상도 이미지, $\mathbf{x} \in \mathbb{R}^{d \times 1}$ 는 선형화된 화질이 감소한 이미지이다.
-여기에 두 제약조건을 제시하는데, 이는 다음과 같다.
+여기서 $$\mathbf{y} \in \mathbb{R}^{D \times 1}$$ 은 선형화된 고해상도 이미지, $$\mathbf{x} \in \mathbb{R}^{d \times 1}$$ 는 선형화된 화질이 감소한 이미지이다. 여기에 두 제약조건을 제시하는데, 이는 다음과 같다.
 
 $$
-Consistency : \mathbf{A \hat{y}} \equiv \mathbf{x}, \quad \quad Realnes : \mathbf{\hat{y}} \sim p(\mathbf{y})
+\begin{split}
+    Consistency : \mathbf{A \hat{y}} \equiv \mathbf{x}, \qquad Realnes : \mathbf{\hat{y}} \sim p(\mathbf{y})
+\end{split}
 $$
 
-여기서 $p(\mathbf{y})$ 는 ground-truth 이미지의 분포이고 $\mathbf{\hat{y}}$ 는 예측한 이미지이다. 
-range-null space decompostion 에서 $\mathbf{\hat{y}}$ 의 일반 해는 다음과 같이 표현할 수 있다.
+여기서 $p(\mathbf{y})$ 는 ground-truth 이미지의 분포이고 $\mathbf{\hat{y}}$ 는 예측한 이미지이다. range-null space decompostion 에서 $\mathbf{\hat{y}}$ 의 일반 해는 다음과 같이 표현할 수 있다.
 
 $$
-\mathbf{\hat{y}} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}\mathbf{\mathbf{y}}),
+\begin{split}
+    \mathbf{\hat{y}} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}\mathbf{\mathbf{y}}),
+\end{split}
 $$
 
-여기서 $\mathbf{A^{\dagger}} \in \mathbb{R}^{D \times d}$는 $\mathbf{AA^{\dagger}A} \equiv \mathbf{A}$ 를 만족하는 pseudo-inverse 이다. (Moore&Penrose Generailized Inverse 참고)
-목표는 null-space $(\mathbf{I-A^{\dagger}A})\mathbf{\mathbf{y}}$ 를 생성하는 적절한 $\mathbf{\mathbf{y}}$ 를 찾아 위 식의 $Realness$ 를 만족하는 range-space  $\mathbf{A^{\dagger}x}$ 를 구성하는 것이다. 깔끔한 중간 상태 $\mathbf{z}_{0|t}$를 유도하기 위해 시간단계 $t$ 에 대해 $\mathbf{z}_0$ 으로부터의 rang-null space decompostion을 수행하고 이는 다음과 같이 정의한다.
+여기서 $$ \mathbf{A^{\dagger}} \in \mathbb{R}^{D \times d}$$ 는 $$ \mathbf{AA^{\dagger}A} \equiv \mathbf{A}$$ 를 만족하는 pseudo-inverse 이다. (Moore&Penrose Generailized Inverse 참고)
+목표는 null-space $$(\mathbf{I-A^{\dagger}A})\mathbf{\mathbf{y}} $$ 를 생성하는 적절한 $$\mathbf{\mathbf{y}}$$ 를 찾아 위 식의 $Realness$ 를 만족하는 range-space $$\mathbf{A^{\dagger}x}$$ 를 구성하는 것이다. 깔끔한 중간 상태 $$\mathbf{z}_{0 \| t}$$ 를 유도하기 위해 시간단계 $t$ 에 대해 $$\mathbf{z}_0$$ 으로부터의 rang-null space decompostion을 수행하고 이는 다음과 같이 정의한다.
 
 $$
-\mathbf{z}_{0|t} = \frac{1}{\sqrt{\mathbf{\bar{\alpha}}_t}} (\mathbf{z}_t - \epsilon_\theta(\mathbf{z}_t, t) \sqrt{1-\mathbf{\bar{\alpha}}_t})
+\begin{split}
+    \mathbf{z}_{0 \| t} = \frac{1}{\sqrt{\mathbf{\bar{\alpha}}_t}} (\mathbf{z}_t - \epsilon_\theta(\mathbf{z}_t, t) \sqrt{1-\mathbf{\bar{\alpha}}_t})
+\end{split}
 $$ 
 
-여기서 $\epsilon_t = \epsilon_{\theta}(\mathbf{z}_t,t)$ 이다.
+여기서 $$\epsilon_t = \epsilon_{\theta}(\mathbf{z}_t,t)$$ 이다.
 
-이 때, $\mathbf{Az_0} \equiv \mathbf{x}$ 를 만족하는 $\mathbf{z}_0$ 를 생성하기 위해, range-space를 $\mathbf{A^{\dagger}y}$ 로 두고 null-space는 바꾸지않는다. 이를 이용해 rectified esimator인 $\mathbf{\hat{z}}_{0|t}$ 를 생성하는데, 이는 다음과 같다.
-
-$$
-\mathbf{\hat{z}}_{0|t} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}) \mathbf{z}_{0|t} 
-$$
-
-마지막으로 $\mathbf{z}_{t-1}$ 을 $p(\mathbf{z}_{t-1} | \mathbf{z}_{t}, \mathbf{\hat{z}}_{0|t})$ 에서 sampling 함으로써 유도한다.
+이 때, $$\mathbf{Az_0} \equiv \mathbf{x}$$ 를 만족하는 $$\mathbf{z}_0$$ 를 생성하기 위해, range-space를 $$\mathbf{A^{\dagger}y}$$ 로 두고 null-space는 바꾸지않는다. 이를 이용해 rectified esimator인 $$\mathbf{\hat{z}}_{0 \| t}$$ 를 생성하는데, 이는 다음과 같다.
 
 $$
-\mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0|t} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
+\begin{split}
+    \mathbf{\hat{z}}_{0 \| t} = \mathbf{A^{\dagger}x} + (\mathbf{I - A^{\dagger}A}) \mathbf{z}_{0 \| t} 
+\end{split}
+$$
+
+마지막으로 $$\mathbf{z}_{t-1}$$ 을 $$p(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{\hat{z}}_{0 \| t})$$ 에서 sampling 함으로써 유도한다.
+
+$$
+\begin{split}
+    \mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0 \|t} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
+\end{split}
 $$ 
 
-여기서 $\alpha_t = 1- \beta_t, \: \mathbf{\bar{\alpha}}_t = \prod_{i=0}^{t}\alpha_i$ 이다.
+여기서 $$\alpha_t = 1- \beta_t, \: \mathbf{\bar{\alpha}}_t = \prod_{i=0}^{t}\alpha_i$$ 이다.
 
-$\mathbf{z}_{t-1}$ 은 $\mathbf{\hat{z}}_{0|t}$ 의 noise가 추가된 버전이다. 이 노이즈는 range-space 와 null-space 간 불일치를 효과적으로 완화한다. 
+$$\mathbf{z}_{t-1}$$ 은 $$\mathbf{\hat{z}}_{0 \| t}$$ 의 noise가 추가된 버전이다. 이 노이즈는 range-space 와 null-space 간 불일치를 효과적으로 완화한다. 
 
-마지막으로 $\mathbf{A}$ 와 $\mathbf{A^{\dagger}}$ 를 정의하는 것에 따라 수행할 복원 작업이 달라진다. 
+마지막으로 $$\mathbf{A}$$ 와 $$\mathbf{A^{\dagger}}$$ 를 정의하는 것에 따라 수행할 복원 작업이 달라진다. 
 
 ## 5.3. Posterior Estimation
 데이터의 일관성을 강화하기 위해 사후분포 추정을 이용한다. Bayesian 접근방법에서 inverse linear problem 을 해결하는데 있어 더 robust하고 확률적인 framework 를 사용한다. 그리고 이를 다양한 image 처리분야에 도입해 더 좋은 결과를 얻을 수 있다. score 함수는 다음과 같다.
 
 $$
-\nabla_{\mathbf{z}_t} \log p_t (\mathbf{z}_t | \mathbf{x}) = \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} | \mathbf{z}_t) + s_{\theta}(\mathbf{x}, t), 
+\begin{split}
+    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{z}_t \| \mathbf{x}) = \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \| \mathbf{z}_t) + s_{\theta}(\mathbf{x}, t), 
+\end{split}
 $$ 
 
-여기서 $s_{\theta}(\mathbf{x}, t)$ 는 사전훈련된 모델에서 추출 가능하지만 반면에 $p_t(\mathbf{x} | \mathbf{z}_t)$ 는 다루기 어렵다. 그래서 이에 대한 목표는 $p_t(\mathbf{x} | \mathbf{z}_t)$ 를 정확하게 추정하는 것이다.
+여기서 $$s_{\theta}(\mathbf{x}, t)$$ 는 사전훈련된 모델에서 추출 가능하지만 반면에 $$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 는 다루기 어렵다. 그래서 이에 대한 목표는 $$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 를 정확하게 추정하는 것이다.
 
 
 #### - MCG & DPS
-MCG와 DPS에서는 $p_t(\mathbf{x} | \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \: with \: \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 | \mathbf{z}_t)$ 를 이용해 $p_t(\mathbf{x} | \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
+MCG와 DPS에서는 $$p_t(\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \: with \: \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \| \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \| \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
 
 $$
-\nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} | \mathbf{z}_t) \approx \nabla_{\mathbf{z}_t} \log p (\mathbf{x} | \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \approx - \frac{1}{\sigma^2} \nabla_{\mathbf{z}_t} \parallel \mathbf{x} - H(\mathbf{\hat{z}}_0 (\mathbf{z}_t)) \parallel_2^2,
+\begin{split}
+    \nabla_{\mathbf{z}_t} \log p_t (\mathbf{x} \| \mathbf{z}_t) \approx \nabla_{\mathbf{z}_t} \log p (\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \approx - \frac{1}{\sigma^2} \nabla_{\mathbf{z}_t} \parallel \mathbf{x} - H(\mathbf{\hat{z}}_0 (\mathbf{z}_t)) \parallel_2^2,
+\end{split}
 $$ 
 
 여기서 $H$ 는 순방향 measurement 연산자이다.
 
 #### - GDP
-$p_t(\mathbf{x} | \mathbf{z}_t)$ 의 조건부 확률이 더 높을수록 degradation 모델인 $\mathcal{D}(\mathbf{z}_t)$ 를 $\mathbf{x}$ 에 적용한 결과와의 거리가 감소하는 것에 집중한다. 이에 대한 heuristic 근사를 다음과 같이 제안한다.
+$$p_t(\mathbf{x} \| \mathbf{z}_t)$$ 의 조건부 확률이 더 높을수록 degradation 모델인 $$\mathcal{D}(\mathbf{z}_t)$ 를 $\mathbf{x}$$ 에 적용한 결과와의 거리가 감소하는 것에 집중한다. 이에 대한 heuristic 근사를 다음과 같이 제안한다.
+
 $$
-p_t(\mathbf{x} | \mathbf{z}_t) \approx \frac{1}{Z} \exp (-[s \mathcal{L}(\mathcal{D}(\mathbf{z}_t), \mathbf{x})]) + \lambda \mathcal{Q}(\mathbf{z}_t),
-$$ 여기서 $\mathcal{L}$ 은 거리 metric, $\mathcal{Q}$은 quality metric, $Z$ 는 정규분포, $s$ 는 gudiance 가중치를 조절하기 위한 scaling factor 이다.
+\begin{split}
+    p_t(\mathbf{x} \| \mathbf{z}_t) \approx \frac{1}{Z} \exp (-[s \mathcal{L}(\mathcal{D}(\mathbf{z}_t), \mathbf{x})]) + \lambda \mathcal{Q}(\mathbf{z}_t),
+\end{split}
+$$
+
+ 여기서 $$\mathcal{L}$$ 은 거리 metric, $$\mathcal{Q}$$ 은 quality metric, $Z$ 는 정규분포, $s$ 는 gudiance 가중치를 조절하기 위한 scaling factor 이다.
 
 
