@@ -54,11 +54,8 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 ## 2.2. Shifted Window based Self-Attention
 #### - Swin Transformer Block
 
-<!-- ![Figure4 : Swin Block](/images/SwinTransformer/figure3-3.jpg){: .align-left height="350"}
 
-![Figure5 : ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: .align-right height="350"} -->
-
-| ![Swin Block](/images/SwinTransformer/figure3-3.jpg){: width="300" height="350"} | ![ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: width="300" height="350"} |
+| ![Swin Block](/images/SwinTransformer/figure3-3.jpg){: width="100%"} | ![ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: width="100%"} |
 | :---: | :---: |
 | **[ Figure 4 : Swin Block ]** | **[ Figure 5 : ViT Block ]** |
 
