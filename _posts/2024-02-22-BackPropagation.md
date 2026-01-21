@@ -11,7 +11,7 @@ use_math: ture # 수식 필요한 경우 사용
 ---
 
 # 1. Loss Function
-손실함수는 실제값과 예측값 사이의 차이를 표현한 것입니다. 주로 사용하는 손실함수로는 LogLoss, L2-Error, CrossEntropy, KL Divergence 등이 있다. 
+손실함수는 실제값과 예측값 사이의 차이를 표현한 것이다. 주로 사용하는 손실함수로는 LogLoss, L2-Error, CrossEntropy, KL Divergence 등이 있다. 
 
 # 2. Forward Propagation
 입력층에서 출력층 방향으로 오차를 전파시키며 각 층의 가중치를 업데이트하는 것을 의미한다.
