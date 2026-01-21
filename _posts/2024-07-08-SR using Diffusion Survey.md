@@ -80,7 +80,7 @@ Flow-based 방법은 optical flow algorithm을 이용해 SR 이미지를 생성�
 
 $$
 \begin{split}
-    \mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} \vert i \le h, j \le w, k \le c \}
+    \mathbf{x} \in \mathbb{R}^{w \times h \times c}, \Omega_{\mathbf{x}} = \{ (i,j,k) \in \mathbb{N}^{3}_{1} \; \vert \; i \le h, j \le w, k \le c \}
 \end{split}
 $$ 
 
@@ -173,7 +173,7 @@ DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 
 
 $$
 \begin{split}
-    q(\mathbf{z}_t \vert \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \alpha_t \mathbf{I})
+    q(\mathbf{z}_t \vert \mathbf{z}_{t-1}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{1-\alpha_t} \mathbf{z}_{t-1}, \; \alpha_t \mathbf{I})
 \end{split}
 $$
 
@@ -181,7 +181,7 @@ $$
 
 $$
 \begin{split}
-    q(\mathbf{z}_t \vert \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t})\mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
+    q(\mathbf{z}_t \vert \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t \vert \sqrt{\gamma_t}\mathbf{z}_{0}, (1-\gamma_{t}) \; \mathbf{I}), \quad where \quad \gamma_t = \prod_{i=1}^{t} ({1-\alpha_i})
 \end{split}
 $$ 
 
@@ -198,7 +198,7 @@ $$
 
 $$
 \begin{split}
-    p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} \vert \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),
+    p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}) = \mathcal{N}(\mathbf{z}_{t-1} \; \vert \; \mu_{\theta}(\mathbf{z}_t, \gamma_{t}), \; \Sigma_{\theta}(\mathbf{z}_t, \gamma_t)),
 \end{split}
 $$ 
 
@@ -218,9 +218,9 @@ $$
 
 $$
 \begin{split}
-    &\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \Vert p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
+    \mathbf{KL}( &q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \Vert p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
     &= -\mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} [\log p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})] + c \\
-    &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t})}{q(\mathbf{z}_t \vert \mathbf{z}_{t-1})}] + c \\
+    &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} \left[ - \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t})}{q(\mathbf{z}_t \vert \mathbf{z}_{t-1})} \right] + c \\
     &\overset{(ii)}{\ge} \mathbb{E}[- \log p_{\theta} (\mathbf{z}_0)] + c
 \end{split}
 $$
@@ -237,7 +237,7 @@ $ 0 < \sigma_1 < ... < \sigma_T$ : 유한한 noise 단계 순서
 
 $$
 \begin{split}
-    q(\mathbf{z}_t | \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \mathbf{z}_{0}, \sigma_t^2 \mathbf{I})
+    q(\mathbf{z}_t | \mathbf{z}_{0}) = \mathcal{N}(\mathbf{z}_t | \mathbf{z}_{0}, \sigma_t^2 \; \mathbf{I})
 \end{split}
 $$ 
 
@@ -383,8 +383,8 @@ DDPMs와 유사하게, $$\mathbf{z}_{T} \approx \mathcal{N}(\mathbf{0}, \mathbf{
 
 $$
 \begin{split}
-    \mathbf{z}_t = \sqrt{\gamma_t} \cdot \mathbf{\hat{z}}_0 + \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \\
-    \Longleftrightarrow \mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
+    &\mathbf{z}_t = \sqrt{\gamma_t} \cdot \mathbf{\hat{z}}_0 + \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \\
+    \Longleftrightarrow &\mathbf{\hat{z}}_0 = \frac{1}{\sqrt{\gamma_t}} \cdot (\mathbf{z}_t - \sqrt{1-\gamma_t} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t))
 \end{split}
 $$ 
 
@@ -392,7 +392,7 @@ $$\mathbf{z}_0$$ 을 사후분포에 대입해 $$p_{\theta}(\mathbf{z}_{t-1} \ve
 
 $$
 \begin{split}
-    \mu_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} [\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)]
+    \mu_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left[ \mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \right]
 \end{split}
 $$ 
 
@@ -400,7 +400,7 @@ $$
 
 $$
 \begin{split} 
-    \mathbf{z}_{t-1} = \frac{1}{\sqrt{\alpha_t}}[\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t)] + \sqrt{1-\alpha_t} \cdot \epsilon_t
+    \mathbf{z}_{t-1} = \frac{1}{\sqrt{\alpha_t}} \left[\mathbf{z}_t - \frac{1-\alpha_t}{\sqrt{1-\gamma_t}} \cdot \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) \right] + \sqrt{1-\alpha_t} \cdot \epsilon_t
 \end{split}
 $$
 
@@ -547,6 +547,7 @@ InDI는 직접적인 mapping을 통해 두 품질 공간 사이의 간극을 효
 
 ![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-right height="225"}
 
+
 color shifting 은 계산량이 제한된 hardware로 작은 batch size나 짧은 학습 시간으로 학습을 진행할 때 많은 계산량때문에 발생한다. StableSR에서 color normalization을 이용해 이를 해결하는데, 다음과 같이 표현할 수 있다.
 
 $$
@@ -608,6 +609,7 @@ SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에
 
 ![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-right height="175"}
 
+
 DDNM은 위 식(LIR problem)에 대한 또다른 접근 방법을 보인다. range-null space decompostion을 이용해 zero-shot 을 진행한다. 기존 image IR problem을 변형해, noise가 없는 공간에서는 다음과 같이 표현할 수 있다.
 
 $$
@@ -654,7 +656,7 @@ $$
 
 $$
 \begin{split}
-    \mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0 \vertt} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
+    \mathbf{z}_{t-1} = \frac{\sqrt{\mathbf{\bar{\alpha}}_{t-1}} \beta_t}{1-\mathbf{\bar{\alpha}}_t} \mathbf{\hat{z}}_{0 \vert} + \frac{\sqrt{\alpha_t}(1-\mathbf{\bar{\alpha}}_{t-1})}{1-\mathbf{\bar{\alpha}}_{t-1}} \mathbf{z}_t + \sigma_t \mathbf{\epsilon} , \quad \mathbf{\epsilon} \sim \mathcal{N}(0, \mathbf{I})
 \end{split}
 $$ 
 
@@ -676,7 +678,7 @@ $$
 
 
 #### - MCG & DPS
-MCG와 DPS에서는 $$p_t(\mathbf{x} \vert \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \; with \; \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \vert \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \vert \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
+MCG와 DPS에서는 $$p_t(\mathbf{x} \vert \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \; \text{with} \; \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \vert \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \vert \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
 
 $$
 \begin{split}
