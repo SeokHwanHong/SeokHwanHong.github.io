@@ -217,14 +217,14 @@ $$
 
 $$
 \begin{split}
-    &\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) || p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
+    &\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \Vert p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})) \\
     &= -\mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})} [\log p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T})] + c \\
     &\overset{(i)}{=} \mathbb{E}_{q(\mathbf{z}_{0}, ... , \mathbf{z}_{T})}[- \log p(\mathbf{z}_T) - \sum_{t=1}^{T} \log \frac{p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t})}{q(\mathbf{z}_t \| \mathbf{z}_{t-1})}] + c \\
     &\overset{(ii)}{\ge} \mathbb{E}[- \log p_{\theta} (\mathbf{z}_0)] + c
 \end{split}
 $$
 
-여기서 $(i)$ 는 두 항이 분포의 곱이기 때문에 성립하고, $(ii)$ 는 Jensen의 부등식으로 유도할 수 있다. 이 때 상수 $c$ 는 영향을 받지 않으므로 $\theta$ 를 최적화하는 데는 무관하다. $c$ 를 제외한 $$\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \|| p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}))$$ 은 데이터 $$\mathbf{z}_0$$ 의 로그 가능도의 변분 하한이며, 이는 일반적으로 DDPM에 의해 최대화된다.
+여기서 $(i)$ 는 두 항이 분포의 곱이기 때문에 성립하고, $(ii)$ 는 Jensen의 부등식으로 유도할 수 있다. 이 때 상수 $c$ 는 영향을 받지 않으므로 $\theta$ 를 최적화하는 데는 무관하다. $c$ 를 제외한 $$\mathbf{KL}(q(\mathbf{z}_{0}, ... , \mathbf{z}_{T}) \Vert p_{\theta}(\mathbf{z}_{0}, ... , \mathbf{z}_{T}))$$ 은 데이터 $$\mathbf{z}_0$$ 의 로그 가능도의 변분 하한이며, 이는 일반적으로 DDPM에 의해 최대화된다.
 
 
 ## 3.3. Score-Based Generative Models (SGMs)
@@ -260,13 +260,13 @@ Annealed Langevin Dynamics (ALD) 는 반복 생성을 수행하는 알고리즘�
 
  3. $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
 
- $$
- \begin{split}
-     &Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
-     &Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
- \end{split}
- $$
-
+    $$
+    \begin{split}
+        &Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
+        &Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
+    \end{split}
+    $$
+    
  4. $$\alpha_t \rightarrow 0$$ 과 $$N \rightarrow \infty $$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
 
 
