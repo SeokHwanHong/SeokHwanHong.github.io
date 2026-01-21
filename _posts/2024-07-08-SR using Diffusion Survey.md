@@ -260,12 +260,12 @@ Annealed Langevin Dynamics (ALD) 는 반복 생성을 수행하는 알고리즘�
 
  3. $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
 
-$$
-\begin{split}
-    &Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
-    &Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
-\end{split}
-$$
+ $$
+ \begin{split}
+     &Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
+     &Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
+ \end{split}
+ $$
 
  4. $$\alpha_t \rightarrow 0$$ 과 $$N \rightarrow \infty $$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
 
