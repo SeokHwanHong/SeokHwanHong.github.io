@@ -57,15 +57,15 @@ statistical, edge-based, patch-based, prediction-based, sparse representation te
 #### - Regression-based Deep Learning
 딥러닝 모형 중 해상도를 증가시키는 end-to-end mapping 구조인 CNN 기반 모델들을 주로 사용한다. 
 
-* 1. 초기모델
+1. **초기 모델**
 SRCNN, FSRCNN, ESPCNN 등 CNN 모형은 깊이와 feature map의 크기를 조절한다.
 
-* 2. 최근 모델 : attention 구조
+2. **최근 모델 : attention 구조**
 이미지 내 관심있는 부분에 집중한다. regression에 기초해 손실함수로는 주로 L1과 L2 정규화를 이용한다. 저배율에서는 효과적이지만 배율이 올라감에 따라 효율이 감소한다. 특히, 더 큰 upscaling에서 세부사항에 문제가 발생하고 지나치게 부드러운 결과를 생성하는 경향이 있는데, 이는 보통 생성모델을 통해 해결된다.
 
 
 #### - Generative Adversarial Networks (GANs)
-SR에서 Generator $G$는 최대한 원본 이미지와 비슷하게 HR sample들을 생성하는 것을 목표로 하고 동시에 Discriminator $D$는 $G$가 생성한 이미지와 원본 이미지를 구별하도록  학습한다. SRGAN 이나 ESRGAN의 경우 덜 부드러운 이미지를 생성하기 위해 adversarial 손실과 content loss를 같이 사용해 최적화하기도 한다. 그러나 모드 붕괴에 취약하고 상당한 계산량이 필요하며, 수렴이 되지않는 경우 안정성 문제가 발생한다. 
+SR에서 Generator $G$는 최대한 원본 이미지와 비슷하게 HR sample들을 생성하는 것을 목표로 하고 동시에 Discriminator $D$ 는 $G$ 가 생성한 이미지와 원본 이미지를 구별하도록 학습한다. SRGAN 이나 ESRGAN의 경우 덜 부드러운 이미지를 생성하기 위해 adversarial 손실과 content loss를 같이 사용해 최적화하기도 한다. 그러나 모드 붕괴에 취약하고 상당한 계산량이 필요하며, 수렴이 되지않는 경우 안정성 문제가 발생한다. 
 
 
 #### - Flow-based Methods
@@ -148,13 +148,11 @@ LPIPS는 $\varphi$ 를 이용해 이미지를 지각적 feature space 로 사영
 # 3. Diffusion Models 
 
 ## 3.1. Architecture 
-
 DMs 은 기존 생성모델들과의 차이점으로 순방향과 역방향의 반복적인 시간 단계에서 실행된다는 것이다. 순방향 $q$는 점진적으로 반복적으로 노이즈를 추가함으로써 입력 데이터의 품질을 저하시킨다. 역방향 $p$ 는 품질이 저하된 데이터의 노이즈를 걷어내고 역시간순으로 원본 이미지를 복원한다. 이는 다음 그림과 같이 표현할 수 있다.
 
 ![Figure 1 : Principle of DMs](/images/SRDM Survey/figure1.jpg){: .align-center height="500"}
 
 #### - Notation 
-
 시간 단계 $t$ : 순방향 diffusion 동안 증가 및 역방향 diffusion 동안 0으로 전파, 유한한 $T$에 대해 $0 < t \le T$로 유한한 경우만 고려.
 
 $\mathcal{D}$ : 저해상도-고해상도 image pair set, $\mathcal{D} = \{ \mathbf{x}_i, \mathbf{y}_i \} _{i=1}^{N}$
@@ -162,11 +160,9 @@ $\mathcal{D}$ : 저해상도-고해상도 image pair set, $\mathcal{D} = \{ \mat
 확률 변수 $\mathbf{z}_t$ : 이미지와 corruption space 간 상태인 현재 상태, 이 때 순방향 $\mathbf{z}_t$ 와 역방향 $\mathbf{z}_t$ 사이에는 명확한 구분이 없다.
 
 #### - Assumptions
-
 순방향에서는 $$\mathbf{z}_t \sim q(\mathbf{z}_t \| \mathbf{z}_{t-1})$$, 역방향에서는 $$\mathbf{z}_{t-1} \sim p(\mathbf{z}_{t-1} \| \mathbf{z}_{t})$$ 이고 $t=0$ 일 때 초기 데이터 분포는 $$\mathbf{z}_0 \sim q(\mathbf{x})$$ 이다. 이 때 $q$ 와 $p$ 는 모형에 따라 다르게 선택하는데, 이는 크게 Denoising Diffusion Probabilistic Models (DDPMs)와 Score-Based Generative Models (SGMs), 그리고 Stochastic Differential Equations(SDEs)로 구분된다.
 
 ## 3.2. Denosing Diffusion Probabilistic Models (DDPMs)
-
 DDPMs는 유한한 이산(discrete) 시간 단계 동안 순방향과 역방향 diffusion을 활성화하기위해 2개의 Markov chain을 사용한다. 
 
 #### - Forward Diffusion
@@ -230,11 +226,9 @@ $$
 
 
 ## 3.3. Score-Based Generative Models (SGMs)
-
 SGMs는 DDPMs와 유사하게 이산형 diffusion 과정과 수학적 이론들을 사용한다. 분포 함수 $p(\mathbf{z})$ 를 직접 사용하는 대신 Stein score 함수를 이용하는데, 이는 로그 확률 분포 $\nabla_{\mathbf{z}} \log p(\mathbf{z})$ 의 gradient이다. 수학적으로 score 함수는 밀도 함수에 대한 모든 정보를 보존하며 더 쉽게 계산이 가능하다. 더욱이, 모형 훈련과 샘플링 절차의 분리는 더 유연하게 샘플링 방법과 훈련 목표를 정의할 수 있다.
 
 #### - Forward Diffusion
-
 $ 0 < \sigma_1 < ... < \sigma_T$ : 유한한 noise 단계 순서
 에 대해 순방향 diffusion은 DDPMs와 유사하게 Gaussian noise 분포를 다음과 같이 정의한다.
 
@@ -245,7 +239,6 @@ $$
 $$ 
 
 * Noise-Conditional Score Network (NCSN)
-
 각 시간 단계 $t$에서의 gradient 근사를 위해 학습된 predictor $s_\theta$ 를 사용하며 Noise-Conditional Score Network (NCSN) 라고 한다. 이는 다음과 같다.
 
 $$ 
@@ -257,14 +250,13 @@ $$
 NCSN에서 sampling하는 것은 $$ s_{\theta} (\mathbf{z}_t,t) $$ 를 사용해 반복적인 접근 방식으로 중간 상태 $$\mathbf{z}_t$$ 를 생성하는 것을 포함한다. 이 과정은 diffusion 에서의 sampling 을 위한 반복과는 다르며, 오직 $$\mathbf{z}_t$$ 생성에만 집중한다. 즉, $$\mathbf{z}_t$$ 는 반복적으로 샘플링되어야 하지만, DDPM은 $$z_{t+1}$$ 로부터 직접 $$z_{t}$$ 를 예측하는 것이 주요 차이점이다. 
 
 * Annealed Langevin Dynamics (ALD)
-
 Annealed Langevin Dynamics (ALD) 는 반복 생성을 수행하는 알고리즘이다. 알고리즘 순서는 다음과 같다.
 
-1. 초기 상태 $$\mathbf{z}_t^{(N)} \sim \mathcal{N}(\mathbf{0},\mathbf{I})$$ 과 해당 시간 단계 $t$ 에서의 단계 크기(step size)를 $\alpha$ > 0 을 이용해 $$\mathbf{z}_{t-1}^{(i)}$$ 에서 $$\mathbf{z}_{t-1}^{(i+1)}$$ 로 얼마나 이동하는지 총 $N$ 번을 반복해 추정한다. 
+ 1. 초기 상태 $$\mathbf{z}_t^{(N)} \sim \mathcal{N}(\mathbf{0},\mathbf{I})$$ 과 해당 시간 단계 $t$ 에서의 단계 크기(step size)를 $\alpha$ > 0 을 이용해 $$\mathbf{z}_{t-1}^{(i)}$$ 에서 $$\mathbf{z}_{t-1}^{(i+1)}$$ 로 얼마나 이동하는지 총 $N$ 번을 반복해 추정한다. 
 
-2. 각 $0 < t \le T$ 동안 $$\mathbf{z}_{t-1}^{(0)} = \mathbf{z}_t^{(N)} \approx \mathbf{z}_t$$ 초기화하는데, 이는 이전 중간 상태 최신 추정치이다.
+ 2. 각 $0 < t \le T$ 동안 $$\mathbf{z}_{t-1}^{(0)} = \mathbf{z}_t^{(N)} \approx \mathbf{z}_t$$ 초기화하는데, 이는 이전 중간 상태 최신 추정치이다.
 
-3. $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
+ 3. $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
 
 $$
 \begin{split}
@@ -273,7 +265,8 @@ $$
 \end{split}
 $$
 
-4. $$\alpha_t \rightarrow 0$$ 과 $$N \rightarrow \infty $$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
+ 4. $$\alpha_t \rightarrow 0$$ 과 $$N \rightarrow \infty $$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
+
 
 DDPMs과 유사하게 SGMs를 조건부 SGMs로 바꿀 수 있는데, 이는 저해상도 이미지와 같은 조건 $$\mathbf{x}$$ 를 추가함으로써 가능하다. 이를 수식으로 표현하면 다음과 같다.
 
@@ -439,43 +432,34 @@ $\lambda > 1$ 인 경우, DM은 조건부 정보를 우선시하여 무조건부
 ![Figure 3 : Topolgy of DMs](/images/SRDM Survey/figure4.jpg){: .align-right height="250"}
 
 #### - Latent space
-1. Latent Score-Based Generative Models(LSGM)
-
+1. **Latent Score-Based Generative Models(LSGM)**
 VAE의 latent space에서 작동하는 일반적인 SGM이며, 연산량을 줄이기위해 autoencoder의 latent space에서 diffusion 과정을 진행한다. VAE를 사전훈련해 더 빠른 샘플링 속도를 보이며 픽셀 도메인에서 작동하는 DM과 비슷하거나 더 나은 결과를 보인다.
 
-2. Latent Diffusion Models (LDMs)
-
+2. **Latent Diffusion Models (LDMs)**
 저차원의 autoencoder latent space에서 diffusion을 수행하는 모델이다. 사전 훈련된 DDPMs과 Autoencoder를 사용하며, denoising 신경망은 함께 훈련되지는 않는다. 이는 성능은 비슷하지만 연산량이 크게 감소한다. 또한 잠재공간에 대한 규제가 거의 없으며 다양한 모델에서 잠재 표현의 재사용을 가능케한다.
 
-3. image REstoration with difFUSION models(REFUSION)
-
+3. **image REstoration with difFUSION models(REFUSION)**
 LDMs의 개선버전으로 encoder 에서 decoder 에 이르는 skip connection 을 포함하는 U-Net 을 사용해 decoder 부분에 더 많은 정보를 제공한다. 비선형 활성화를 요소별 작업으로 대체하는 Nonlinear Activation-Free Block(NAFBlock) 을 도입해 두 부분으로 feature channel을 분리하고 그것들을 곱하여 하나의 출력을 생성한다. 그리고 인코딩된 저해상도 이미지나 고해상도 이미지에 대해 잠재 표현을 부분적으로 대체해 재구성 작업을 수행하도록 U-Net을 학습한다.
 
-4. Hierarchical Integration Diffusion Model(HI-Diff)
-
+4. **Hierarchical Integration Diffusion Model(HI-Diff)**
 첫 번째 단계에서는 인코더가 ground truth image를 매우 compact한 잠재 공간 표현으로 압축하는데, 이는 LDM보다 더 압축 비율이 높다. 그래서 다양한 scale의 잠재 표현을 세밀하게 다듬는 DM의 계산 부담이 크게 줄어든다. 두 번째 단계는 ViT를 기초로 한 autoencoder로, 이는 cross-attention fusion module 인 Hierarchical Integration Modules (HIM) 을 통해 downsampling 동안 첫 번째 단계의 잠재 표현을 통합한다.
 
 #### - Frequency space
-1. Wavelets
-
+1. **Wavelets**
 공간 domain 에서 wavelet domain 으로의 변환은 손실없이 이루어지며 이미지의 공간적 크기가 4가지 요인에 의해 작아질 수 있기 때문에 여러 이점들이 있다. 따라서 학습과 추론 단계에서 더 빠르게 diffusion이 진행된다. 또한, 이 변환은 고주파 세부사항을 개별 채널로 분리해 고주파 정보를 더욱 구체적으로 이용할 수 있고 더 잘 제어할 수 있다. 게다가 기존의 DM에 plug-in 기능으로 간편하게 통합이 가능하다.
 
-2. DiWa
-
+2. **DiWa**
 diffusion 과정은 모든 wavelet bands 와 직접적으로 상호작용하거나 특정 band를 목표로 나머지 band를 표준 CNN으로 예측할 수 있다. 
 
 #### - Residual space
-1. SRDiff
-
+1. **SRDiff**
 SRDiff 는 생성과정을 잔차 공간, 즉 upsample 된 저해상도 이미지와 고해상도 이미지 간의 차이에 집중한 첫 논문이다. 이를 이용해 DM은 잔차에 대한 세부사항에 집중하고 수렴속도가 증가하며 학습과정을 안정화할 수 있다는 장점이 생긴다. 
 $$ Whang \; et \; al. $$ 도 이미지의 blur를 제거하기 위해 predict-and-refine 을 이용해 기초적인 요소로써 잔차 예측을 사용한다. 그러나 SRDiff와 달리 CNN을 사용해 SR을 예측하며, 이 예측값과 고해상도 값 사이의 잔차를 DM으로 예측한다.
 
-2. ResDiff
-
+2. **ResDiff**
 ResDiff는 위 방법과 더불어 역방향 diffusion 에서 SR 예측과 고주파 정보를 통합한다. 
 
-3. ResShift
-
+3. **ResShift**
 고해상도 이미지와 저해상도 이미지 간의 잔차를 조정해 변환에 대한 Markov Chain 을 구성한다. 순방향 diffusion에서 단순히 Gaussian noise를 추가하는 것 대신에, 잔차는 학습동안 noise sampling 의 평균으로 추가된다. 이를 통해 샘플링의 효율성을 크게 향상시켜 샘플링 단계를 고작 15개까지로 감소할 수 있다.
 
 
@@ -483,16 +467,14 @@ ResDiff는 위 방법과 더불어 역방향 diffusion 에서 SR 예측과 고�
 #### - Low Resolution Reference
 직관적인 channel 통합으로 고품질의 SR 이미지를 생성한다. 저해상도 이미지가 $t-1$ 번째부터 denoised 결과와 합쳐져 $t$ 번째에서 noise 예측을 위한 조건부 정보의 입력값의 역할을 한다. 
 
-1. Iterative Latent Variable Refinement (ILVR)
-
+1. **Iterative Latent Variable Refinement (ILVR)**
 ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건을 부여한다. 이는 사전 훈련된 DM 을 활용해 훈련 시간을 더 짧게 한다. 조건 정보를 통합하기 위해, 노이즈가 제거된 출력의 저주파 구성 요소는 저해상도 이미지의 해당하는 부분으로 대체된다. 이를 통해 잠재변수는 생성 과정의 각 단계에서 제공된 참조 이미지와 정렬되어, 사용자가 원하는 데로 생성하도록 구성된다.
 
 ####  - Super-Resolved Reference
-1. CDPMSR
-
+1. **CDPMSR**
 저해상도 이미지의 noise를 제거하는 조건을 대한 대안으로 사전 학습된 SR 모델로부터 사전분포를 학습해 참조 이미지를 예측하는 방법이 있다. CDPMSR은 기존 standard SR 모델을 사용해 얻어진 예측된 SR 참조 이미지로 noise 제거 과정에 조건을 부여한다.
 
-2. $$Pandey \; et \; al.$$
+2. **$$Pandey \; et \; al.$$**
 
 ![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-right height="250"}
 
@@ -500,12 +482,10 @@ ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건�
 
 
 #### - Feature Reference
-1. SRDiff
-
+1. **SRDiff**
 조건 정보는 사전 학습된 신경망으로부터 관련있는 feature들을 추출할 수 있다는 장점이 있다. SRDiff는 사전 훈련된 encoder를 이용해 역방향 diffusion 의 각 단계에서 저해상도 이미지의 feature를 encoding 한다. 이 feature들은 guidance 역할을 하며, 고해상도 출력을 생성하는데 도움을 준다.
 
-2. Impicit DMs (IDMs)
-
+2. **Impicit DMs (IDMs)**
 IDMs는 다른 접근법을 이용하는데, neural representation으로 noise 제거 신경망을 조건화한다. 이는 다양한 scale에서 연속적인 표현을 가능하도록 한다.
 
 
@@ -513,22 +493,19 @@ IDMs는 다른 접근법을 이용하는데, neural representation으로 noise �
 ## 4.5. Corruption Space
 DM 에는 noise schedule, 신경망 parameterization, sampling algorithm 이라는 3가지 핵심 기술이 있다. 최근에는 순방향 diffusion 동안 순수한 Gaussian noise를 사용하는 것 대신에 다른 종류의 corruption space 사용을 주장한다. 
 
-1. Soft Score Mathcing (SSM)
-
+1. **Soft Score Mathcing (SSM)**
 SSM은 필터링 과정을 SGM에 직접 통합해, 모델이 깨끗한 이미지를 예측하도록 훈련하는 방법이다. 이미지가 손상되었을 때, 이 예측된 이미지가 관찰값과 일치하도록 한다. 
 
-2. Cold Diffusion
-
+2. **Cold Diffusion**
 Cold Diffusion은 DDPMs의 손상 공간을 조정하는 방법을 제안한다. 이는 이미지 생성 능력이 이미지 degradation 에 강하게 의존하지 않는데, Gaussian noise 이외에도 animorphosis와 같은 여러 최신 diffusion에도 적용가능하다.
 
-3. Image-to-Image Schrödinger Bridge (I2ISB)
+3. **Image-to-Image Schrödinger Bridge (I2ISB)**
 
 ![Figure 5 : Comparison of the standard corruption space and I2ISB](/images/SRDM Survey/figure6.jpg){: .align-right height="250"}
 
 I2ISB는 위 방법들과 비슷하지만 사전분포에 대해 어떠한 가정도 하지 않는다. diffusion 과정에서 깨끗한 이미지는 최초의 상태를 유지하지만 화질이 낮아진 이미지는 순방향과 역방향 모두에서 마지막 상태를 유지한다. 이 접근법은 저화질의 이미지가 깨끗하게 유지되어 원본 이미지로의 추적이 용이하다는 장점이 있다. 또한 더 적은 단계를 거치기 때문에 효율성이 높다는 장점도 있다. 하지만 훈련 시 pair인 data에만 특정되어, 비지도 학습 기반의 SR에 적합하지않다. 
 
-4. Inversion by Direct Iteration (InDI)
-
+4. **Inversion by Direct Iteration (InDI)**
 InDI는 직접적인 mapping을 통해 두 품질 공간 사이의 간극을 효율적으로 연결한다. 이와 같은 내재된 유연성과 직접 mapping 능력은 이미지의 품질을 향상시킨다. 
 
 ## 4.6. Color Shifting
@@ -552,16 +529,13 @@ Zero-shot image SR은 사전 이미지에 대한 예시나 학습에 의존하�
 ## 5.1. Projection-Based
 이 방법은 저해상도 이미지에서 내재된 구조나 texture를 추출해 각 단계에서 생성된 이미지를 보완하고 데이터 일관성을 유지하는 것을 목표로 한다. 
 
-1. RePaint 
-
+1. **RePaint**
 RePaint에서 diffusion 과정은 inpainting이 필요한 특정 부분에만 선택적으로 적용되고, 나머지 부분은 적용되지 않는다. 
 
-2. You Only Diffuse Areas (YODA)
-
+2. **You Only Diffuse Areas (YODA)**
 YODA는 RePaint와 유사한 아이디어를 SR에 적용하지만 zero-shot은 아니다. YODA는 DINO에서 파생된 importance mask를 이용해 각 시간 단계동안 diffusion이 일어날 영역을 지정한다.
 
-3. ILVR
-
+3. **ILVR**
 ILVR은 저해상도 이미지에서 저주파수 정보를 고해상도 이미지로 투영해 데이터의 일관성을 유지하고 향상된 DM 조건을 설정한다. Come-Closer-Diffuse-Faster (CCDF) 에서는 SR에 대한 일관화된 투영방법을 다음과 같이 표현한다.
 
 $$
@@ -584,11 +558,10 @@ $$
 
 여기서 $A$ 는 degradation operator, $b$ 는 contiminating noise 이다.
 
-1. SNIPS & DDRM
-
+1. **SNIPS & DDRM**
 SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에 diffusion 과정을 적용한다. 이 과정에서 $\mathbf{A}$ 에 SVD(singualr value decomposition)을 적용해 향상된 결과를 얻게 된다.
 
-2. Denosing Diffusion Null-space Model (DDNM)
+2. **Denosing Diffusion Null-space Model (DDNM)**
 
 ![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-right height="175"}
 
@@ -679,6 +652,4 @@ $$
 \end{split}
 $$
 
- 여기서 $$\mathcal{L}$$ 은 거리 metric, $$\mathcal{Q}$$ 은 quality metric, $Z$ 는 정규분포, $s$ 는 gudiance 가중치를 조절하기 위한 scaling factor 이다.
-
-
+여기서 $$\mathcal{L}$$ 은 거리 metric, $$\mathcal{Q}$$ 은 quality metric, $Z$ 는 정규분포, $s$ 는 gudiance 가중치를 조절하기 위한 scaling factor 이다.
