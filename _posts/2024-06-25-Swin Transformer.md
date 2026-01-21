@@ -58,7 +58,10 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 
 ![Figure5 : ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: .align-right height="350"} -->
 
-| ![Figure 4 : Swin Block](/images/SwinTransformer/figure3-3.jpg) | ![Figure 5 : ViT Block](/images/SwinTransformer/figure3-3-1.jpg) |
+| ![Swin Block](/images/SwinTransformer/figure3-3.jpg){: width="300" height="350"} | ![ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: width="300" height="350"} |
+| :---: | :---: |
+| **[ Figure 4 : Swin Block ]** | **[ Figure 5 : ViT Block ]** |
+| ![Swin Block](/images/SwinTransformer/figure3-3.jpg){: width="300" height="350"} | ![ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: width="300" height="350"} |
 | :---: | :---: |
 | **[ Figure 4 : Swin Block ]** | **[ Figure 5 : ViT Block ]** |
 
@@ -100,8 +103,8 @@ $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈
 
 $$
 \begin{split}
-    \hat{z}^l \: \: &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
-    z^l \: \: &= MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}, \\
+    \hat{z}^l \quad &= W-MSA (LN(z^{l-1}))+ z^{l-1}, \\
+    z^l \quad &= MLP(LN(\hat{z}^{l}))+ \hat{z}^{l}, \\
     \hat{z}^{l+1} &= SW-MSA (LN(z^{l}))+ z^{l}, \\
     z^{l+1} &= MLP(LN(\hat{z}^{l+1}))+ \hat{z}^{l+1}
 \end{split}

@@ -23,7 +23,7 @@ Computer-Vision에서 Image Super-Resolution(SR)은 여러 어려움들을 해�
 종류 : 변환시키는 이미지의 수에 따라 Single(단일)과 Multi(다수)로 구분한다. 
 
 ## 2.1. Single Image SR (SISR)
-주어진 단일 저해상도 이미지 $\mathbf{x} \in \mathbb{R}^{\mathbf{w} \times \mathbf{h} \times c}$ 에 대응하는 $\mathbf{y} \in \mathbb{R}^{w \times h \times c}$ 를 생성하는데, 여기서 $\mathbf{w} < w, \: \mathbf{h} < h $ 를 만족한다.  $x$와 $y$의 관계를 표현하면 다음과 같다.
+주어진 단일 저해상도 이미지 $\mathbf{x} \in \mathbb{R}^{\mathbf{w} \times \mathbf{h} \times c}$ 에 대응하는 $\mathbf{y} \in \mathbb{R}^{w \times h \times c}$ 를 생성하는데, 여기서 $\mathbf{w} < w, \; \mathbf{h} < h $ 를 만족한다.  $x$와 $y$의 관계를 표현하면 다음과 같다.
 
 $$ 
 \begin{split}
@@ -37,7 +37,7 @@ $$
 
 $$
 \begin{split}
-    \theta = argmin_{\theta} \mathcal{L}(\hat{\mathbf{y}}, \mathbf{y}) + \lambda \: \phi(\theta)
+    \theta = argmin_{\theta} \mathcal{L}(\hat{\mathbf{y}}, \mathbf{y}) + \lambda \; \phi(\theta)
 \end{split}
 $$
 
@@ -205,7 +205,7 @@ $$
 \end{split}
 $$ 
 
-여기서 $$\mu_{\theta}$$ 와 $$\Sigma_{\theta}$$ 은 학습가능하다. 유사하게 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{x})$$ 의 평균과 분산을 $$\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \: \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$$ 로 대체할 수 있다. 
+여기서 $$\mu_{\theta}$$ 와 $$\Sigma_{\theta}$$ 은 학습가능하다. 유사하게 $$p_{\theta}(\mathbf{z}_{t-1} \| \mathbf{z}_{t}, \mathbf{x})$$ 의 평균과 분산을 $$\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \; \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$$ 로 대체할 수 있다. 
 
 #### - Optimization 
 순방향 과정을 학습하는 역방향 과정에서 다음과 같은 순방향 및 역방향 시퀀스의 결합 분포는 다음과 같다. 
@@ -266,16 +266,16 @@ Annealed Langevin Dynamics (ALD) 는 반복 생성을 수행하는 알고리즘�
 
 2. 각 $0 < t \le T$ 동안 $$\mathbf{z}_{t-1}^{(0)} = \mathbf{z}_t^{(N)} \approx \mathbf{z}_t$$ 초기화하는데, 이는 이전 중간 상태 최신 추정치이다.
 
-3.  $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
+3. $$\mathbf{z}_{t-1}^{(N)} \approx \mathbf{z}_{t-1}$$ 로 근사하기 위해, ALD는 $i = 0, ..., N − 1$ 에 대해 다음과 같은 업데이트 규칙을 사용한다.
 
 $$
 \begin{split}
-    $Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
-    $Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
+    &Rule (1) : \epsilon^{(i)} \leftarrow \mathcal{N}(\mathbf{0},\mathbf{I})  \\
+    &Rule (2) : \mathbf{z}_{t-1}^{(i+1)} \leftarrow \mathbf{z}_{t-1}^{(i)} + \frac{1}{2} \alpha_{t-1} s_{\theta}(\mathbf{z}_{t-1}^{(i)}, t-1) + \sqrt{s_{t-1}} \epsilon^{(i)} \\
 \end{split}
 $$
 
-4. $\alpha_t \rightarrow 0$ 과 $N \rightarrow \inf$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
+4. $$\alpha_t \rightarrow 0$$ 과 $$N \rightarrow \infty $$ 일 때 $$\mathbf{z}_{0}^{(N)}$$ 가 $$q(\mathbf{z}_0)$$ 로 수렴할 때까지 진행한다.
 
 DDPMs과 유사하게 SGMs를 조건부 SGMs로 바꿀 수 있는데, 이는 저해상도 이미지와 같은 조건 $$\mathbf{x}$$ 를 추가함으로써 가능하다. 이를 수식으로 표현하면 다음과 같다.
 
@@ -297,7 +297,7 @@ $$
 \end{split}
 $$
 
-여기서 $\lambda(t) > 0 $ 은 가중함수, $\sigma_t$ 는 시간 단계 $t$ 마다 추가되는 noise level이다. $(i)$ 는 Vincent et al. , $(ii)$ 는 DDPM의 KL Divergence 를 이용한 최적화, $(iii)$ 는 $\theta$ 의 최적화 과정에서 $\mathbf{z}_t = \mathbf{z}_0 + \sigma_t \: \epsilon \: \& \: c$ 를 이용해 유도할 수 있다. 
+여기서 $\lambda(t) > 0 $ 은 가중함수, $\sigma_t$ 는 시간 단계 $t$ 마다 추가되는 noise level이다. $(i)$ 는 Vincent et al. , $(ii)$ 는 DDPM의 KL Divergence 를 이용한 최적화, $(iii)$ 는 $\theta$ 의 최적화 과정에서 $\mathbf{z}_t = \mathbf{z}_0 + \sigma_t \; \epsilon \; \& \; c$ 를 이용해 유도할 수 있다. 
 
 
 
@@ -317,7 +317,7 @@ $$
 
 $$ 
 \begin{split}
-    \mathrm{d} \mathbf{z} = -\frac{1}{2} \alpha(t) \mathbf{z} \mathrm{d}t + \sqrt{\alpha(t)} \: \mathrm{d} \mathbf{w}, 
+    \mathrm{d} \mathbf{z} = -\frac{1}{2} \alpha(t) \mathbf{z} \mathrm{d}t + \sqrt{\alpha(t)} \; \mathrm{d} \mathbf{w}, 
 \end{split}
 $$ 
 
@@ -325,7 +325,7 @@ $$
 
 $$ 
 \begin{split}
-    \mathrm{d} \mathbf{z} = \sqrt{\frac{\mathrm{d}[\sigma(t)^2]}{\mathrm{d}t}} \: \mathrm{d} \mathbf{w}, 
+    \mathrm{d} \mathbf{z} = \sqrt{\frac{\mathrm{d}[\sigma(t)^2]}{\mathrm{d}t}} \; \mathrm{d} \mathbf{w}, 
 \end{split}
 $$ 
 
@@ -470,7 +470,7 @@ diffusion 과정은 모든 wavelet bands 와 직접적으로 상호작용하거�
 1. SRDiff
 
 SRDiff 는 생성과정을 잔차 공간, 즉 upsample 된 저해상도 이미지와 고해상도 이미지 간의 차이에 집중한 첫 논문이다. 이를 이용해 DM은 잔차에 대한 세부사항에 집중하고 수렴속도가 증가하며 학습과정을 안정화할 수 있다는 장점이 생긴다. 
-Whang $$ et \: al. $$ 도 이미지의 blur를 제거하기 위해 predict-and-refine 을 이용해 기초적인 요소로써 잔차 예측을 사용한다. 그러나 SRDiff와 달리 CNN을 사용해 SR을 예측하며, 이 예측값과 고해상도 값 사이의 잔차를 DM으로 예측한다.
+$$ Whang \; et \; al. $$ 도 이미지의 blur를 제거하기 위해 predict-and-refine 을 이용해 기초적인 요소로써 잔차 예측을 사용한다. 그러나 SRDiff와 달리 CNN을 사용해 SR을 예측하며, 이 예측값과 고해상도 값 사이의 잔차를 DM으로 예측한다.
 
 2. ResDiff
 
@@ -494,7 +494,7 @@ ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건�
 
 저해상도 이미지의 noise를 제거하는 조건을 대한 대안으로 사전 학습된 SR 모델로부터 사전분포를 학습해 참조 이미지를 예측하는 방법이 있다. CDPMSR은 기존 standard SR 모델을 사용해 얻어진 예측된 SR 참조 이미지로 noise 제거 과정에 조건을 부여한다.
 
-2. $$Pandey \: et \: al.$$
+2. $$Pandey \; et \; al.$$
 
 ![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-right height="250"}
 
@@ -644,7 +644,7 @@ $$
 \end{split}
 $$ 
 
-여기서 $$\alpha_t = 1- \beta_t, \: \mathbf{\bar{\alpha}}_t = \prod_{i=0}^{t}\alpha_i$$ 이다.
+여기서 $$\alpha_t = 1- \beta_t, \; \mathbf{\bar{\alpha}}_t = \prod_{i=0}^{t}\alpha_i$$ 이다.
 
 $$\mathbf{z}_{t-1}$$ 은 $$\mathbf{\hat{z}}_{0 \| t}$$ 의 noise가 추가된 버전이다. 이 노이즈는 range-space 와 null-space 간 불일치를 효과적으로 완화한다. 마지막으로 $$\mathbf{A}$$ 와 $$\mathbf{A^{\dagger}}$$ 를 정의하는 것에 따라 수행할 복원 작업이 달라진다. 
 
@@ -662,7 +662,7 @@ $$
 
 
 #### - MCG & DPS
-MCG와 DPS에서는 $$p_t(\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \: with \: \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \| \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \| \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
+MCG와 DPS에서는 $$p_t(\mathbf{x} \| \mathbf{\hat{z}}_0 (\mathbf{z}_t)) \; with \; \mathbf{\hat{z}}_0 (\mathbf{z}_t) = \mathbb{E}(\mathbf{z}_0 \| \mathbf{z}_t)$$ 를 이용해 $p_t(\mathbf{x} \| \mathbf{z}_t)$ 를 추정한다. 이는 다음과 같이 표현할 수 있다. 
 
 $$
 \begin{split}
