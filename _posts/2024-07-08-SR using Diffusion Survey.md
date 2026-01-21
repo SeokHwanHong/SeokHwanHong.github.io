@@ -607,7 +607,7 @@ SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에
 
 **2. Denosing Diffusion Null-space Model (DDNM)**
 
-![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-center height="175"}
+![Figure 7 : Overview of DDNM](/images/SRDM Survey/figure8.jpg){: .align-center height="175"}
 
 
 DDNM은 위 식(LIR problem)에 대한 또다른 접근 방법을 보인다. range-null space decompostion을 이용해 zero-shot 을 진행한다. 기존 image IR problem을 변형해, noise가 없는 공간에서는 다음과 같이 표현할 수 있다.
@@ -617,7 +617,8 @@ $$
     \mathbf{x} = \mathbf{Ay}
 \end{split}
 $$ 
-![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-center height="225"}
+
+
 여기서 $$\mathbf{y} \in \mathbb{R}^{D \times 1}$$ 은 선형화된 고해상도 이미지, $$\mathbf{x} \in \mathbb{R}^{d \times 1}$$ 는 선형화된 화질이 감소한 이미지이다. 여기에 두 제약조건을 제시하는데, 이는 다음과 같다.
 
 $$
