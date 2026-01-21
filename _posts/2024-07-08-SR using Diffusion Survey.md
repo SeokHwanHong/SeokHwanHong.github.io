@@ -501,7 +501,7 @@ ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건�
 
 **2. $$Pandey \; et \; al.$$**
 
-![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-right height="250"}
+![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-center height="250"}
 
 본 논문에서는 DiffuseVAE를 사용해 예측된 조건을 변화시키는 아이디어를 도입했다. 이는 확률적 예측을 생성하는 VAE가 DM의 조건 정보로 통합되어 두 모델의 이점을 모두 활용할 수 있다. 'generator-refiner framework' 라고 불리는 두 단계 접근법을 사용한다. 첫 번째에서는 훈련 데이터에 대해 학습하고, 두 번째 단계에서 DM 이 VAE 에 의해 생성된 다양하고 흐릿한 재구성을 사용해 조건화된다. 이 방법의 핵심은 VAE 의 저차원 잠재 공간 내에서 생성된 샘플들이 다양하다는 것이다. 즉, 샘플링 속도와 다양성에 강점이 있다. 
 
@@ -545,7 +545,7 @@ InDI는 직접적인 mapping을 통해 두 품질 공간 사이의 간극을 효
 
 ## 4.6. Color Shifting
 
-![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-right height="225"}
+![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-center height="225"}
 
 
 color shifting 은 계산량이 제한된 hardware로 작은 batch size나 짧은 학습 시간으로 학습을 진행할 때 많은 계산량때문에 발생한다. StableSR에서 color normalization을 이용해 이를 해결하는데, 다음과 같이 표현할 수 있다.
@@ -607,7 +607,7 @@ SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에
 
 **2. Denosing Diffusion Null-space Model (DDNM)**
 
-![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-right height="175"}
+![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure8.jpg){: .align-center height="175"}
 
 
 DDNM은 위 식(LIR problem)에 대한 또다른 접근 방법을 보인다. range-null space decompostion을 이용해 zero-shot 을 진행한다. 기존 image IR problem을 변형해, noise가 없는 공간에서는 다음과 같이 표현할 수 있다.
@@ -617,7 +617,7 @@ $$
     \mathbf{x} = \mathbf{Ay}
 \end{split}
 $$ 
-
+![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-center height="225"}
 여기서 $$\mathbf{y} \in \mathbb{R}^{D \times 1}$$ 은 선형화된 고해상도 이미지, $$\mathbf{x} \in \mathbb{R}^{d \times 1}$$ 는 선형화된 화질이 감소한 이미지이다. 여기에 두 제약조건을 제시하는데, 이는 다음과 같다.
 
 $$
