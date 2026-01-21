@@ -37,6 +37,7 @@ $$
 Kullback-Leibler divergence(KL Divergence)는 두 확률분포의 차이를 계산하는데 사용하는 함수로, 어떤 이상적인 분포(실제모형)에 대해 그 분포를 근사하는 다른 분포(예측모형)를 사용해 두 분포간 정보량의 차이를 계산한다.
 
 #### - 이산확률변수
+
 $$
 \begin{split}
     D_{KL}(P||Q) = \sum_{i} P(i) \log \left[\frac{P(i)}{Q(i)} \right] = H_p(q) - H(q)
@@ -44,6 +45,7 @@ $$
 $$
 
 #### - 연속확률변수
+
 $$
 \begin{split}
     D_{KL}(P||Q) = \int_{-\infty}^{\infty} p(x) \log \left[\frac{p(x)}{q(x)} \right] dx
