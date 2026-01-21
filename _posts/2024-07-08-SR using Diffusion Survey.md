@@ -57,12 +57,10 @@ statistical, edge-based, patch-based, prediction-based, sparse representation te
 #### - Regression-based Deep Learning
 딥러닝 모형 중 해상도를 증가시키는 end-to-end mapping 구조인 CNN 기반 모델들을 주로 사용한다. 
 
-1. 초기모델
-
+* 1. 초기모델
 SRCNN, FSRCNN, ESPCNN 등 CNN 모형은 깊이와 feature map의 크기를 조절한다.
 
-2. 최근 모델 : attention 구조
-
+* 2. 최근 모델 : attention 구조
 이미지 내 관심있는 부분에 집중한다. regression에 기초해 손실함수로는 주로 L1과 L2 정규화를 이용한다. 저배율에서는 효과적이지만 배율이 올라감에 따라 효율이 감소한다. 특히, 더 큰 upscaling에서 세부사항에 문제가 발생하고 지나치게 부드러운 결과를 생성하는 경향이 있는데, 이는 보통 생성모델을 통해 해결된다.
 
 
