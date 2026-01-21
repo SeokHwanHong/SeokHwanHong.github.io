@@ -54,15 +54,19 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 ## 2.2. Shifted Window based Self-Attention
 #### - Swin Transformer Block
 
-<div style="display: flex; justify-content: space-between;">
-    <figure style="text-align: center; display: inline-block; width: 400px;">
-        <img src="/images/SwinTransformer/figure3-3.jpg" height ="350"/>
-        <figcaption style="display: block; color: black; padding: 5px; white-space: nowrap; text-align: center;"> [ Figure4 : Swin Block ]
+<div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+    <figure style="text-align: center; margin: 0; width: 48%; min-width: 300px;">
+        <img src="{{ '/images/SwinTransformer/figure3-3.jpg' | relative_url }}" 
+             style="width: 100%; height: auto; object-fit: contain;">
+        <figcaption style="display: block; color: #555; padding: 10px 0; text-align: center; font-size: 0.9em;">
+            [ Figure4 : Swin Block ]
         </figcaption>
     </figure>
-    <figure style="text-align: center; display: inline-block; width: 200px;">
-        <img src="/images/SwinTransformer/figure3-3-1.jpg" height="350"/>
-        <figcaption style="display: block; color: black; padding: 5px; white-space: nowrap; text-align: center;">[ Figure5 : ViT Block ]
+    <figure style="text-align: center; margin: 0; width: 24%; min-width: 150px;">
+        <img src="{{ '/images/SwinTransformer/figure3-3-1.jpg' | relative_url }}" 
+             style="width: 100%; height: auto; object-fit: contain;">
+        <figcaption style="display: block; color: #555; padding: 10px 0; text-align: center; font-size: 0.9em;">
+            [ Figure5 : ViT Block ]
         </figcaption>
     </figure>
 </div>
@@ -191,9 +195,7 @@ ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet�
 
 ![Table 11 : Results of Ablation study 2](/images/SwinTransformer/ablation2.jpg){: .align-center height="150"}
 
-위 표는 여러 self-attention 계산 방법을 비교한 것이다. 본 논문에서 제시하는 Cyclic Shift는 더 깊은 층에서의 naive padding보다 더 좋은 성능을 보인다.
-
-또한 4 단계에 걸친 MSA에서 shifted window가 sliding window에 비해 대부분 더 좋은 성능을 보인다. 이를 바탕으로 각각 Image Classification, Object Detection, Semantic Segmentation에 적용한 결과는 다음 표와 같다.
+위 표는 여러 self-attention 계산 방법을 비교한 것이다. 본 논문에서 제시하는 Cyclic Shift는 더 깊은 층에서의 naive padding보다 더 좋은 성능을 보인다. 또한 4 단계에 걸친 MSA에서 shifted window가 sliding window에 비해 대부분 더 좋은 성능을 보인다. 이를 바탕으로 각각 Image Classification, Object Detection, Semantic Segmentation에 적용한 결과는 다음 표와 같다.
 
 ![Table 12 : Results of Ablation study 3](/images/SwinTransformer/ablation3.jpg){: .align-center height="100"}
 
