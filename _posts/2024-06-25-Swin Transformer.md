@@ -54,22 +54,8 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 ## 2.2. Shifted Window based Self-Attention
 #### - Swin Transformer Block
 
-<div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-    <figure style="text-align: center; margin: 0; width: 48%; min-width: 300px;">
-        <img src="{{ '/images/SwinTransformer/figure3-3.jpg' | relative_url }}" 
-             style="width: 100%; height: auto; object-fit: contain;">
-        <figcaption style="display: block; color: #555; padding: 10px 0; text-align: center; font-size: 0.9em;">
-            [ Figure4 : Swin Block ]
-        </figcaption>
-    </figure>
-    <figure style="text-align: center; margin: 0; width: 24%; min-width: 150px;">
-        <img src="{{ '/images/SwinTransformer/figure3-3-1.jpg' | relative_url }}" 
-             style="width: 100%; height: auto; object-fit: contain;">
-        <figcaption style="display: block; color: #555; padding: 10px 0; text-align: center; font-size: 0.9em;">
-            [ Figure5 : ViT Block ]
-        </figcaption>
-    </figure>
-</div>
+![Figure4 : Swin Block](/images/SwinTransformer/figure3-3.jpg){: .align-left height="350"}
+![Figure5 : ViT Block](/images/SwinTransformer/figure3-3-1.jpg){: .align-right height="350"}
 
 Swin Transformer는 기존 multi-head self-attention(MSA) 에서 shifted window가 적용된 Transformer Block을 사용한다. ViT Block과는 다르게 2개의 block이 하나로 구성되어 있는데, 첫번째 block은 W-MSA를 사용하고 두번째 block은 SW-MSA(Shifted Winodw MSA)를 사용한다.
 
