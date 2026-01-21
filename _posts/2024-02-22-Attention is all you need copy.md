@@ -58,7 +58,7 @@ Self-Attention은 input sequence 내에서 서로 관련된 부분들을 찾아 
 #### - Attention sequence
 $$
 \begin{aligned}
-    Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V
+    Attention(Q,K,V) = softmax({Q{K^{T}}/\sqrt{d_v}}) * V \\
 \end{aligned}
 $$ 
 
@@ -80,7 +80,7 @@ Multi-head Attention(MHA) 는 서로 다른 공간에 있는 정보들을 하나
 
 $$
 \begin{aligned}
-    MultiHead(Q, K, V) = Concat(head_1,\: ... \:, head_h) W^O \\
+    MultiHead(Q, K, V) = Concat(head_1,\: ... \:, head_h) W^O \\ \\
     where \quad head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) 
 \end{aligned}
 $$
