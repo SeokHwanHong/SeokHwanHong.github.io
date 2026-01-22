@@ -22,7 +22,7 @@ $$X = (X_1, X_2, \dots , X_p) \in \mathbb{R}^p$$ : Predictors
 
 $$Y \in y = \{1, 2, \dots , k \} $$ : Class Label (Categorical)
 
-$$\mathcal{D} = \{(x_i,y_i) \vert i = 1, 2, \dots , n \}$$ : 학습 데이터
+$$\mathcal{D} = \{ (x_i,y_i) \vert i = 1, 2, \dots , n \} $$ : 학습 데이터
 
 $$\phi : \mathbb{R}^p \rightarrow y$$ : 결정 규칙
 
