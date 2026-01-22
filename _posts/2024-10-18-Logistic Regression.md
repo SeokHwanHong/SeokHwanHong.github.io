@@ -60,7 +60,7 @@ $$
 
 $$
 \begin{split}
-    l(w,b) = \sum_{i=1}^n [y_i \log \mathbb{P}(y_i = 1 \vert x_i) + (1 - y_i) \log (1 - \mathbb{P}(y_i = 1 \vert x_i))]
+    l(w,b) = \sum_{i=1}^n \left[ y_i \log \mathbb{P}(y_i = 1 \vert x_i) + (1 - y_i) \log (1 - \mathbb{P}(y_i = 1 \vert x_i)) \right]
 \end{split}
 $$
 
