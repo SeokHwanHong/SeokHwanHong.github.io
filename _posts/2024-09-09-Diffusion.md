@@ -262,8 +262,8 @@ $$
 \begin{equation}
     \begin{split}
         H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(t-1)})  &+ H_q(\mathbf{X}^{(t-1)} \vert \mathbf{X}^{(t)}) - H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(0)}) \\
-        &\le H_q(\mathbf{X}^{(t-1)} \vert \mathbf{X}^{(t)}) 
-        &\le H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(t-1)})
+        &\le H_q(\mathbf{X}^{(t-1)} \vert \mathbf{X}^{(t)}) \\
+        &\le H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(t-1)}) \\
     \end{split}
 \end{equation}
 $$

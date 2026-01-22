@@ -42,7 +42,8 @@ $ N $ : 추가적인 노이즈
 이미지 전반에 걸쳐 blur가 균일하게 발생한다는 가정 하에 카메라 흔들림을 이용해 blur를 처리한다. 유도된 blur kernel 을 기준으로 카메라의 움직임을 추정해 deconvolution 작업을 수행함으로써 원본 이미지를 탐색한다. 또는 blur kernel의 지역 선형성과 간단한 휴리스틱을 가정해 미지의 kernel을 빠르게 추정한다. 이 방법은 빠르지만 제한된 이미지에서만 잘 작동한다.
 
 
-**2. deep learning **
+**2. deep learning**
+
 CNN을 기반으로 한 모형들을 이용해 미지의 blur kernel을 추정한다.
 
 
