@@ -18,11 +18,11 @@ $k$ : class 수
 
 $n$ : 데이터 수
 
-$$X = (X_1, X_2, \odots , X_p) \in \mathbb{R}^p$$ : Predictors
+$$X = (X_1, X_2, \dots , X_p) \in \mathbb{R}^p$$ : Predictors
 
-$$Y \in y = \{1, 2, \odots , k \} $$ : Class Label (Categorical)
+$$Y \in y = \{1, 2, \dots , k \} $$ : Class Label (Categorical)
 
-$$\mathcal{D} = \{(x_i,y_i) \vert i = 1, 2, \odots , n \}$$ : 학습 데이터
+$$\mathcal{D} = \{(x_i,y_i) \vert i = 1, 2, \dots , n \}$$ : 학습 데이터
 
 $$\phi : \mathbb{R}^p \rightarrow y$$ : 결정 규칙
 
