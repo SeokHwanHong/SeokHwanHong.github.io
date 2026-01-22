@@ -44,6 +44,7 @@ $$
 
 
 **3. inverse filtering**
+
 inverse filtering 을 이용해 noise 가 없이 계산이 가능하다.
 
 $$
@@ -105,6 +106,7 @@ $$
     &\propto \exp \left[ -\frac{(\mathbf{b} - (\mathbf{Ax}))^2}{2\sigma^2}\right]
 \end{split}
 $$
+
 
 #### - Bayesian perspective
 **1. Bayes'rule**
@@ -332,7 +334,7 @@ $$\mathbf{C} \in \mathbb{R}^{N\times N} $$ : 합성곱 필터
 
 $$\mathbf{z}, \mathbf{u}  \in \mathbb{R}^{2N} $$ : slack, dual 변수
 
-$\$mathbf{D} = \begin{bmatrix} \mathbf{D}_x \\ \mathbf{D}_y\end{bmatrix} \in \mathbb{R}^{2N \times N} $$ : 유한한 TV 정규화 연산자
+$$\mathbf{D} = \begin{bmatrix} \mathbf{D}_x \\ \mathbf{D}_y\end{bmatrix} \in \mathbb{R}^{2N \times N} $$ : 유한한 TV 정규화 연산자
 
 
 ## 4.1. Deconvolution Problem
@@ -420,7 +422,7 @@ $$
 \end{split}
 $$
 
-여기서의 soft thresholding 은 anisotropic TV 에 대한 proximal operator 이며 $$k = \lambda / \rho, \nu = \mathbf{Dx + u}$$ 이다.
+여기서의 soft thresholding 은 anisotropic TV 에 대한 proximal operator 이며 $$k = \lambda / \rho, \; \nu = \mathbf{Dx + u}$$ 이다.
 
 
 
