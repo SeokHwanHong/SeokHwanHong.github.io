@@ -5,7 +5,7 @@ categories: Super-Resolution    # 카테고리
 tag: [DL, Image, Generative, Diffusion, Survey] # 해시태그
 author_profiel: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
 sidemathbf:              # 페이지 왼쪽에 카테고리 지정
-    nav: "docs"       # sidemathbf의 주소 지정
+    nav: "counts"       # sidemathbf의 주소 지정
 #search: false # 블로그 내 검색 비활성화
 use_math: true
 ---
