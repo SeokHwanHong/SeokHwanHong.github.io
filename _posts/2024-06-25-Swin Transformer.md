@@ -63,6 +63,7 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
     <img src="/images/SwinTransformer/figure3-3-1.jpg" height="350" />
   </a>
   <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <b>[ Figure 4 : Swin Block ]</b> 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <b>[ Figure 5 : ViT Block ]</b>
