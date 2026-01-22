@@ -97,7 +97,7 @@ input : queries and keys of dimensions $d_{k}$ (= $d_{q}$), values of $d_{v}$
 
 <p align="center">
   <a href="#">
-    <img src="/images/attentionisallyouneed/mha.jpg" width="100%" />
+    <img src="/images/attentionisallyouneed/mha.jpg" width="400" />
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
