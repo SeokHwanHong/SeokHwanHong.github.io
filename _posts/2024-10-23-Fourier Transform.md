@@ -490,8 +490,8 @@ $$L \text{ 을 } H$$ 에 대해 미분한 값을 0으로 설정해 확인하면,
 
 $$
 \begin{split}
-    \frac{\partial L}{\partial H} = 0 \\
-    \Longrightarrow -2K(1-HK)\mathbb{E}[ \Vert I \Vert^2] + 2H\mathbb{E}[\Vert N \Vert^2] = 0 \\
-    \Longrightarrow H = \frac{K \mathbb{E}[ \Vert I \Vert^2]}{K^2 \mathbb{E}[\Vert I \Vert^2] + \mathbb{E}[\Vert N \Vert^2]} = \frac{1}{K + \frac{\mathbb{E}[\Vert N \Vert^2]}{\mathbb{E}[ \Vert I \Vert^2]}} \qquad \Box
+    &\frac{\partial L}{\partial H} = 0 \\
+    &\Longrightarrow -2K(1-HK)\mathbb{E}[ \Vert I \Vert^2] + 2H\mathbb{E}[\Vert N \Vert^2] = 0 \\
+    &\Longrightarrow H = \frac{K \mathbb{E}[ \Vert I \Vert^2]}{K^2 \mathbb{E}[\Vert I \Vert^2] + \mathbb{E}[\Vert N \Vert^2]} = \frac{1}{K + \frac{\mathbb{E}[\Vert N \Vert^2]}{\mathbb{E}[ \Vert I \Vert^2]}} \qquad \Box
 \end{split}
 $$
