@@ -138,7 +138,7 @@ Jensen 부등식을 이용해 전개하면 하한은 다음과 같다.
 
 $$
 \begin{align}
-    L &>= \int d\mathbf{x}^{(0 \cdot \cdot \cdot T)} \: q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) \cdot \log \left[p(\mathbf{x}^{(T)}) \: \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} \right] \\
+    L &\ge \int d\mathbf{x}^{(0 \cdot \cdot \cdot T)} \: q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) \cdot \log \left[p(\mathbf{x}^{(T)}) \: \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} \right] \\
 \end{align}
 $$
 
@@ -147,7 +147,7 @@ $$
 $$
 \begin{equation}
     \begin{split}
-        L &>= K, \\ 
+        L &\ge K, \\ 
         K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{(0)}, \mathbf{x}^{(t)}) \: \cdot \: D_{KL}(q(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)}, \mathbf{x}^{(0)}) \: \Vert \: p(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)})) \\
         &\quad + H_q(\mathbf{X}^{(T)} | \mathbf{X}^{(0)}) - H_q(\mathbf{X}^{(1)} | \mathbf{X}^{(0)}) - H_p(\mathbf{X}^{(T)}) \\
     \end{split}
