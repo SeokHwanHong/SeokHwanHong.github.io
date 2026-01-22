@@ -22,7 +22,7 @@ $$X = (X_1, X_2, \dots , X_p) \in \mathbb{R}^p$$ : Predictors
 
 $$Y \in y = \{1, 2, \dots , k \} $$ : Class Label (Categorical)
 
-$$\mathcal{D} = \{ (x_i,y_i) \vert i = 1, 2, \dots , n \} $$ : 학습 데이터
+$$\mathcal{D} = \{ (x_i,y_i) \vert \; i = 1, 2, \dots , n \} $$ : 학습 데이터
 
 $$\phi : \mathbb{R}^p \rightarrow y$$ : 결정 규칙
 
@@ -85,7 +85,7 @@ $$
 \end{split}
 $$
 
-또한, 최적화 결정 규칙 $$\hat{\phi} = \argmax_k \hat{P}_k(x)$$ 를 대입하면 다음과 같이 표현 가능하다.
+또한, 최적화 결정 규칙 $$\hat{\phi} = argmax_k \hat{P}_k(x)$$ 를 대입하면 다음과 같이 표현 가능하다.
 
 $$
 \begin{split}
@@ -102,13 +102,13 @@ $$
 
 
 ## 2.2. Notation
-$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k)$$
+**$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k)$$**
 
-$$2. \; \Sigma_1 = \Sigma_2 = ... = \Sigma_k$$
+**$$2. \; \Sigma _1 = \Sigma _2 = ... = \Sigma_k $$**
 
-$$3. \; f_k(X) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(X-\mu_k)^{T} \Sigma^{-1} (X-\mu_k)] $$
+**$$3. \; f_k(X) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(X-\mu_k)^{T} \Sigma^{-1} (X-\mu_k)] $$**
 
-$$4. \; p_k(x) = \frac{\pi_k f_k(x)}{\Sigma \pi_k f_k(x)}$$
+**$$4. \; p_k(x) = \frac{\pi_k f_k(x)}{\Sigma \pi_k f_k(x)}$$**
 
 
 
@@ -170,15 +170,15 @@ $$
 
 ## 3.2. Notation
 
-$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k) $$ 및 등분산성 가정
+**$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k) $$ 및 등분산성 가정**
 
-$$2. \; \hat{\Sigma}_k = \frac{1}{n_k-1} \sum_{i=1}^{n_k}(x_{ik} - \hat{\mu}_k)(x_{ik} - \hat{\mu}_k)^T $$
+**$$2. \; \hat{\Sigma}_k = \frac{1}{n_k-1} \sum_{i=1}^{n_k}(x_{ik} - \hat{\mu}_k)(x_{ik} - \hat{\mu}_k)^T $$**
 
-$$3. \; \delta_k(x) = \log \pi_k - \frac{1}{2} \log \vert \pi_k \vert - \frac{1}{2} (x - \mu_k)^{T} \Sigma^{-1}_k (x - \mu_k)$$
+**$$3. \; \delta_k(x) = \log \pi_k - \frac{1}{2} \log \vert \pi_k \vert - \frac{1}{2} (x - \mu_k)^{T} \Sigma^{-1}_k (x - \mu_k)$$**
 
-$$4. \; f_k(x) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(x - \mu_k)^{T} \Sigma^{-1} (x - \mu_k)] $$
+**$$4. \; f_k(x) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(x - \mu_k)^{T} \Sigma^{-1} (x - \mu_k)] $$**
 
-$$5. \; \text{Plug-in Estimators} \; : \; \hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k $$
+**$$5. \; \text{Plug-in Estimators} \; : \; \hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k $$**
 
 
 ## 3.3. LDA vs QDA
