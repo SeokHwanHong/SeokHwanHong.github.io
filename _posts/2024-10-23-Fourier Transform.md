@@ -359,10 +359,10 @@ Aliasing 은 샘플링 속도가 신호에서 가장 높은 주파수 성분(최
 Anti-Aliasing (AA) 은 이러한 왜곡들을 줄이거나 없애기 위한 기법이다. 이에 관해서는 다양한 기법들이 존재한다.
 
 #### - Sampling Based
-이미지에서 가장 기본적인 방법은 샘플링 해상도를 증가하는 것이다. 이를 super-sampling AA (SSAA) 라고 하며, 픽셀보다 더 많은 샘플을 사용해 경계에서 발생하는 왜곡을 감소시킨다.
+이미지에서 가장 기본적인 방법은 샘플링 해상도를 증가하는 것이다. 이를 Super-Sampling AA (SSAA) 라고 하며, 픽셀보다 더 많은 샘플을 사용해 경계에서 발생하는 왜곡을 감소시킨다.
 
 #### - Multi-sampling Based
-Multi-sampling AA (MSAA) 는 계산 비용이 매우 높은 SSAA 의 단점을 보완하며, 경계 영역에서만 추가 샘플링을 수행하는 방식이다. 
+Multi-Sampling AA (MSAA) 는 계산 비용이 매우 높은 SSAA 의 단점을 보완하며, 경계 영역에서만 추가 샘플링을 수행하는 방식이다. 
 
 #### - Post Processing Based
 Fast Approximate AA (FXAA) 와 같은 기술은 렌더링 후 이미지를 후처리해 AA 를 적용하는 방식이다. 경계를 부드럽게 처리해 Aliasing 을 감소하지만, 세밀한 부분에서는 효과가 떨어질 수 있다.
