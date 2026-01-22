@@ -46,6 +46,7 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 #### - Hierarchcial Feature Map
 
 ![Figure3 : Stage2 ~ 4](/images/SwinTransformer/figure3-2.jpg){: .align-center height="200"}
+| **[ Figure 3 : Stage 2 ~ 4 ]** {: .aligned -center}
 
 전체적으로 계층적인 feature map을 구성하기 위해 신경망이 깊어지면서 patch들을 합쳐 토큰의 수를 감소시킨다. Stage1에서 Stage2로 이동하면서 기존 패치들을 2x2로 합치고 4C 차원의 feature map을 구성한다. 따라서 output 차원은 2C가 된다. 동일하게 각 Stage를 이동할때마다 2x downsampling of resolution을 적용함으로써 Stage3와 Stage4의 해상도는 각각 $\frac{H}{16} \times \frac{W}{16} \times 4C$ 와 $\frac{H}{32} \times \frac{W}{32} \times 8C$ 로 층을 지날수록 감소한다. 이를 통해 일반적인 representation보다 더 계층적인 구조를 학습가능하고 차원이 감소한만큼 연산속도가 빨라진다.
 
