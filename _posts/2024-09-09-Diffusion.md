@@ -49,23 +49,27 @@ $\pi(\mathbf{y})$ : 분석적으로 다루기 쉬운 분포
 $T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta)$ : $\pi(\mathbf{y})$ 에 대한 Markov diffusion kernel
 $\beta$ : diffusion rate (noise 추가 정도)
 
-$$ 
-\pi(\mathbf{y}) = \int d\mathbf{y}^{\prime} \: T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta) \: \pi(\mathbf{y}^{\prime})
+$$
+\begin{split}
+    \pi(\mathbf{y}) = \int d\mathbf{y}^{\prime} \; T_{\pi}(\mathbf{y} \vert \mathbf{y}^{\prime} ; \beta) \; \pi(\mathbf{y}^{\prime})
+\end{split}
 $$
 
 $$
-q(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)}) = T_{\pi}(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)} ; \beta_t)
+\begin{split}
+    q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)}) = T_{\pi}(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)} ; \beta_t)
+\begin{split}
 $$
 
 #### - Forward Diffusion
-목표 : $T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta)$를 반복적으로 적용해 $q(\mathbf{x}^{(0)})$ 를 점진적으로 $\pi(\mathbf{y})$로 변환한다.
+목표 : $T_{\pi}(\mathbf{y} \vert \mathbf{y}^{\prime} ; \beta)$를 반복적으로 적용해 $q(\mathbf{x}^{(0)})$ 를 점진적으로 $\pi(\mathbf{y})$ 로 변환한다.
 time step $t = 0$ 부터 $t=T$까지 진행되는 diffusion 과정은 다음과 같다.
 
 $$
-q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = q(\mathbf{x}^{(0)}) \: \prod _{t=1}^{T} q(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)})
+q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = q(\mathbf{x}^{(0)}) \; \prod _{t=1}^{T} q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)})
 $$
 
-여기서 $q(\mathbf{x}^{(t)} | \mathbf{x}^{(t-1)})$ 은 정규분포에서 공분산이 단위-공분산인 정규분포나 이항분포에서 독립 이항분포로의 변환에 해당한다.
+여기서 $q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)})$ 은 정규분포에서 공분산이 단위-공분산인 정규분포나 이항분포에서 독립 이항분포로의 변환에 해당한다.
 
 
 
@@ -74,11 +78,15 @@ $$
 Forward Trajectory와 동일하게 구성하지만, 순서는 반대로 진행한다.
 
 $$ 
-p(\mathbf{x}^{(T)}) = \pi(\mathbf{x}^{(T)})
+\begin{split}
+    p(\mathbf{x}^{(T)}) = \pi(\mathbf{x}^{(T)})
+\end{split}
 $$
 
 $$
-p(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = p(\mathbf{x}^{(T)}) \: \prod _{t=1}^{T} p(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)})
+\begin{split}
+    p(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = p(\mathbf{x}^{(T)}) \; \prod _{t=1}^{T} p(\mathbf{x}^{(t-1)} \vert \mathbf{x}^{(t)})
+\end{split}
 $$
 
 #### - Reverse Diffusion
@@ -90,16 +98,18 @@ $$
 생성모델이 데이터에 부여하는 확률은 다음과 같다.
 
 $$
-p(\mathbf{x}^{(0)}) = \int d \mathbf{x}^{(1 \cdot \cdot \cdot T)} \: p(\mathbf{x} ^ {(1 \cdot \cdot \cdot T)})
+\begin{split}
+    p(\mathbf{x}^{(0)}) = \int d \mathbf{x}^{(1 \cdot \cdot \cdot T)} \; p(\mathbf{x} ^ {(1 \cdot \cdot \cdot T)})
+\end{split}
 $$
 
 이를 Forward Trajectory와 Reverse Trajectory 를 적당히 이용하면 다음과 같이 전개할 수 있다.
 
 $$
 \begin{align}
-p(\mathbf{x}^{(0)}) &= \int d \mathbf{x}^{(1 \cdot \cdot \cdot T)} \: p(\mathbf{x} ^ {(0 \cdot \cdot \cdot T)}) \frac{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})}{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})}\\
-&= \int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: \frac{p(\mathbf{x}^{(0 \cdot \cdot \cdot T)})}{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})} \\
-&= \int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: p(\mathbf{x} ^ {(T)}) \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})}\\ 
+    p(\mathbf{x}^{(0)}) &= \int d \mathbf{x}^{(1 \cdot \cdot \cdot T)} \: p(\mathbf{x} ^ {(0 \cdot \cdot \cdot T)}) \frac{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})}{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})}\\
+    &= \int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: \frac{p(\mathbf{x}^{(0 \cdot \cdot \cdot T)})}{q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)})} \\
+    &= \int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: p(\mathbf{x} ^ {(T)}) \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})}\\ 
 \end{align}
 $$ 
 
@@ -113,8 +123,8 @@ $$
 
 $$
 \begin{align}
-L &= \int d\mathbf{x}^{(0)} \: \log p(\mathbf{x}^{(0)}) \\
-&= \int d\mathbf{x}^{(0)} \: q(\mathbf{x}^{(0)}) \cdot \log [\int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: p(\mathbf{x} ^ {(T)}) \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})}]\\
+    L &= \int d\mathbf{x}^{(0)} \: \log p(\mathbf{x}^{(0)}) \\
+    &= \int d\mathbf{x}^{(0)} \: q(\mathbf{x}^{(0)}) \cdot \log \left[\int d\mathbf{x}^{1 \cdot \cdot \cdot T} \: q(\mathbf{x}^{(1 \cdot \cdot \cdot T)} | \mathbf{x}^{(0)}) \: p(\mathbf{x} ^ {(T)}) \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} \right] \\
 \end{align}
 $$
 
@@ -122,7 +132,7 @@ Jensen 부등식을 이용해 전개하면 하한은 다음과 같다.
 
 $$
 \begin{align}
-L &>= \int d\mathbf{x}^{(0 \cdot \cdot \cdot T)} \: q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) \cdot \log [p(\mathbf{x}^{(T)}) \: \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} ] \\
+    L &>= \int d\mathbf{x}^{(0 \cdot \cdot \cdot T)} \: q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) \cdot \log \left[p(\mathbf{x}^{(T)}) \: \prod_{t=1}^{T} \frac{p(\mathbf{x^{(t-1)}}|\mathbf{x^{(t)}})}{q(\mathbf{x^{(t)}}|\mathbf{x^{(t-1)}})} \right] \\
 \end{align}
 $$
 
@@ -131,9 +141,9 @@ $$
 $$
 \begin{equation}
 \begin{split}
-L &>= K \\ 
-K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{(0)}, \mathbf{x}^{(t)}) \: \cdot \: D_{KL}(q(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)}, \mathbf{x}^{(0)}) \: || \: p(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)})) \\
-&+ H_q(\mathbf{X}^{(T)} | \mathbf{X}^{(0)}) - H_q(\mathbf{X}^{(1)} | \mathbf{X}^{(0)}) - H_p(\mathbf{X}^{(T)}) \\
+    L &>= K, \\ 
+    K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{(0)}, \mathbf{x}^{(t)}) \: \cdot \: D_{KL}(q(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)}, \mathbf{x}^{(0)}) \: \Vert \: p(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)})) \\
+    &\quad + H_q(\mathbf{X}^{(T)} | \mathbf{X}^{(0)}) - H_q(\mathbf{X}^{(1)} | \mathbf{X}^{(0)}) - H_p(\mathbf{X}^{(T)}) \\
 \end{split}
 \end{equation}
 $$
