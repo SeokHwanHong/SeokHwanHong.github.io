@@ -44,6 +44,7 @@ $$
 #### - Optimal Classification
 
 **1. 0-1 손실함수**
+
 예측값 $$\hat{y}$$ 에 대해 올바르게 예측했다면 0을, 잘못 예측했다면 1을 부여하는 손실함수이다.
 
 $$
@@ -55,6 +56,7 @@ $$
 
 
 **2. 위험함수**
+
 결정 규칙 $$$\phi$$ 의 오류율을 확인하는 함수이다.
 
 $$
@@ -64,7 +66,9 @@ $$
 \end{split}
 $$
 
+
 **3. 베이지안 분류기**
+
 베이즈 결정 규칙 $$\phi^*$$ 와 오류율 $$R^*$$ 에 대해 다음과 같이 표현 가능하다.
 
 $$
@@ -90,6 +94,7 @@ $$
 $$
 
 
+
 # 2. Lineaer Discriminant Analysis (LDA)
 ## 2.1. Definition
 선형판별분석 (Linear Discriminant Analysis, LDA) 이란 분류모델과 차원축소까지 동시에 사용하는 알고리즘이다. 이는 입력 데이터 세트를 저차원 공간으로 투영해 차원을 축소하며 지도학습에서 사용한다. 또한, 클래스 간 분리를 최대화하는 축을 탐색하기 위해 클래스 간 분산과 클래스 내부 분산의 비율을 최대화 하는 방식으로 차원을 축소하며 축이 선형적인 특성을 띈다. 
@@ -97,13 +102,13 @@ $$
 
 
 ## 2.2. Notation
-1. $$X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k)$$
+$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k)$$
 
-2. $$\Sigma_1 = \Sigma_2 = ... = \Sigma_k$$
+$$2. \; \Sigma_1 = \Sigma_2 = ... = \Sigma_k$$
 
-3. $$f_k(X) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(X-\mu_k)^{T} \Sigma^{-1} (X-\mu_k)] $$
+$$3. \; f_k(X) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(X-\mu_k)^{T} \Sigma^{-1} (X-\mu_k)] $$
 
-4. $$p_k(x) = \frac{\pi_k f_k(x)}{\Sigma \pi_k f_k(x)}$$
+$$4. \; p_k(x) = \frac{\pi_k f_k(x)}{\Sigma \pi_k f_k(x)}$$
 
 
 
@@ -165,15 +170,15 @@ $$
 
 ## 3.2. Notation
 
-1. $$X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k) $$ 및 등분산성 가정
+$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k) $$ 및 등분산성 가정
 
-2. $$\hat{\Sigma}_k = \frac{1}{n_k-1} \sum_{i=1}^{n_k}(x_{ik} - \hat{\mu}_k)(x_{ik} - \hat{\mu}_k)^T $$
+$$2. \; \hat{\Sigma}_k = \frac{1}{n_k-1} \sum_{i=1}^{n_k}(x_{ik} - \hat{\mu}_k)(x_{ik} - \hat{\mu}_k)^T $$
 
-3. $$\delta_k(x) = \log \pi_k - \frac{1}{2} \log \vert \pi_k \vert - \frac{1}{2} (x - \mu_k)^{T} \Sigma^{-1}_k (x - \mu_k)$$
+$$3. \; \delta_k(x) = \log \pi_k - \frac{1}{2} \log \vert \pi_k \vert - \frac{1}{2} (x - \mu_k)^{T} \Sigma^{-1}_k (x - \mu_k)$$
 
-4. $$f_k(x) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(x - \mu_k)^{T} \Sigma^{-1} (x - \mu_k)] $$
+$$4. \; f_k(x) = (2 \pi)^{-\frac{p}{2}} \vert \Sigma \vert^{-\frac{1}{2}} \exp[-\frac{1}{2}(x - \mu_k)^{T} \Sigma^{-1} (x - \mu_k)] $$
 
-5. Plug-in Estimators : $$\hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k $$
+$$5. \; \text{Plug-in Estimators} \; : \; \hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k $$
 
 
 ## 3.3. LDA vs QDA
