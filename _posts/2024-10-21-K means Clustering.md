@@ -52,7 +52,7 @@ $$
 
 $$
 \begin{split}
-    r_{ik} = \begin{cases} 1 & \text{if} \quad k = \argmin_j \Vert x_i - \mu_j \Vert^2 \\ 
+    r_{ik} = \begin{cases} 1 & \text{if} \quad k = argmin_j \Vert x_i - \mu_j \Vert^2 \\ 
     0 & \text{otherwise} \end{cases} 
 \end{split}
 $$
