@@ -75,7 +75,7 @@ $$
 
 **2. Kullback & Leibler Divergence**
 
-$\lambda$ 를 사용하는 대신 KL 발산을 이용한다. 각 뉴런의 활성확률을 $Bernoulli(p)$ 로 가정하여 이 확률을 조정한다. 각 뉴런 $j$ 에 대해 경험적 확률 $\hat{p}_j = \frac{1}{m} \sum_{i} a_i(x)$ 과 실제 확률간 차이를 측정해 정규화 계수로 사용하는데 이 차이가 0이 되도록 함수를 학습한다. 전체 손실함수는 다음과 같다.
+$$\lambda$$ 를 사용하는 대신 KL 발산을 이용한다. 각 뉴런의 활성확률을 $$Bernoulli(p)$$ 로 가정하여 이 확률을 조정한다. 각 뉴런 $$j$$ 에 대해 경험적 확률 $$\hat{p}_j = \frac{1}{m} \sum_{i} a_i(x)$$ 과 실제 확률간 차이를 측정해 정규화 계수로 사용하는데 이 차이가 0이 되도록 함수를 학습한다. 전체 손실함수는 다음과 같다.
 
 $$
 \begin{split}
@@ -146,6 +146,7 @@ $\phi$ : 입력값에 대한 모수, 미지 $\rightarrow \: q_{\phi}$ : 확률�
 
 $p_{\theta}(\mathbf{z}_i)$ : 잠재변수 $\mathbf{z}_i$ 에 대한 사전분포
 
+
 #### - Likelihood
 **1. marginal log-likelihood**
 
@@ -183,7 +184,7 @@ $$
 
 **4. mini-batch**
 
-mini-batch $\mathbf{X}^M = \{ \mathbf{x}_i \}_{i=1}^M$ 을 이용해 다음과 같이 표현할 수 있다.
+mini-batch $$\mathbf{X}^M = \{ \mathbf{x}_i \}_{i=1}^M$$ 을 이용해 다음과 같이 표현할 수 있다.
 
 $$
 \begin{split}
