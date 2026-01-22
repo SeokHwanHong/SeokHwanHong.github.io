@@ -43,7 +43,7 @@ Gaussian Distribution 은 정규분포라고도 하며 다음과 같이 표현�
 
 $$
 \begin{split}
-    \mathcal{N} (x \vert \mu_k, \Sigma_k) = (2 \pi)^{-\frac{d}{2}} \vert \Sigma_k \vert^{-\frac{1}{2}} \exp [ -\frac{1}{2} (x-\mu_k)^T \Sigma_k^{-1} (x-\mu_k)]
+    \mathcal{N} (x \vert \mu_k, \Sigma_k) = (2 \pi)^{-\frac{d}{2}} \vert \Sigma_k \vert^{-\frac{1}{2}} \exp \left[ -\frac{1}{2} (x-\mu_k)^T \Sigma_k^{-1} (x-\mu_k) \right]
 \end{split}
 $$
 
@@ -108,7 +108,7 @@ $$
 
 $$
 \begin{split}
-    \theta^{(t+1)} = \argmax_{\theta} Q(\theta \vert \theta^{(t)})
+    \theta^{(t+1)} = argmax_{\theta} Q(\theta \vert \theta^{(t)})
 \end{split}
 $$
 
