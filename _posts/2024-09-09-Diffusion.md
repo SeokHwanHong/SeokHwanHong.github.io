@@ -140,11 +140,11 @@ $$
 
 $$
 \begin{equation}
-\begin{split}
-    L &>= K, \\ 
-    K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{(0)}, \mathbf{x}^{(t)}) \: \cdot \: D_{KL}(q(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)}, \mathbf{x}^{(0)}) \: \Vert \: p(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)})) \\
-    &\quad + H_q(\mathbf{X}^{(T)} | \mathbf{X}^{(0)}) - H_q(\mathbf{X}^{(1)} | \mathbf{X}^{(0)}) - H_p(\mathbf{X}^{(T)}) \\
-\end{split}
+    \begin{split}
+        L &>= K, \\ 
+        K &= -2 \sum_{t=2}^{T} \int d \mathbf{x}^{(0)} d \mathbf{x}^{(t)} q(\mathbf{x}^{(0)}, \mathbf{x}^{(t)}) \: \cdot \: D_{KL}(q(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)}, \mathbf{x}^{(0)}) \: \Vert \: p(\mathbf{x}^{(t-1)} |\mathbf{x}^{(t)})) \\
+        &\quad + H_q(\mathbf{X}^{(T)} | \mathbf{X}^{(0)}) - H_q(\mathbf{X}^{(1)} | \mathbf{X}^{(0)}) - H_p(\mathbf{X}^{(T)}) \\
+    \end{split}
 \end{equation}
 $$
 
@@ -154,7 +154,7 @@ $$
 
 $$
 \begin{align}
-\hat{p} \:(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)}) = \argmax_{p(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)})} K 
+    \hat{p} \:(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)}) = argmax_{p(\mathbf{x}^{(t-1)} | \mathbf{x}^{(t)})} K 
 \end{align}
 $$
 
@@ -187,7 +187,9 @@ $\tilde{p}(\mathbf{x}^{(0)}) \propto p(\mathbf{x}^{(0)}) \: r(\mathbf{x}^{(0)})$
 $\tilde{p}(\mathbf{x}^{(0)})$ 를 계산하기 위해 각 중간 분포와 그에 대응하는 $r(\mathbf{x}^{(t)})$ 를 곱한다. 이에 대응되는 변형된 역과정 $\tilde{p}(\mathbf{x}^{(T)})$ 는 다음과 같이 정의할 수 있다.
 
 $$
-\tilde{p}(\mathbf{x}^{(t)}) = \frac{1}{\tilde{Z_T}} \: p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})
+\begin{split}
+    \tilde{p}(\mathbf{x}^{(t)}) = \frac{1}{\tilde{Z_T}} \: p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})
+\end{split}
 $$
 
 여기서 $Z_T$ 는 $t$ 번째 중간 분포의 정규화 상수이다.
@@ -196,29 +198,31 @@ $$
 역과정에서 Markov kernel $p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 은 다음과 같이 표현할 수 있다.
 
 $$
-p(\mathbf{x}^{(t)}) = \int d \mathbf{x}^{(t+1)} \: p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}}) \: p(\mathbf{x^{(t+1)}})
+\begin{split}
+    p(\mathbf{x}^{(t)}) = \int d \mathbf{x}^{(t+1)} \: p(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}}) \: p(\mathbf{x^{(t+1)}})
+\end{split}
 $$
 
-본 논문에서는 섭동된(perturbed) Markov kernel $ \tilde{p}(\mathbf{x^{(t)}}|\mathbf{x^{(t+1)}})$ 을 만드는 것을 목표이며 다음과 같이 유도할 수 있다.
-
-$$
-\begin{align}
-\tilde{p}(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \tilde{p} (\mathbf{x}^{(t+1)})\\
-\frac{p(\mathbf{x}^{(t)}) \: r(\mathbf{x}^{(t)})}{\tilde{Z_t}} &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \cdot \frac{p(\mathbf{x}^{(t+1)}) \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1}} \\
-p(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \: \tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \cdot \frac{\tilde{Z}_{t} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t+1)})\\
-\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \frac{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t} \: r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t+1)})\\
-\end{align}
-$$
-
-만약 $\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 식 $(12)$ 와 같다면, 식 $(11)$ 의 등식이 성립한다. 식 $(12)$ 가 정규화된 확률 분포가 아닐 수도 있기 때문에, 이에 대한 방안으로 다음과 같은 식을 이용한다.
+본 논문에서는 섭동된(perturbed) Markov kernel $\tilde{p}(\mathbf{x^{(t)}} \vert \mathbf{x^{(t+1)}})$ 을 만드는 것을 목표이며 다음과 같이 유도할 수 있다.
 
 $$
 \begin{align}
-\tilde{p} (\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) &= \frac{1}{\tilde{Z}_{t}} \cdot \frac{r(\mathbf{x}^{(t+1)})} {r(\mathbf{x}^{(t)})} \: p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)}) \: \\
+    \tilde{p}(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \; \tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) \; \tilde{p} (\mathbf{x}^{(t+1)})\\
+    \frac{p(\mathbf{x}^{(t)}) \; r(\mathbf{x}^{(t)})}{\tilde{Z_t}} &= \int d \mathbf{x}^{(t+1)} \; \tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) \cdot \frac{p(\mathbf{x}^{(t+1)}) \; r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1}} \\
+    p(\mathbf{x}^{(t)}) &= \int d \mathbf{x}^{(t+1)} \; \tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) \cdot \frac{\tilde{Z}_{t} \; r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t+1} \; r(\mathbf{x}^{(t)})} \; p(\mathbf{x}^{(t+1)})\\
+    \tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) &= \tilde{p}(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) \frac{\tilde{Z}_{t+1} \: r(\mathbf{x}^{(t+1)})}{\tilde{Z}_{t} \; r(\mathbf{x}^{(t)})} \; p(\mathbf{x}^{(t+1)})\\
 \end{align}
 $$
 
-여기서 $\tilde{Z}_t (\mathbf{x}^{(t+1)})$ 은 정규화 상수이다. $\frac{r(\mathbf{x}^{(t)})}{r(\mathbf{x}^{(t+1)})}$은  $\:p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 섭동으로 간주된다. 이러한 작은 섭동은 정규분포의 평균에 영향은 미치지만 정규화 상수에는 영향이 없기때문에, 식 $(12)$ 와 $(13)$ 은 동치이다.
+만약 $$\tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)})$$ 식 $(12)$ 와 같다면, 식 $(11)$ 의 등식이 성립한다. 식 $(12)$ 가 정규화된 확률 분포가 아닐 수도 있기 때문에, 이에 대한 방안으로 다음과 같은 식을 이용한다.
+
+$$
+\begin{align}
+    \tilde{p} (\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) &= \frac{1}{\tilde{Z}_{t}} \cdot \frac{r(\mathbf{x}^{(t+1)})} {r(\mathbf{x}^{(t)})} \; p(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)}) \; \\
+\end{align}
+$$
+
+여기서 $\tilde{Z}_t (\mathbf{x}^{(t+1)})$ 은 정규화 상수이다. $\frac{r(\mathbf{x}^{(t)})}{r(\mathbf{x}^{(t+1)})}$ 은  $\; p(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)})$ 에 대한 섭동으로 간주된다. 이러한 작은 섭동은 정규분포의 평균에 영향은 미치지만 정규화 상수에는 영향이 없기때문에, 식 $(12)$ 와 $(13)$ 은 동치이다.
 
 ### 2.5.3. Appling $r \: (\mathbf{x}^{(t)})$
 #### case 1 : $r(\mathbf{x}^{(t)})$ 가 충분히 부드러운 경우
@@ -229,10 +233,11 @@ $r(\mathbf{x}^{(t)})$ 을 역과정 kernel $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+
 
 ### 2.5.4. Choosing $\: r \: (\mathbf{x}^{(t)})$
 $r(\mathbf{x}^{(t)})$ 은 주로 diffusion 과정에서 천천히 변화하도록 정해져야한다. 본 논문에서는 상수가 되도록 다음과 같이 설정한다.
+
 $$
 \begin{align}
-r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \\
-r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \cdot {\frac{T-t}{T}} \\
+    r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \\
+    r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \cdot {\frac{T-t}{T}} \\
 \end{align}
 $$
 식 $(15)$ 의 경우 $\tilde{p}(\mathbf{x}^{(T)})$에서 뽑은 표본들은 역과정에서 시작 분포의 영향이 없다.
@@ -242,10 +247,10 @@ $$
 전진 과정을 알고있기 때문에, 상한과 하한을 다음과 같이 유도할 수 있다. (Appendix A 참고)
 $$
 \begin{equation}
-\begin{split}
-H_q(\mathbf{X}^{(t)} | \mathbf{X}^{(t-1)})  &+ H_q(\mathbf{X}^{(t-1)} | \mathbf{X}^{(t)}) - H_q(\mathbf{X}^{(t)} | \mathbf{X}^{(0)}) \\
-&\le H_q(\mathbf{X}^{(t-1)} | \mathbf{X}^{(t)}) \le H_q(\mathbf{X}^{(t)} | \mathbf{X}^{(t-1)})
-\end{split}
+    \begin{split}
+        H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(t-1)})  &+ H_q(\mathbf{X}^{(t-1)} \vert \mathbf{X}^{(t)}) - H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(0)}) \\
+        &\le H_q(\mathbf{X}^{(t-1)} \vert \mathbf{X}^{(t)}) \le H_q(\mathbf{X}^{(t)} \vert \mathbf{X}^{(t-1)})
+    \end{split}
 \end{equation}
 $$
 
