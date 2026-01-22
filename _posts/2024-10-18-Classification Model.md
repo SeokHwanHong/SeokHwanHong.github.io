@@ -72,6 +72,7 @@ $$\hat{p}_{mk} = \frac{1}{n_m} \sum_{x_i \in \mathbb{R}_m} I(y_i = k) $$ : m 번
 
 #### - Objective Functions
 **1. Misclassification Error**
+
 클래스가 잘못 분류된 관측치들의 수에 대한 목적함수이다.
 
 $$
@@ -82,6 +83,7 @@ $$
 $$
 
 **2. Gini Index**
+
 불순도를 측정하는 지표로 데이터의 통계적 분산 정도를 정량화해 표현한 값이다.
 
 $$
@@ -91,6 +93,7 @@ $$
 $$
 
 **3. Cross-Entropy or Deviance**
+
 Cross Entropy 역시 Gini Index와 마찬가지로 불순도를 측정하는 지표로 정보량의 기댓값을 표현한 값이다.
 
 $$
@@ -98,6 +101,8 @@ $$
     D = -\sum_{k=1}^K \hat{P}_{mk} \log \hat{P}_{mk}
 \end{split}
 $$
+
+
 
 ## 1.4. Advantages & Disadvantages of Tree
 #### - Advantages
