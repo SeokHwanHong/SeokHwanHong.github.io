@@ -226,7 +226,7 @@ $$
 
 ### 2.5.3. Appling $r \: (\mathbf{x}^{(t)})$
 #### case 1 : $r(\mathbf{x}^{(t)})$ 가 충분히 부드러운 경우
-$r(\mathbf{x}^{(t)})$ 을 역과정 kernel인 $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 대한 작은 섭동으로 간주해 $\: \tilde{p}(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 과 $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 가 동일한 분포를 따르지만 정규분포 kernel에서는 동조(perturbed)된 평균을, 이항분포 kernel에서는 동조된 flip rate를 가지게 된다.
+$r(\mathbf{x}^{(t)})$ 을 역과정 kernel인 $p(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)})$ 에 대한 작은 섭동으로 간주해 $\; \tilde{p}(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)})$ 과 $p(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t+1)})$ 가 동일한 분포를 따르지만 정규분포 kernel에서는 동조(perturbed)된 평균을, 이항분포 kernel에서는 동조된 flip rate를 가지게 된다.
 
 #### case 2 : $r(\mathbf{x}^{(t)})$ 가 닫힌 형태(closed form)로 정규분포나 이항분포와 곱해진 경우
 $r(\mathbf{x}^{(t)})$ 을 역과정 kernel $p(\mathbf{x}^{(t)} | \mathbf{x}^{(t+1)})$ 에 바로 곱할 수 있다. 이는 $r(\mathbf{x}^{(t)})$ 가 좌표축에 대한 부분집합의 delta 함수로 구성된 경우에 적용 가능하다.
@@ -240,11 +240,13 @@ $$
     r(\mathbf{x}^{(t)}) &= r(\mathbf{x}^{(0)}) \cdot {\frac{T-t}{T}} \\
 \end{align}
 $$
+
 식 $(15)$ 의 경우 $\tilde{p}(\mathbf{x}^{(T)})$에서 뽑은 표본들은 역과정에서 시작 분포의 영향이 없다.
 
 
 ## 2.6. Entropy of Reverse Process
 전진 과정을 알고있기 때문에, 상한과 하한을 다음과 같이 유도할 수 있다. (Appendix A 참고)
+
 $$
 \begin{equation}
     \begin{split}
