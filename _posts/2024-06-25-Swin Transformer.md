@@ -57,10 +57,10 @@ NLP에서 사용하는 transfomer를 vision에도 적용시키기에는 어려�
 
 <p align="center">
   <a href="#">
-    <img src="/images/SwinTransformer/figure3-3.jpg" width="400" />
+    <img src="/images/SwinTransformer/figure3-3.jpg" height="350" />
   </a>
   <a href="#">
-    <img src="/images/SwinTransformer/figure3-3-1.jpg" width="315" />
+    <img src="/images/SwinTransformer/figure3-3-1.jpg" height="350" />
   </a>
   <br>
   <b>[ Figure 4 : Swin Block ]</b> 
