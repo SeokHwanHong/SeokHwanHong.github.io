@@ -117,7 +117,7 @@ window를 이용한 self-attention 모듈은 window 간 상호작용이 부족�
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure6 : Shifted Window Partitioning ]</b> 
+  <b>[ Figure 6 : Shifted Window Partitioning ]</b> 
 </p>
 
 $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈도우로 분할하고 window $\lceil \frac{h}{M} \rceil \times \lceil \frac{w}{M} \rceil$ 개에 각각 독립적으로 self-attention을 한다. 다음 층인 $l+1$ 번째 층에서는 추가적으로 window를 $(\lceil \frac{h}{M} \rceil+1) \times (\lceil \frac{w}{M} \rceil+1)$ 로 나누어 $l$ 번째 층과 동일하게 self-attention을 한다. 이 때 각 window들은 $\lceil \frac{M}{2} \rceil \times \lceil \frac{M}{2} \rceil$ 만큼 이동해(shifted) self-attention을 한다. 이를 그림으로 표현하면 다음과 같다.
@@ -128,7 +128,7 @@ $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure7 : Efficient batch computation in Shifted Windows ]</b> 
+  <b>[ Figure 7 : Efficient batch computation in Shifted Windows ]</b> 
 </p>
 
 #### - Cyclic Shift
@@ -141,7 +141,7 @@ $l$번째 층에서는 왼쪽 위를 기준으로 크기가 $M \times M$ 인 윈
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure8 : Cyclic Shift ]</b> 
+  <b>[ Figure 8 : Cyclic Shift ]</b> 
 </p>
 
 
