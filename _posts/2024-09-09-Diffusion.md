@@ -45,8 +45,11 @@ Gererative Model, Image, Diffusion Model
 ## 2.1. Forward Trajectory 
 #### - Notation
 $q(\mathbf{x}^{(0)})$ : 데이터 분포
+
 $\pi(\mathbf{y})$ : 분석적으로 다루기 쉬운 분포
+
 $T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta)$ : $\pi(\mathbf{y})$ 에 대한 Markov diffusion kernel
+
 $\beta$ : diffusion rate (noise 추가 정도)
 
 $$
@@ -180,7 +183,9 @@ $$
 ## 2.5. Multiplying Distributions, and Computing Posteriors
 #### - Notation
 $p(\mathbf{x}^{(0)})$ : 모형 분포
+
 $r(\mathbf{x}^{(0)})$ : 2번째 분포 또는 제한된 양수 함수(bounded positive function)
+
 $\tilde{p}(\mathbf{x}^{(0)}) \propto p(\mathbf{x}^{(0)}) \: r(\mathbf{x}^{(0)})$ : 새로운 분포 
 
 분포의 곱은 계산량이 많고 어렵지만, 각 과정에서 $r(\mathbf{x}^{(0)})$ 을 작은 섭동으로 간주하거나 정확하게 계산되기때문에 diffusion 모형은 직관적이다.
