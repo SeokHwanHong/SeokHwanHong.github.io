@@ -153,7 +153,14 @@ LPIPS는 $\varphi$ 를 이용해 이미지를 지각적 feature space 로 사영
 ## 3.1. Architecture 
 DMs 은 기존 생성모델들과의 차이점으로 순방향과 역방향의 반복적인 시간 단계에서 실행된다는 것이다. 순방향 $q$는 점진적으로 반복적으로 노이즈를 추가함으로써 입력 데이터의 품질을 저하시킨다. 역방향 $p$ 는 품질이 저하된 데이터의 노이즈를 걷어내고 역시간순으로 원본 이미지를 복원한다. 이는 다음 그림과 같이 표현할 수 있다.
 
-![Figure 1 : Principle of DMs](/images/SRDM Survey/figure1.jpg){: .align-center height="500"}
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure1.jpg" height="500" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 1 : Principle of DMs ]</b> 
+</p>
 
 #### - Notation 
 시간 단계 $t$ : 순방향 diffusion 동안 증가 및 역방향 diffusion 동안 0으로 전파, 유한한 $T$에 대해 $0 < t \le T$로 유한한 경우만 고려.
@@ -357,8 +364,14 @@ $$
 
 ## 3.5. Relation to other Image SR Generative Models
 
-![Figure 2 : Conceptual Overview of Generative Models](/images/SRDM Survey/figure2.jpg){: .align-right height="500"}
-
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure2.jpg" height="500" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 2 : Conceptual Overview of Generative Models ]</b> 
+</p>
 
 #### - Generative Adversarial Networks (GANs)
 DMs 에서는 discriminator 를 사용하지 않지만, 최대한 현실과 비슷한 데이터를 생성하기 위하여 반복적으로 noise를 추가 및 제거해 discriminator와 비슷한 효과를 낸다.
@@ -434,7 +447,15 @@ $\lambda > 1$ 인 경우, DM은 조건부 정보를 우선시하여 무조건부
 
 ## 4.3. State Domains 
 
-![Figure 3 : Topolgy of DMs](/images/SRDM Survey/figure4.jpg){: .align-right height="250"}
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure3.jpg" height="250" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 3 : Topolgy of DMs ]</b> 
+</p>
+
 
 #### - Latent space
 **1. Latent Score-Based Generative Models(LSGM)**
@@ -501,7 +522,14 @@ ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건�
 
 **2. $$Pandey \; et \; al.$$**
 
-![Figure 4 : Overview of DiffusueVAE](/images/SRDM Survey/figure5.jpg){: .align-center height="250"}
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure5.jpg" height="250" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 4 : Overview of DiffusueVAE ]</b> 
+</p>
 
 본 논문에서는 DiffuseVAE를 사용해 예측된 조건을 변화시키는 아이디어를 도입했다. 이는 확률적 예측을 생성하는 VAE가 DM의 조건 정보로 통합되어 두 모델의 이점을 모두 활용할 수 있다. 'generator-refiner framework' 라고 불리는 두 단계 접근법을 사용한다. 첫 번째에서는 훈련 데이터에 대해 학습하고, 두 번째 단계에서 DM 이 VAE 에 의해 생성된 다양하고 흐릿한 재구성을 사용해 조건화된다. 이 방법의 핵심은 VAE 의 저차원 잠재 공간 내에서 생성된 샘플들이 다양하다는 것이다. 즉, 샘플링 속도와 다양성에 강점이 있다. 
 
@@ -533,7 +561,14 @@ Cold Diffusion은 DDPMs의 손상 공간을 조정하는 방법을 제안한다.
 
 **3. Image-to-Image Schrödinger Bridge (I2ISB)**
 
-![Figure 5 : Comparison of the standard corruption space and I2ISB](/images/SRDM Survey/figure6.jpg){: .align-right height="250"}
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure6.jpg" height="250" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 5 : Comparison of the standard corruption space and I2ISB ]</b> 
+</p>
 
 I2ISB는 위 방법들과 비슷하지만 사전분포에 대해 어떠한 가정도 하지 않는다. diffusion 과정에서 깨끗한 이미지는 최초의 상태를 유지하지만 화질이 낮아진 이미지는 순방향과 역방향 모두에서 마지막 상태를 유지한다. 이 접근법은 저화질의 이미지가 깨끗하게 유지되어 원본 이미지로의 추적이 용이하다는 장점이 있다. 또한 더 적은 단계를 거치기 때문에 효율성이 높다는 장점도 있다. 하지만 훈련 시 pair인 data에만 특정되어, 비지도 학습 기반의 SR에 적합하지않다. 
 
@@ -545,8 +580,14 @@ InDI는 직접적인 mapping을 통해 두 품질 공간 사이의 간극을 효
 
 ## 4.6. Color Shifting
 
-![Figure 6 : Example of Color Shifting](/images/SRDM Survey/figure7.jpg){: .align-center height="225"}
-
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure7.jpg" height="225" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 6 : Example of Color Shifting ]</b> 
+</p>
 
 color shifting 은 계산량이 제한된 hardware로 작은 batch size나 짧은 학습 시간으로 학습을 진행할 때 많은 계산량때문에 발생한다. StableSR에서 color normalization을 이용해 이를 해결하는데, 다음과 같이 표현할 수 있다.
 
@@ -607,8 +648,14 @@ SINPS와 DDRM 은 SR의 결과를 더 좋게 만들기 위해 spectral domain에
 
 **2. Denosing Diffusion Null-space Model (DDNM)**
 
-![Figure 7 : Overview of DDNM](/images/SRDM Survey/figure8.jpg){: .align-center height="175"}
-
+<p align="center">
+  <a href="#">
+    <img src="/images/SRDM Survey/figure8.jpg" height="175" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 7 : Overview of DDNM ]</b> 
+</p>
 
 DDNM은 위 식(LIR problem)에 대한 또다른 접근 방법을 보인다. range-null space decompostion을 이용해 zero-shot 을 진행한다. 기존 image IR problem을 변형해, noise가 없는 공간에서는 다음과 같이 표현할 수 있다.
 
