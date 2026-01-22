@@ -24,7 +24,7 @@ $B :  \mathbb{R}^p \rightarrow \mathbb{R}^n$ (decoder)
 
 $\Delta $ : reconstruction loss function, decoder의 결과물과 input 간 거리 비교, L-2 정규화 사용
 
-$\argmin_{A,B} \mathbb{E}[\Delta(\mathbf{x}, B \circ A (\mathbf{x}))]$ 를 만족하는 $A,B$ 를 학습하는 것이 목표
+$argmin_{A,B} \mathbb{E}[\Delta(\mathbf{x}, B \circ A (\mathbf{x}))]$ 를 만족하는 $A,B$ 를 학습하는 것이 목표
 
 <p align="center">
   <a href="#">
@@ -36,15 +36,15 @@ $\argmin_{A,B} \mathbb{E}[\Delta(\mathbf{x}, B \circ A (\mathbf{x}))]$ 를 만�
 </p>
 
 #### - Types
-1. $A,B$ : nerual networks
+**1. $A,B$ : nerual networks**
 
-2. $A,B$ : linear operations $\rightarrow$ linear autoencoder 
+**2. $A,B$ : linear operations $\rightarrow$ linear autoencoder**
 
-3. $A,B$ : drop non-linear operations in LAE(Linear AutoEncoder) $\rightarrow$ PCA
+**3. $A,B$ : drop non-linear operations in LAE(Linear AutoEncoder) $\rightarrow$ PCA**
 
 $\rightarrow$ Autoencoder는 PCA의 일반화 버전
 
-4. $A,B$ : 층대로 점진적으로 학습 -> 'stacked' 버전
+**4. $A,B$ : 층대로 점진적으로 학습 -> 'stacked' 버전**
 
 
 
@@ -80,7 +80,7 @@ $\lambda$ 를 사용하는 대신 KL 발산을 이용한다. 각 뉴런의 활�
 $$
 \begin{split}
     argmin_{A,B} \mathbb{E} [\Delta (\mathbf{x}, B \circ A (\mathbf{x}))] + \sum_j KL(p \Vert \hat{p}_j)
-\end{splut}
+\end{split}
 $$
 
 ## 2.2. Denoising AE
@@ -169,6 +169,7 @@ $$
 
 
 **3. lower bound with KL divergence**
+
 KL divergence는 항상 0보다 크기때문에 다음과 같이 표현할 수 있다.
 
 $$
@@ -201,9 +202,9 @@ $$
 
 $\epsilon \sim p(\epsilon)$ : 보조 잡음 변수 (auxiliary noise variable)
 
-$ g_{\phi} (\epsilon, \mathbf{x})$ : 미분 가능한 함수로의 변환
+$g_{\phi} (\epsilon, \mathbf{x})$ : 미분 가능한 함수로의 변환
 
-$\tilde{\mathbf{z}} \sim q_{\phi} (\mathbf{z} | \mathbf{x})$ : $ g_{\phi} (\epsilon, \mathbf{x})$ 를 이용한 확률변수
+$\tilde{\mathbf{z}} \sim q_{\phi} (\mathbf{z} \vert \mathbf{x})$ : $ g_{\phi} (\epsilon, \mathbf{x})$ 를 이용한 확률변수
 
 
 #### - Reparameterization Trick
@@ -248,7 +249,7 @@ $$
 \end{split}
 $$
 
-이는 가능도 함수 $q_{\phi} (\mathbf{z}_{z,l} | \mathbf{x}_i)$ 를 가중치로 표현해 생성 신경망의 기울기를 근사한 사후분포의 표본들에서 뽑은 가중합으로 학습한다. 
+이는 가능도 함수 $q_{\phi} (\mathbf{z}_{z,l} \vert \mathbf{x}_i)$ 를 가중치로 표현해 생성 신경망의 기울기를 근사한 사후분포의 표본들에서 뽑은 가중합으로 학습한다. 
 
 
 
@@ -257,7 +258,7 @@ lower bound with KL divergence 에서 KL divergence에 $\beta$ 를 추가함으�
 
 $$
 \begin{split}
-    \mathcal{L} (\theta, \phi ; \mathbf{x}^{(i)}) = -\beta D_{KL}(q_{\phi}(z \vert \mathbf{x^{(i)}}) \Vert p_{\theta}(z)) + \mathbb{E}_{q_{\phi}(z \vert \mathbf{x}^{(i)})} [\log p_{\theta}(\mathbf{x}^{(i)} \vert z) ]
+    \mathcal{L} (\theta, \phi ; \mathbf{x}^{(i)}) = -\beta \cdot D_{KL}(q_{\phi}(z \vert \mathbf{x^{(i)}}) \Vert p_{\theta}(z)) + \mathbb{E}_{q_{\phi}(z \vert \mathbf{x}^{(i)})} [\log p_{\theta}(\mathbf{x}^{(i)} \vert z) ]
 \end{split}
 $$
 
