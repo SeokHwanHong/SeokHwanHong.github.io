@@ -42,13 +42,14 @@ Gererative Model, Image, Diffusion Model
 1. 복잡한 데이터 분포를 간단하고, 다루기 쉬운 분포로 변환하는 전진(추론) diffusion 과정을 정의한다.
 2. 1번 과정의 역순을 생성 모형의 분포를 정의하기 위해 유한번 학습한다.
 
+
 ## 2.1. Forward Trajectory 
 #### - Notation
 $q(\mathbf{x}^{(0)})$ : 데이터 분포
 
 $\pi(\mathbf{y})$ : 분석적으로 다루기 쉬운 분포
 
-$T_{\pi}(\mathbf{y} | \mathbf{y}^{\prime} ; \beta)$ : $\pi(\mathbf{y})$ 에 대한 Markov diffusion kernel
+$T_{\pi}(\mathbf{y} \vert \mathbf{y}^{\prime} ; \beta)$ : $\pi(\mathbf{y})$ 에 대한 Markov diffusion kernel
 
 $\beta$ : diffusion rate (noise 추가 정도)
 
@@ -182,6 +183,7 @@ $$
 
 ## 2.5. Multiplying Distributions, and Computing Posteriors
 #### - Notation
+
 $p(\mathbf{x}^{(0)})$ : 모형 분포
 
 $r(\mathbf{x}^{(0)})$ : 2번째 분포 또는 제한된 양수 함수(bounded positive function)
@@ -189,6 +191,8 @@ $r(\mathbf{x}^{(0)})$ : 2번째 분포 또는 제한된 양수 함수(bounded po
 $\tilde{p}(\mathbf{x}^{(0)}) \propto p(\mathbf{x}^{(0)}) \: r(\mathbf{x}^{(0)})$ : 새로운 분포 
 
 분포의 곱은 계산량이 많고 어렵지만, 각 과정에서 $r(\mathbf{x}^{(0)})$ 을 작은 섭동으로 간주하거나 정확하게 계산되기때문에 diffusion 모형은 직관적이다.
+
+
 
 ### 2.5.1. Modified Marginal Distributions
 $\tilde{p}(\mathbf{x}^{(0)})$ 를 계산하기 위해 각 중간 분포와 그에 대응하는 $r(\mathbf{x}^{(t)})$ 를 곱한다. 이에 대응되는 변형된 역과정 $\tilde{p}(\mathbf{x}^{(T)})$ 는 다음과 같이 정의할 수 있다.
