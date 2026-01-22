@@ -16,7 +16,14 @@ use_math: ture # 수식 필요한 경우 사용
 # 2. Forward Propagation
 입력층에서 출력층 방향으로 오차를 전파시키며 각 층의 가중치를 업데이트하는 것을 의미한다.
 
-![Figure1 : Forward Propagation](/images/Propagation/순전파.jpg){: .align-center}
+<p align="center">
+  <a href="#">
+    <img src="/images/Propagation/순전파.jpg" width="100%" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 1 : Forward Propagation ]</b> 
+</p>
 
 
 위 그림에서 확인할 수 있듯이, 입력층에서 출력층으로 연산을 진행하며 가중치와 기울기를 계산한다. 이 과정에서 Hidden layer의 수가 증가하면 할수록 필요한 연산의 수는 기하급수적으로 증가한다.
@@ -24,7 +31,14 @@ use_math: ture # 수식 필요한 경우 사용
 # 3. BackPropagation
 Forward Propagation과 반대 반향으로 오차를 전파시키며 각 층의 가중치를 업데이트하는 것을 의미한다. 
 
-![Figure2 : Back Propagation](/images/Propagation/역전파.jpg){: .align-center}
+<p align="center">
+  <a href="#">
+    <img src="/images/Propagation/역전파.jpg" width="100%" />
+  </a>
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>[ Figure 2 : Back Propagation ]</b> 
+</p>
 
 Forward Propagation에서 계산한 오차 $(L(y_1-\widehat{y}_1))$를 기반으로, 출력층에서 입력층으로 오차에 대한 기울기를 연쇄 법칙으로 계산함으로써 모든 가중치를 업데이트한다. 이 과정을 반복함으로써 손실 함수를 통해 계산되는 손실 점수를 최소화하는 가중치를 탐색한다.
 
