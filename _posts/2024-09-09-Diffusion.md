@@ -58,7 +58,7 @@ $$
 $$
 \begin{split}
     q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)}) = T_{\pi}(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)} ; \beta_t)
-\begin{split}
+\end{split}
 $$
 
 #### - Forward Diffusion
@@ -66,7 +66,9 @@ $$
 time step $t = 0$ 부터 $t=T$까지 진행되는 diffusion 과정은 다음과 같다.
 
 $$
-q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = q(\mathbf{x}^{(0)}) \; \prod _{t=1}^{T} q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)})
+\begin{split}
+    q(\mathbf{x}^{(0 \cdot \cdot \cdot T)}) = q(\mathbf{x}^{(0)}) \; \prod _{t=1}^{T} q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)})
+\end{split}
 $$
 
 여기서 $q(\mathbf{x}^{(t)} \vert \mathbf{x}^{(t-1)})$ 은 정규분포에서 공분산이 단위-공분산인 정규분포나 이항분포에서 독립 이항분포로의 변환에 해당한다.
