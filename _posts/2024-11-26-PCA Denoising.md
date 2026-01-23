@@ -69,8 +69,8 @@ $$\Lambda$$ : 내림차순으로 정렬된 고유값 대각행렬
 
 $$
 \begin{split}
-    P = Q^T V \\
-    p_{ki} = \sum_{j=1}^m q_{jk} \nu_i(t_k) \quad \text{for } i=1,2,...,n; \; j,k = 1,2,...,m 
+    &P = Q^T V \\
+    &p_{ki} = \sum_{j=1}^m q_{jk} \nu_i(t_k) \quad \text{for } i=1,2,...,n; \; j,k = 1,2,...,m 
 \end{split}
 $$
 
@@ -81,8 +81,8 @@ $$
 
 $$
 \begin{split}
-    V = QP \\
-    \nu_i (t_j) = \sum_{j=1}^m q_{jk} p_{ki} \quad \text{for } i=1,2,...,n; \; j,k = 1,2,...,m 
+    &V = QP \\
+    &\nu_i (t_j) = \sum_{j=1}^m q_{jk} p_{ki} \quad \text{for } i=1,2,...,n; \; j,k = 1,2,...,m 
 \end{split}
 $$
 
@@ -122,4 +122,4 @@ $$
 \end{split}
 $$
 
-여기서 $$s(n)$$ 은 원본 데이터, $$\hat{s}(n)$ $은 노이즈를 제거한 데이터이다. 따라서 $$\sum_n s^2(n)/n$$ 은 음성 데이터의 정도를, $$\sum_n [s(n) - \hat{s}(n)] / n$$ 은 잡음 데이터의 정도를 나타낸다.
+여기서 $$s(n)$$ 은 원본 데이터, $$\hat{s}(n)$$ 은 노이즈를 제거한 데이터이다. 따라서 $$\sum_n s^2(n)/n$$ 은 음성 데이터의 정도를, $$\sum_n [s(n) - \hat{s}(n)] / n$$ 은 잡음 데이터의 정도를 나타낸다.
