@@ -29,7 +29,7 @@ $$
     \vdots & \vdots & \ddots & \vdots \\
     \nu_{t+(g-1)\tau} & \nu_{t+g\tau} & \cdots & \nu_{t+(g+R+1)\tau} 
     \end{matrix} \right]
-\ed{split}
+\end{split}
 $$
 
 여기서 $\tau$ 는 시간 증가량, $g$ 는 임베딩 차원, $R > g$ 는 delay vector 이다. $R$ 의 크기에 따라 처리 가능한 데이터의 양이 결정된다. 실제로 $g$ 와$\tau$ 는 데이터 내 가장 주파수가 낮은 부분에 기반해 설정되고 다음과 같이 표현 가능하다.
