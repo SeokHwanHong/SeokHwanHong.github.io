@@ -18,37 +18,26 @@
       {% endif %}
     {% endif %}
 
-    <nav class="nav__list">
+    <nav class="nav__list" aria-label="카테고리">
       <input id="ac-toc" name="accordion-toc" type="checkbox" />
-      <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle Menu" }}</label>
+      <label for="ac-toc">카테고리</label>
       <ul class="nav__items">
-        
         <li>
-          <span class="nav__sub-title">Category</span>
+          <span class="nav__sub-title">카테고리</span>
           <ul>
-            {% for category in site.categories %}
-              <li>
-                <a href="{{ site.url }}/categories/#{{ category[0] | slugify }}">
-                  {{ category[0] }} ({{ category[1].size }})
-                </a>
-              </li>
+            {% for category in site.data.categories %}
+              {% assign category_posts = site.categories[category.name] %}
+              {% assign category_count = category_posts | size %}
+              {% if category_count > 0 %}
+                <li>
+                  <a href="{{ '/categories/' | relative_url }}#{{ category.slug }}">
+                    {{ category.name }} ({{ category_count }})
+                  </a>
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </li>
-
-        <li>
-          <span class="nav__sub-title">Tag</span>
-          <ul>
-            {% for tag in site.tags %}
-              <li>
-                <a href="{{ site.url }}/tags/#{{ tag[0] | slugify }}">
-                  {{ tag[0] }} ({{ tag[1].size }})
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </li>
-
       </ul>
     </nav>
     </div>

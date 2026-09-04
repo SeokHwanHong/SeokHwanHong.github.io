@@ -1,19 +1,20 @@
 ---
-layout: single        # 문서 형식
-title: Transformation for Classification in Statistics # 제목
-categories: Statistics    # 카테고리
-tag: [ML, Statistics, Classification]
-author_profile: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
-sidebar:              # 페이지 왼쪽에 카테고리 지정
-    nav: "counts"       # sidebar의 주소 지정
-#search: false # 블로그 내 검색 비활성화
+layout: single
+title: "Transformation for Classification in Statistics"
+categories:
+  - "Machine Learning"
+author_profile: true
 use_math: true
+toc: true
+toc_sticky: true
 ---
-# Keywords
+
+## Keywords
 Statistics, Classification, Machine Learning
 
-# 1. Classification
-#### - Notation
+## 1. Classification
+**Notation**
+
 $k$ : class 수
 
 $n$ : 데이터 수
@@ -31,7 +32,8 @@ $$\delta_k(x)$$ : 판별식
 $$\pi_k(x) = \mathbb{P}(Y = k)$$ : 전체에서 $k$ 번째 class 가 차지하는 비율
 
 
-#### - Classification Rule
+**Classification Rule**
+
 주어진 데이터 쌍 $$\mathcal{D}$$ 에 대해 최적의 결정 규칙 $$\phi$$ 를 계산하는 것을 목표로 한다.
 
 $$
@@ -41,7 +43,8 @@ $$
 $$
 
 
-#### - Optimal Classification
+**Optimal Classification**
+
 
 **1. 0-1 손실함수**
 
@@ -49,8 +52,8 @@ $$
 
 $$
 \begin{split}
-    \mathcal{L} (y, \phi(x)) = I(y \neq \phi(x)) = \begin{cases} 0 & \text{if} \quad \hat{y} = y \\ 
-    1 & \text{if} \quad \hat{y} \neq y \end{cases}, 
+    \mathcal{L} (y, \phi(x)) = I(y \neq \phi(x)) = \begin{cases} 0 & \text{if} \quad \hat{y} = y \\
+    1 & \text{if} \quad \hat{y} \neq y \end{cases},
 \end{split}
 $$
 
@@ -89,19 +92,19 @@ $$
 
 $$
 \begin{split}
-    P_k(x) = \mathbb{P} (Y = k \vert X = x) = \frac{\mathbb{P}(Y = k, X = x)}{\mathbb{P}(X = x)} = \frac{\mathbb{P}(X = x \vert Y = k) \mathbb{P}(Y = k)}{\mathbb{P}(X = x)} 
+    P_k(x) = \mathbb{P} (Y = k \vert X = x) = \frac{\mathbb{P}(Y = k, X = x)}{\mathbb{P}(X = x)} = \frac{\mathbb{P}(X = x \vert Y = k) \mathbb{P}(Y = k)}{\mathbb{P}(X = x)}
 \end{split}
 $$
 
 
 
-# 2. Lineaer Discriminant Analysis (LDA)
-## 2.1. Definition
-선형판별분석 (Linear Discriminant Analysis, LDA) 이란 분류모델과 차원축소까지 동시에 사용하는 알고리즘이다. 이는 입력 데이터 세트를 저차원 공간으로 투영해 차원을 축소하며 지도학습에서 사용한다. 또한, 클래스 간 분리를 최대화하는 축을 탐색하기 위해 클래스 간 분산과 클래스 내부 분산의 비율을 최대화 하는 방식으로 차원을 축소하며 축이 선형적인 특성을 띈다. 
+## 2. Lineaer Discriminant Analysis (LDA)
+### 2.1. Definition
+선형판별분석 (Linear Discriminant Analysis, LDA) 이란 분류모델과 차원축소까지 동시에 사용하는 알고리즘이다. 이는 입력 데이터 세트를 저차원 공간으로 투영해 차원을 축소하며 지도학습에서 사용한다. 또한, 클래스 간 분리를 최대화하는 축을 탐색하기 위해 클래스 간 분산과 클래스 내부 분산의 비율을 최대화 하는 방식으로 차원을 축소하며 축이 선형적인 특성을 띈다.
 
 
 
-## 2.2. Notation
+### 2.2. Notation
 **$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k)$$**
 
 **$$2. \; \Sigma _1 = \Sigma _2 = ... = \Sigma_k $$**
@@ -112,7 +115,7 @@ $$
 
 
 
-## 2.3. Decision Rule
+### 2.3. Decision Rule
 $$\Sigma \pi_k f_k(x)$$ 는 상수이기 때문에 결정 규칙은 다음과 같이 표현할 수 있다.
 
 $$
@@ -127,13 +130,14 @@ $$
 
 
 
-## 2.4. Binary Case
+### 2.4. Binary Case
 가정 : 각 class의 비율이 동일 $$(\pi_1 = \pi_2 = \frac{1}{2})$$
 
 $\quad \rightarrow \; \delta_k(x) = (\Sigma^{-1} \mu_k)^T (x -\frac{1}{2} \mu_k)$
 
 
-#### - Bayes Decision Boundary
+**Bayes Decision Boundary**
+
 
 $$
 \begin{split}
@@ -144,7 +148,8 @@ $$
 $$
 
 
-#### - Optimal Boundary
+**Optimal Boundary**
+
 위 조건들을 이용해 다음과 같이 표현 가능하다.
 
 $$
@@ -155,7 +160,8 @@ $$
 \end{split}
 $$
 
-#### - Plug-in Estimator
+**Plug-in Estimator**
+
 
 1. Class Proportion : $$\pi_k = \mathbb{P} (Y = k) \rightarrow \hat{\pi}_k = \frac{n_k}{n}$$
 
@@ -163,12 +169,12 @@ $$
 
 3. Common Covariance matrix : $$\hat{\Sigma} = \frac{1}{n-k} \sum_{k=1}{K} \sum_{i=1}^{n_k} (x_{ik} - \hat{\mu}_k) (x_{ik} - \hat{\mu}_k)^T$$
 
-# 3. Quadratic Discriminant Analysis (QDA)
-## 3.1. Definition
+## 3. Quadratic Discriminant Analysis (QDA)
+### 3.1. Definition
 선형판별분석과 동일한 과정을 갖지만, 클래스별로 다른 공분산 구조를 갖는 판별 분석 알고리즘이다.
 
 
-## 3.2. Notation
+### 3.2. Notation
 
 **$$1. \; X \vert Y = k \sim \mathcal{N}(\mu_k, \Sigma_k) $$ 및 등분산성 가정**
 
@@ -181,7 +187,7 @@ $$
 **$$5. \; \text{Plug-in Estimators} \; : \; \hat{\pi}_k, \hat{\mu}_k, \hat{\Sigma}_k $$**
 
 
-## 3.3. LDA vs QDA
+### 3.3. LDA vs QDA
 **1. $$\pi_k = \frac{n_k}{n}$$**
 
 **2. $$\hat{\mu}_k = \frac{1}{n_k} \sum_{i=1}^{n_k} x_{ik} $$**
@@ -203,5 +209,5 @@ $$
 $$
 
 
-# 참고
+## 참고
 https://velog.io/@swan9405/LDA-Linear-Discriminant-Analysis

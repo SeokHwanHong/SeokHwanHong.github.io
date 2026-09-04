@@ -1,0 +1,11 @@
+- title: "제조 계기판 Detection–OCR"
+  label: "Research"
+  description: "제조 현장의 계기판 이미지에서 숫자 영역을 탐지하고 OCR로 연결하는 파이프라인을 연구했습니다."
+
+- title: "난임 환자 임신 성공 예측"
+  label: "LG Aimers 6기"
+  description: "혼합형 데이터를 재구성하고 CatBoost와 LightGBM을 앙상블해 상위 3% 성과를 기록했습니다."
+
+- title: "EXAONE 1.2B 경량화"
+  label: "LG Aimers 8기"
+  description: "RAG와 4-bit QLoRA, BF16 변환을 활용해 언어 모델 경량화 과정을 경험했습니다."

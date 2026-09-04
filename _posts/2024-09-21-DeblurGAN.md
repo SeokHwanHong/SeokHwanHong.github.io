@@ -1,21 +1,22 @@
 ---
-layout: single        # 문서 형식
-title: DeblurGAN # 제목
-categories: Deblurring    # 카테고리
-tag: [DL, Image, Generative, Lecture]
-author_profile: false # 홈페이지 프로필이 다른 페이지에도 뜨는지 여부
-sidebar:              # 페이지 왼쪽에 카테고리 지정
-    nav: "counts"       # sidebar의 주소 지정
-#search: false # 블로그 내 검색 비활성화
+layout: single
+title: "DeblurGAN"
+categories:
+  - "Computer Vision"
+author_profile: true
 use_math: true
+toc: true
+toc_sticky: true
 ---
-# Keywords
+
+## Keywords
 Blur, GAN, Critic Network
 
 
-# 1. Introduction
-## 1.1. Image Deblurring
-#### - Notation
+## 1. Introduction
+### 1.1. Image Deblurring
+**Notation**
+
 일정하지않은 blur model의 일반적인 식은 다음과 같다.
 
 $$
@@ -36,7 +37,8 @@ $ N $ : 추가적인 노이즈
 
 이 경우 deblurring 알고리즘으로 잠재적인 깔끔한 이미지인 $I_S$ 와 blur kernel $k(M)$ 을 추정한다. 이 때 각 픽셀별 blur kernel을 찾는 것은 해가 굉장히 많은 문제(ill-posed problem)이고 휴리스틱한 방법, 이미지 통계, blur에 대한 가정에 의존한다.
 
-#### - Solutions
+**Solutions**
+
 **1. blur kernel 추정**
 
 이미지 전반에 걸쳐 blur가 균일하게 발생한다는 가정 하에 카메라 흔들림을 이용해 blur를 처리한다. 유도된 blur kernel 을 기준으로 카메라의 움직임을 추정해 deconvolution 작업을 수행함으로써 원본 이미지를 탐색한다. 또는 blur kernel의 지역 선형성과 간단한 휴리스틱을 가정해 미지의 kernel을 빠르게 추정한다. 이 방법은 빠르지만 제한된 이미지에서만 잘 작동한다.
@@ -47,13 +49,13 @@ $ N $ : 추가적인 노이즈
 CNN을 기반으로 한 모형들을 이용해 미지의 blur kernel을 추정한다.
 
 
-## 1.2. GANs
-### 1.2.1. Vanilla GANs
+### 1.2. GANs
+#### 1.2.1. Vanilla GANs
 Vanilla GANs의 식은 다음과 같다.
 
 $$
 \begin{split}
-    \min_{G} \max_{D} \underset{x \sim \mathbb{P}_r}{\mathbb{E}} [\log(D(x))] + \underset{\bar{x} \sim \mathbb{P}_g}{\mathbb{E}} [1-\log(D(\bar{x}))] 
+    \min_{G} \max_{D} \underset{x \sim \mathbb{P}_r}{\mathbb{E}} [\log(D(x))] + \underset{\bar{x} \sim \mathbb{P}_g}{\mathbb{E}} [1-\log(D(\bar{x}))]
 \end{split}
 $$
 
@@ -67,9 +69,10 @@ $\bar{x} = G(z)$ : 실제 데이터와 유사한 데이터를 생성하는 생�
 
 
 
-### 1.2.3. WGAN
+#### 1.2.3. WGAN
 
-#### - Wasserstein Distance
+**Wasserstein Distance**
+
 Wasserstein 거리는 두 확률 분포 간 거리를 다음과 같이 정의한다.
 
 $$
@@ -82,7 +85,8 @@ $$
 
 
 
-#### - Loss Function
+**Loss Function**
+
 
 Vanilla GANs을 학습시키는 과정에서 mode collapse, gradient 소실 등 여러 문제들이 발생한다. 이를 해결해고자 다음과 같은 WGAN(Wasserstein GANs) 을 제안한다.
 
@@ -92,7 +96,7 @@ $$
 \end{split}
 $$
 
-$\mathcal{D}$ : 1 - Lipschitz 함수의 집합 
+$\mathcal{D}$ : 1 - Lipschitz 함수의 집합
 
 $\mathbb{P}_g$ : 모형의 분포
 
@@ -108,7 +112,7 @@ $$
 
 
 
-### 1.2.3. Conditional Adversarial Networks
+#### 1.2.3. Conditional Adversarial Networks
 Vanilla GANs 과 다르게 cGAN 은 y 라는 조건을 추가해 자신이 원하는 label 의 데이터를 생성하는 모형이다. 이를 그림으로 표현하면 다음과 같다.
 
 <p align="center">
@@ -117,7 +121,7 @@ Vanilla GANs 과 다르게 cGAN 은 y 라는 조건을 추가해 자신이 원�
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure 1 : Conditional Adversarial Network ]</b> 
+  <b>[ Figure 1 : Conditional Adversarial Network ]</b>
 </p>
 
 손실함수 역시 Vanilla GANs 의 그것에서 y를 조건부 확률로 추가한 형태이다. 이는 다음과 같다.
@@ -128,7 +132,7 @@ $$
 \end{split}
 $$
 
-# 2. Motion Blur Generation
+## 2. Motion Blur Generation
 대부분의 상황에서 깔끔한 이미지와 blur 이미지 짝을 찾는 것은 쉽지 않다. 그래서 본 논문에서는 깔끔한 이미지에 Markov Process를 이용해 blur 이미지를 생성해 데이터셋을 구성한다. 이에 관한 알고리즘은 다음과 같다.
 
 <p align="center">
@@ -137,7 +141,7 @@ $$
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Algorithm 1 : Motion Blur Kernel Generation ]</b> 
+  <b>[ Algorithm 1 : Motion Blur Kernel Generation ]</b>
 </p>
 
 1. random trajectories generation 적용
@@ -151,12 +155,14 @@ $\rightarrow$ trajectory vector : 이미지 상에서 물체의 움직임을 표
 
 
 
-# 3. The Proposed Method
-#### - 목표
+## 3. The Proposed Method
+**목표**
+
 입력값으로 오직 blurred image $I_B$ 만 주어졌을 때 깔끔한 이미지 $I_S$ 복원
 
 
-#### - 학습
+**학습**
+
 생성자로 사전학습된 CNN $G_{\theta_G}$ 를 이용해 Deblurring을 진행한다. 그리고 판별자 $D_{\theta_D}$ 를 추가해 기존 GANs과 같이 두 신경망을 동시에 학습한다. 대략적인 학습 구조는 다음과 같다.
 
 <p align="center">
@@ -165,11 +171,11 @@ $\rightarrow$ trajectory vector : 이미지 상에서 물체의 움직임을 표
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure 2 : DeblurGAN Training ]</b> 
+  <b>[ Figure 2 : DeblurGAN Training ]</b>
 </p>
 
 
-## 3.1. Loss Function
+### 3.1. Loss Function
 손실함수를 다음과 같이 정의한다.
 
 $$
@@ -188,7 +194,8 @@ $\lambda$ : 규제항, 본 논문의 실험에서는 모두 100으로 설정
 
 
 
-#### - Advesarial Loss
+**Advesarial Loss**
+
 본 논문에서는 WGAN-GP를 critic function 으로 사용하는데, 이는 생성자 모형 선택에 있어 더욱 강건하다는 특징을 갖는다.
 
 $$
@@ -201,7 +208,8 @@ GANs의 요소가 없이 훈련된 DeBlurGAN은 수렴하지만, 부드럽고 bl
 
 
 
-#### - Content Loss
+**Content Loss**
+
 Content 손실로 L2-손실인 인지적 손실을 사용하는데, 이는 생성된 이미지와 목표 이미지의 CNN 특징 맵 간의 차이에 기반한다. 그리고 다음과 같이 정의한다.
 
 $$
@@ -214,29 +222,31 @@ $\phi_{i,j}$ : VGG19 에서 ImagNet으로 사전 학습된, i번째 맥스풀링
 
 $W_{i,j}, H_{i,j}$ : 특징 맵의 차원(너비, 높이)
 
-원본 이미지의 특징맵과 blur 이미지를 깔끔하게 생성한 특징맵의 차이를 비교(L2 norm) 후 전체를 특징맵의 크기만큼으로 나누어 scaling을 진행하는 구조다. 본 논문에서는 i=3, j=3 인 $VGG_{3,3}$ 을 사용했다. 이는 주로 전체적인 이미지를 복원하는데 집중한다. 
+원본 이미지의 특징맵과 blur 이미지를 깔끔하게 생성한 특징맵의 차이를 비교(L2 norm) 후 전체를 특징맵의 크기만큼으로 나누어 scaling을 진행하는 구조다. 본 논문에서는 i=3, j=3 인 $VGG_{3,3}$ 을 사용했다. 이는 주로 전체적인 이미지를 복원하는데 집중한다.
 
 
-## 3.2. Network Architecture
-#### - Generator
+### 3.2. Network Architecture
+**Generator**
+
 <p align="center">
   <a href="#">
     <img src="/images/DeblurGAN/generator.jpg" height="100" />
   </a>
   <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <b>[ Figure 3 : Generator Architecture ]</b> 
+  <b>[ Figure 3 : Generator Architecture ]</b>
 </p>
 
-생성자는 stride 가 2인 residual block 9개와 transposed convolutional block 2개로 구성된다. 
+생성자는 stride 가 2인 residual block 9개와 transposed convolutional block 2개로 구성된다.
 
 
 
-#### - Critic Networks
+**Critic Networks**
+
 gradient 규제를 추가한 Wasserstein GAN 의 critic network 인 $D_{\theta_{D}}$ 를 사용한다. 이는 PatchGAN 의 그것과 동일하다.
 
 
-# 참고
+## 참고
 https://roytravel.tistory.com/133
 https://link.springer.com/article/10.1007/s11263-014-0697-5
 https://ddongwon.tistory.com/126
