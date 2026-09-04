@@ -1,7 +1,66 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<div id="main" role="main">
+  <main class="archive taxonomy-page">
+    <header class="page-heading">
+      <p class="section-kicker">Knowledge map</p>
+      <h1 id="page-title" class="page__title">{{ page.title }}</h1>
+      <p>공부한 내용을 큰 주제별로 정리했습니다. 각 글에는 하나의 대표 카테고리만 사용합니다.</p>
+    </header>
 
-{% include posts-taxonomy.html taxonomies=site.categories %}
+    <nav class="category-grid category-grid--index" aria-label="카테고리 바로가기">
+      {% for category in site.data.categories %}
+        {% assign category_posts = site.categories[category.name] %}
+        <a class="category-card{% if category.children %} category-card--featured{% endif %}" href="#{{ category.slug }}">
+          <span class="category-card__name">{{ category.name }}</span>
+          <span class="category-card__description">{{ category.description }}</span>
+          <span class="category-card__count">{{ category_posts | size }}개의 글</span>
+        </a>
+      {% endfor %}
+    </nav>
+
+    {% for category in site.data.categories %}
+      {% assign category_posts = site.categories[category.name] %}
+      <section id="{{ category.slug }}" class="taxonomy-section">
+        <div class="taxonomy-section__heading">
+          <div>
+            <h2>{{ category.name }}</h2>
+            <p>{{ category.description }}</p>
+          </div>
+          <span>{{ category_posts | size }}개의 글</span>
+        </div>
+
+        {% if category.children %}
+          <div class="subcategory-grid">
+            {% for child in category.children %}
+              {% assign child_posts = category_posts | where: "subcategory", child.name %}
+              <section id="{{ category.slug }}-{{ child.slug }}" class="subcategory-card">
+                <h3>{{ child.name }} <span>{{ child_posts | size }}</span></h3>
+                <p>{{ child.description }}</p>
+                {% if child_posts.size > 0 %}
+                  <ul class="taxonomy-posts">
+                    {% for post in child_posts %}
+                      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a><time>{{ post.date | date: "%Y.%m.%d" }}</time></li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p class="empty-note">아직 작성된 글이 없습니다.</p>
+                {% endif %}
+              </section>
+            {% endfor %}
+          </div>
+        {% elsif category_posts.size > 0 %}
+          <ul class="taxonomy-posts">
+            {% for post in category_posts %}
+              <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a><time>{{ post.date | date: "%Y.%m.%d" }}</time></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="empty-note">아직 작성된 글이 없습니다.</p>
+        {% endif %}
+      </section>
+    {% endfor %}
+  </main>
+</div>

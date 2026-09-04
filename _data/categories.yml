@@ -1,0 +1,37 @@
+- name: "Data Science"
+  slug: "data-science"
+  description: "통계, 확률, 수학적 도구와 데이터 분석의 기반을 정리합니다."
+
+- name: "Machine Learning"
+  slug: "machine-learning"
+  description: "분류, 회귀, 군집화 등 머신러닝 알고리즘을 다룹니다."
+
+- name: "Deep Learning"
+  slug: "deep-learning"
+  description: "신경망의 기초부터 생성 모델과 Transformer까지 학습합니다."
+
+- name: "Computer Vision"
+  slug: "computer-vision"
+  description: "이미지 인식, 복원, 초해상도 등 컴퓨터 비전 기술을 정리합니다."
+
+- name: "Programming"
+  slug: "programming"
+  description: "프로그래밍 언어, 자료구조와 구현 과정에서 배운 내용을 기록합니다."
+
+- name: "Data Engineering"
+  slug: "data-engineering"
+  description: "데이터베이스, 파이프라인, 분산 처리와 운영 기술을 다룹니다."
+
+- name: "SK Encore DE 2기"
+  slug: "sk-encore-de-2"
+  description: "SK Encore 데이터 엔지니어링 2기에서 배우고 만든 것을 기록합니다."
+  children:
+    - name: "회고록"
+      slug: "retrospective"
+      description: "학습 과정과 경험을 돌아봅니다."
+    - name: "수업 내용"
+      slug: "classes"
+      description: "수업에서 학습한 개념과 실습을 정리합니다."
+    - name: "프로젝트"
+      slug: "projects"
+      description: "프로젝트의 설계, 구현과 결과를 기록합니다."
