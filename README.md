@@ -1,6 +1,6 @@
 # Seokhwan Hong — Data & Engineering Notes
 
-데이터와 AI를 공부하고, 데이터 엔지니어링과 서비스 구현으로 관심 영역을 확장해 가는 과정을 기록하는 기술 블로그입니다.
+통계&데이터와 AI를 공부하고, 데이터 엔지니어링과 서비스 구현으로 관심 영역을 확장해 가는 과정을 기록하는 기술 블로그입니다.
 
 - 블로그: <https://seokhwanhong.github.io>
 - 운영 기준: [`blog-management/`](blog-management/)
