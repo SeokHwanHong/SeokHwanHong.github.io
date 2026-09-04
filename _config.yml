@@ -188,6 +188,7 @@ exclude:
   - package-lock.json
   - Rakefile
   - README
+  - /blog-management # repository-only blog management documents
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test

@@ -26,5 +26,8 @@ jobs:
           ruby-version: "3.2"
           bundler-cache: true
 
+      - name: Check blog content
+        run: python blog-management/check_blog.py
+
       - name: Build site
         run: bundle exec jekyll build --trace

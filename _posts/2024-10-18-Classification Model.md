@@ -30,7 +30,7 @@ figure 1에서 확인할 수 있듯이, 한 영역을 2개로 분리하는데 �
 
 
 ### 1.2. Regression Tree
-**Notation **
+**Notation**
 
 $$X_j$$ : a splitting variable
 
@@ -61,7 +61,7 @@ $$
 
 
 ### 1.3. Classification Tree
-**Notation **
+**Notation**
 
 
 $$x_i \in \mathbb{R}_m$$ : 데이터

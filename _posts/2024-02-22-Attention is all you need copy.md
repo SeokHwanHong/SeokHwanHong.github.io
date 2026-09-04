@@ -15,7 +15,7 @@ toc_sticky: true
 
 순서를 가지는 데이터(sequential data)로부터 또 다른 순서를 가지는 데이터를 생성하는 작업(task)을 수행하는 모델을 의미한다. 기존 순환모델들은 모든 데이터를 한번에 처리하기보단 순서 위치(sequence position)에 따라 순차적으로 입력해야한다.
 
-**Trasduction (Transductive Problem) **
+**Trasduction (Transductive Problem)**
 
 학습 시 사전에 미리 train dataset 뿐만 아니라 test dataset도 관측한 상태를 의미한다. test dataset의 label은 미관측 상태지만 학습이 진행되는 동안 train dataset 내 labeled data의 특징이나 데이터 간 연관성, 패턴 등을 공유하거나 전파하는 등 추가적인 정보를 활용함으로써 test dataset의 label을 추론한다.
 

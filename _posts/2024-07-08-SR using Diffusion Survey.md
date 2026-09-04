@@ -171,7 +171,7 @@ DMs 은 기존 생성모델들과의 차이점으로 순방향과 역방향의 �
   <b>[ Figure 1 : Principle of DMs ]</b>
 </p>
 
-**Notation **
+**Notation**
 
 시간 단계 $t$ : 순방향 diffusion 동안 증가 및 역방향 diffusion 동안 0으로 전파, 유한한 $T$에 대해 $0 < t \le T$로 유한한 경우만 고려.
 
@@ -224,7 +224,7 @@ $$
 
 여기서 $$\mu_{\theta}$$ 와 $$\Sigma_{\theta}$$ 은 학습가능하다. 유사하게 $$p_{\theta}(\mathbf{z}_{t-1} \vert \mathbf{z}_{t}, \mathbf{x})$$ 의 평균과 분산을 $$\mu_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_{t}), \; \Sigma_{\theta}(\mathbf{z}_t, \mathbf{x}, \gamma_t)$$ 로 대체할 수 있다.
 
-**Optimization **
+**Optimization**
 
 순방향 과정을 학습하는 역방향 과정에서 다음과 같은 순방향 및 역방향 시퀀스의 결합 분포는 다음과 같다.
 
@@ -414,7 +414,7 @@ NF는 VAEs와 DMs와 마찬가지로 데이터의 로그 가능도를 기반으�
 ### 4.1. Concrete Realization of Diffusion Models
 SR에서는 주로 DDPMs를 사용한다. 왜냐하면 DDPMs가 더욱 직관적인 접근이고 진입장벽이 낮기 때문이다. 그리고 SGM은 맞춤형 해답을 만드는 유연성이 있지만 고려해야할 다양한 설계 변수들로 인해 구조가 복잡해진다.
 
-**SR3 **
+**SR3**
 
 DDPMs와 유사하게, $$\mathbf{z}_{T} \approx \mathcal{N}(\mathbf{0}, \mathbf{I})$$ 이 될 때까지 저해상도 이미지에 Gaussian noise를 추가해 정제 단계 $$T$$ 번 동안 목표인 고해상도 이미지 $$\mathbf{z}_0$$ 을 반복적으로 생성한다. 여기서 noise $$\epsilon_{t}$$ 를 예측하기 위한 denoising model $$ \varphi_{\theta}(\mathbf{x}, \mathbf{z}_t, \gamma_t) $$ 을 추가하는데, 여기서 입력값들 $$\mathbf{x}$$ 는 저해상도 이미지, noise의 분산 $$\gamma_t$$, 그리고 $$\mathbf{z}_t$$ 는 nosiy target 이미지다. $$\varphi_{\theta}$$ 를 이용한 $$\epsilon_t$$ 예측으로 다음과 같이 근사할 수 있다.
 
@@ -544,7 +544,7 @@ ResDiff는 위 방법과 더불어 역방향 diffusion 에서 SR 예측과 고�
 ILVR 에서는 무조건부 LDM (unconditional LDM) 의 생성 과정에 조건을 부여한다. 이는 사전 훈련된 DM 을 활용해 훈련 시간을 더 짧게 한다. 조건 정보를 통합하기 위해, 노이즈가 제거된 출력의 저주파 구성 요소는 저해상도 이미지의 해당하는 부분으로 대체된다. 이를 통해 잠재변수는 생성 과정의 각 단계에서 제공된 참조 이미지와 정렬되어, 사용자가 원하는 데로 생성하도록 구성된다.
 
 
-#####  - Super-Resolved Reference
+#### Super-Resolved Reference
 **1. CDPMSR**
 
 저해상도 이미지의 noise를 제거하는 조건을 대한 대안으로 사전 학습된 SR 모델로부터 사전분포를 학습해 참조 이미지를 예측하는 방법이 있다. CDPMSR은 기존 standard SR 모델을 사용해 얻어진 예측된 SR 참조 이미지로 noise 제거 과정에 조건을 부여한다.

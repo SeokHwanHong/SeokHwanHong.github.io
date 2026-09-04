@@ -275,7 +275,7 @@ validation set에 대한 Average pooling 값과 FLOPs 를 비교한 표다. 기�
 
 ADE20K 로 학습을 진행하였다. base framework로는 mmseg에서 UperNet을 이용하였다.
 
-**Results **
+**Results**
 
 
 <p align="center">

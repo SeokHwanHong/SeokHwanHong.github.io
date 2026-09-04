@@ -14,7 +14,7 @@ Unsupervised manner, latent space, encoder & decoder, clustering
 
 
 ## 1. Introduction
-**Purpose **
+**Purpose**
 
 비지도 학습 기반의 군집화와 같은 다양한 작업에 사용
 

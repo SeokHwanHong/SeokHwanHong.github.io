@@ -21,7 +21,7 @@ toc_sticky: true
 
 균일한 간격으로 픽셀을 제거해 해상도를 감소하는 방법이다. 간단하지만 Aliasing 문제 발생 가능이 존재한다.
 
-**Gaussian blur and subsampling **
+**Gaussian blur and subsampling**
 
 Gaussian blur를 적용 후 일정 간격으로 픽셀을 선택해 요약하는 방법이다. 노이즈 변형 대처에 효과적이다.
 
