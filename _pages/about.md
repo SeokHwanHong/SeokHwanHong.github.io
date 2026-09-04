@@ -15,6 +15,10 @@ classes: wide
 
 ## 현재 관심 분야
 
+- Statistics
+- Statistical Computing
+- Data Analytics
+- Data Science
 - Data Engineering
 - MLOps
 - Machine Learning & Deep Learning
