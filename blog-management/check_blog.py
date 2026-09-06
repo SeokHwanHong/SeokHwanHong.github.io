@@ -119,6 +119,8 @@ def validate_document(path: Path, parents: set[str], children: set[str], *, is_p
         errors.append(f"{path}: 코드 블록이 닫히지 않았습니다.")
     if body.count("$$") % 2:
         errors.append(f"{path}: 수식 구분자 $$의 개수가 맞지 않습니다.")
+    if "$$" in body and scalar(metadata, "use_math") != "true":
+        errors.append(f"{path}: 수식이 있으면 use_math: true를 지정해야 합니다.")
     if body.count("<figure") != body.count("</figure>"):
         errors.append(f"{path}: figure 태그가 닫히지 않았습니다.")
 
