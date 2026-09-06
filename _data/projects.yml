@@ -4,20 +4,20 @@
 
 - title: "난임 환자 임신 성공 예측"
   label: "LG Aimers 6기"
-  description: "혼합형 데이터를 재구성하고 CatBoost와 LightGBM을 앙상블해 상위 3% 성과를 기록했습니다."
+  description: "조건부 결측치와 시술 이력을 해석하고, CatBoost·LightGBM·AutoGluon 앙상블로 상위 3% 성과를 기록했습니다."
   url: "/projects/lg-aimers-infertility/"
 
 - title: "색채화·초해상도"
   label: "2025 Inha AI Challenge"
-  description: "L-CAD 기반 색채화와 SwinIR 초해상도를 연결해 저해상도 흑백 이미지를 복원했습니다."
+  description: "언어 기반 L-CAD 색채화와 SwinIR 초해상도를 연결하고, 후보 모델을 비교해 Private 0.6925를 기록했습니다."
   url: "/projects/inha-colorization-super-resolution/"
 
 - title: "GCN 반지도 노드 분류"
   label: "Graph Learning"
-  description: "GEMSEC Facebook 그래프 데이터에서 Graph Convolution Network로 노드 분류를 수행했습니다."
+  description: "GEMSEC Facebook 그래프에서 Local Degree Profile과 GCN을 구현하고, 학습 곡선·t-SNE로 결과를 검증했습니다."
   url: "/projects/gcn-semi-supervised-classification/"
 
 - title: "전력망 손실 시계열 예측"
   label: "Time Series"
-  description: "노르웨이 전력망의 손실 데이터를 시계열로 분석하고 예측 모델을 비교했습니다."
+  description: "노르웨이 전력망의 계절성·외생 변수를 분석하고, SARIMAX와 XGBoost의 예측 오차를 비교했습니다."
   url: "/projects/norway-power-grid-forecasting/"
