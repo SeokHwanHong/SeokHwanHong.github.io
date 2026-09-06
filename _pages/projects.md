@@ -15,7 +15,7 @@ classes: wide
   {% for project in site.data.projects %}
     <article class="project-card">
       <span class="project-card__label">{{ project.label }}</span>
-      <h2>{{ project.title }}</h2>
+      <h2>{% if project.url %}<a href="{{ project.url | relative_url }}">{{ project.title }}</a>{% else %}{{ project.title }}{% endif %}</h2>
       <p>{{ project.description }}</p>
     </article>
   {% endfor %}
