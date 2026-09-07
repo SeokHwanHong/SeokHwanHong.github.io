@@ -22,6 +22,14 @@
   slug: "data-engineering"
   description: "데이터베이스, 파이프라인, 분산 처리와 운영 기술을 다룹니다."
 
+- name: "Automotive Industry"
+  slug: "automotive-industry"
+  description: "자동차 산업의 역사, 시장 구조, 소비 트렌드와 산업 변화를 정리합니다."
+
+- name: "Automotive Company"
+  slug: "automotive-company"
+  description: "자동차 산업의 주요 기업과 현대차그룹 계열사의 역할과 전략을 정리합니다."
+
 - name: "SK Encore DE 2기"
   slug: "sk-encore-de-2"
   description: "SK Encore 데이터 엔지니어링 2기에서 배우고 만든 것을 기록합니다."
