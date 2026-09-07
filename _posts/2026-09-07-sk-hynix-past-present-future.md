@@ -2,7 +2,7 @@
 layout: single
 title: "SK하이닉스는 어떻게 AI 메모리 기업이 되었을까"
 categories:
-  - "Semiconductor Company"
+  - "Semiconductor Industry"
 author_profile: true
 toc: true
 toc_sticky: true
