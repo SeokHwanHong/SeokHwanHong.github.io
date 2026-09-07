@@ -2,7 +2,7 @@
 layout: single
 title: "최근 현대차그룹은 어디로 가고 있을까"
 categories:
-  - "Automotive Company"
+  - "Automotive Industry"
 author_profile: true
 toc: true
 toc_sticky: true
