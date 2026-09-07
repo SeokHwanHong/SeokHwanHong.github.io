@@ -2,7 +2,7 @@
 layout: single
 title: "현대차·기아·모비스·오토에버·트랜시스는 무엇이 다를까"
 categories:
-  - "Automotive Company"
+  - "Automotive Industry"
 author_profile: true
 toc: true
 toc_sticky: true
