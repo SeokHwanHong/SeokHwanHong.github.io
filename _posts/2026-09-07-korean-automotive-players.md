@@ -2,7 +2,7 @@
 layout: single
 title: "한국 자동차 산업의 주요 플레이어"
 categories:
-  - "Automotive Company"
+  - "Automotive Industry"
 author_profile: true
 toc: true
 toc_sticky: true
