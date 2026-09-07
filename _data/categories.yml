@@ -26,10 +26,6 @@
   slug: "automotive-industry"
   description: "자동차 산업의 역사, 시장 구조, 소비 트렌드와 산업 변화를 정리합니다."
 
-- name: "Automotive Company"
-  slug: "automotive-company"
-  description: "자동차 산업의 주요 기업과 현대차그룹 계열사의 역할과 전략을 정리합니다."
-
 - name: "Semiconductor Industry"
   slug: "semiconductor-industry"
   description: "반도체 산업의 역사, 시장 구조, 기술 트렌드와 미래 변화를 정리합니다."
