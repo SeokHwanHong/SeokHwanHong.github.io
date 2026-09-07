@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+{% assign category_info = site.data.categories | where: "name", page.category | first %}
+{% assign category_posts = site.categories[page.category] %}
+{% if page.subcategory %}
+  {% assign visible_posts = category_posts | where: "subcategory", page.subcategory %}
+{% else %}
+  {% assign visible_posts = category_posts %}
+{% endif %}
+
+<div id="main" role="main">
+  <main class="archive taxonomy-page category-detail">
+    <header class="page-heading">
+      <p class="section-kicker">Category</p>
+      <p class="category-detail__back"><a href="{{ '/categories/' | relative_url }}">카테고리</a>{% if page.parent_url %} <span aria-hidden="true">/</span> <a href="{{ page.parent_url | relative_url }}">{{ page.category }}</a>{% endif %}</p>
+      <h1 id="page-title" class="page__title">{{ page.title }}</h1>
+      <p>{{ page.description }}</p>
+    </header>
+
+    {% if category_info.children and page.subcategory == nil %}
+      <nav class="subcategory-grid" aria-label="{{ page.category }} 하위 카테고리">
+        {% for child in category_info.children %}
+          {% assign child_posts = category_posts | where: "subcategory", child.name %}
+          <a class="subcategory-card" href="{{ '/categories/' | append: category_info.slug | append: '/' | append: child.slug | append: '/' | relative_url }}">
+            <h2>{{ child.name }} <span>{{ child_posts | size }}</span></h2>
+            <p>{{ child.description }}</p>
+            <span class="category-detail__action">항목 보기 →</span>
+          </a>
+        {% endfor %}
+      </nav>
+    {% elsif visible_posts.size > 0 %}
+      <ul class="taxonomy-posts taxonomy-posts--detail">
+        {% for post in visible_posts %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <time>{{ post.date | date: "%Y.%m.%d" }}</time>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty-note">아직 작성된 글이 없습니다.</p>
+    {% endif %}
+  </main>
+</div>
