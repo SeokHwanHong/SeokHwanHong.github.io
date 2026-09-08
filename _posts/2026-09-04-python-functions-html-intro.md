@@ -660,7 +660,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 아메리카노 -->
         <div class="item">
-            <div class="photo"><img src="assets/americano-hot" class="coffee_img" id="aa_img"></div>
+            <div class="photo"><img src="[원본-미포함] 아메리카노-HOT" class="coffee_img" id="aa_img"></div>
             <p class="name">아메리카노</p>
             <p class="eng">CAFFE AMERICANO</p>
 
@@ -740,7 +740,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 돌체라떼 -->
         <div class="item">
-            <div class="photo"><img src="assets/dolce-hot" class="coffee_img" id="dol_img"></div>
+            <div class="photo"><img src="[원본-미포함] 돌체라떼-HOT" class="coffee_img" id="dol_img"></div>
             <p class="name">돌체라떼</p>
             <p class="eng">DOLCE LATTE</p>
 
@@ -848,9 +848,9 @@ color: 또는 background-color: 등으로 사용
     function aaimg(type) {
         const img = document.getElementById('aa_img');
         if(type === 'hot') {
-            img.src = 'assets/americano-hot';
+            img.src = '[원본-미포함] 아메리카노-HOT';
         } else {
-            img.src = 'assets/americano-ice';
+            img.src = '[원본-미포함] 아메리카노-ICE';
         }
         aa_total(); // 💡 HOT/ICE 바뀔 때마다 즉시 가격 재계산
     }
@@ -894,9 +894,9 @@ color: 또는 background-color: 등으로 사용
     function dolimg(type) {
         const img = document.getElementById('dol_img');
         if(type === 'hot') {
-            img.src = 'assets/dolce-hot';
+            img.src = '[원본-미포함] 돌체라떼-HOT';
         } else {
-            img.src = 'assets/dolce-ice';
+            img.src = '[원본-미포함] 돌체라떼-ICE';
         }
         dol_total(); // 💡 HOT/ICE 바뀔 때마다 즉시 가격 재계산
     }
