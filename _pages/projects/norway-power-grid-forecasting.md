@@ -61,7 +61,7 @@ SARIMAX의 한계를 보완하기 위해, 전력 손실이 전류 제곱에 비�
 | Grid 2 | 11.497 | **4.011** | 65.1% |
 | Grid 3 | 2.396 | **0.371** | 84.5% |
 
-![Grid 1, Grid 2, Grid 3의 XGBoost 실제값과 예측값 비교]({{ '/images/projects/norway-power-grid/xgboost-predictions.png' | relative_url }})
+![Grid 1, Grid 2, Grid 3의 XGBoost 실제값과 예측값 비교](/images/projects/norway-power-grid/xgboost-predictions.png)
 
 *각 전력망의 실제 손실(파랑)과 XGBoost 예측(주황) 비교*
 

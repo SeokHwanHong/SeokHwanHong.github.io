@@ -30,7 +30,7 @@ toc_sticky: true
 
 기본 접근은 Canny edge와 Stable Diffusion을 이용해 원본 해상도에서 바로 색채화를 수행하는 방식이었다. 그러나 512×512 출력을 직접 만들면 일부 영역에 색이 채워지지 않은 픽셀이 남는 문제가 관찰됐다. 색채화의 일관성을 먼저 확보한 뒤 해상도를 복원하는 편이 낫다고 판단했다.
 
-![L-CAD 색채화 뒤 SwinIR로 2배 복원한 이미지 예시]({{ '/images/projects/inha-ai-challenge/swinir-output.png' | relative_url }})
+![L-CAD 색채화 뒤 SwinIR로 2배 복원한 이미지 예시](/images/projects/inha-ai-challenge/swinir-output.png)
 
 *색채화 결과를 SwinIR로 2배 복원한 출력 예시*
 
