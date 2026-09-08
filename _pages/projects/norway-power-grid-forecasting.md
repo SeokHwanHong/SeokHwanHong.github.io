@@ -61,9 +61,9 @@ SARIMAX의 한계를 보완하기 위해, 전력 손실이 전류 제곱에 비�
 | Grid 2 | 11.497 | **4.011** | 65.1% |
 | Grid 3 | 2.396 | **0.371** | 84.5% |
 
-![Grid 1, Grid 2, Grid 3의 XGBoost 실제값과 예측값 비교](/images/projects/norway-power-grid/xgboost-predictions.png)
+![Grid 1, Grid 2, Grid 3의 SARIMAX와 XGBoost RMSE 비교](/images/projects/norway-power-grid/rmse-comparison.svg)
 
-*각 전력망의 실제 손실(파랑)과 XGBoost 예측(주황) 비교*
+*세 전력망에서 XGBoost가 SARIMAX보다 낮춘 RMSE 비교*
 
 Grid 1과 Grid 2는 변동성이 큰 구간에서도 전반적인 수준과 하락·상승 구간을 따라갔고, Grid 3은 상대적으로 낮은 손실이 이어지는 구간을 잘 근사했다. 반면 급격한 이상 변동은 여전히 어려웠다. 즉 XGBoost가 모든 사건을 맞혔다기보다, 시간·수요·부하량·온도 사이의 비선형 관계를 학습해 평균 예측 오차를 크게 줄인 결과로 해석했다.
 
