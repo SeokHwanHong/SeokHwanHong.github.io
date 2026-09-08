@@ -1,6 +1,5 @@
-{% if page.author_profile or layout.author_profile or page.sidebar %}
-  <div class="sidebar sticky">
-    {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
+<div class="sidebar sticky">
+    {% include author-profile.html %}
     
     {% if page.sidebar %}
       {% for s in page.sidebar %}
@@ -30,7 +29,7 @@
               {% assign category_count = category_posts | size %}
               {% if category_count > 0 %}
                 <li>
-                  <a href="{{ '/categories/' | relative_url }}#{{ category.slug }}">
+                  <a href="{{ '/categories/' | append: category.slug | append: '/' | relative_url }}">
                     {{ category.name }} ({{ category_count }})
                   </a>
                 </li>
@@ -41,4 +40,3 @@
       </ul>
     </nav>
     </div>
-{% endif %}
