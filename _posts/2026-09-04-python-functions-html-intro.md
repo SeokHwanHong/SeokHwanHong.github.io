@@ -660,7 +660,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 아메리카노 -->
         <div class="item">
-            <div class="photo"><img src="[원본-미포함] 아메리카노-HOT" class="coffee_img" id="aa_img"></div>
+            <div class="photo"><img data-original-image="아메리카노 HOT 이미지 — 원본 미포함" class="coffee_img" id="aa_img"></div>
             <p class="name">아메리카노</p>
             <p class="eng">CAFFE AMERICANO</p>
 
@@ -740,7 +740,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 돌체라떼 -->
         <div class="item">
-            <div class="photo"><img src="[원본-미포함] 돌체라떼-HOT" class="coffee_img" id="dol_img"></div>
+            <div class="photo"><img data-original-image="돌체라떼 HOT 이미지 — 원본 미포함" class="coffee_img" id="dol_img"></div>
             <p class="name">돌체라떼</p>
             <p class="eng">DOLCE LATTE</p>
 
