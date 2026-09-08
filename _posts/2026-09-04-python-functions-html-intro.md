@@ -20,6 +20,9 @@ toc_sticky: true
 
 ## 수업 기록
 
+> 가위·바위·보 이미지 3장은 함께 보관했습니다. 키오스크 예제에서 쓰는 음료 이미지 4종은 원본 압축파일에 포함되어 있지 않아, 해당 경로는 자리표시자로 남겼습니다.
+
+
 ### for 문
 ```
 # c언어 for문: for(from;to;step){}
@@ -208,13 +211,13 @@ jQuery가 아닌 이상 개행 등이 난해 -> script 내에서 "<br>" 등으�
     <!-- 개별 설정 -->
     <!-- width와 height를 지정해 다른 이미지들과 강제로 동일한 해상도로 설정 -->
     <!-- 주먹 -->
-    <button type="button" onclick="game(1)"><img src = "1.png" width="200" height="200">  <!-- onclick: 일종의 트리거 -->
+    <button type="button" onclick="game(1)"><img src = "/images/bootcamp/2026-09-04/rps-rock.png" width="200" height="200">  <!-- onclick: 일종의 트리거 -->
     </button>
     <!-- 가위 -->
-    <button type="button" onclick="game(2)"><img src = "2.png" width="200" height="200">
+    <button type="button" onclick="game(2)"><img src = "/images/bootcamp/2026-09-04/rps-scissors.png" width="200" height="200">
     </button>
     <!-- 보자기 -->
-    <button type="button" onclick="game(3)"><img src = "3.png" width="200" height="200">
+    <button type="button" onclick="game(3)"><img src = "/images/bootcamp/2026-09-04/rps-paper.png" width="200" height="200">
     </button>
 
     <script>
@@ -271,11 +274,11 @@ color: 또는 background-color: 등으로 사용
     }
 </style>
 <body>
-    <button type="button" id="com1"><img src="1.png" class="ig">
+    <button type="button" id="com1"><img src="/images/bootcamp/2026-09-04/rps-rock.png" class="ig">
     </button>
-    <button type="button" id="com2"><img src="2.png" class="ig">
+    <button type="button" id="com2"><img src="/images/bootcamp/2026-09-04/rps-scissors.png" class="ig">
     </button>
-    <button type="button" id="com3"><img src="3.png" class="ig">
+    <button type="button" id="com3"><img src="/images/bootcamp/2026-09-04/rps-paper.png" class="ig">
     </button>
 </body>
 <script>
@@ -657,7 +660,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 아메리카노 -->
         <div class="item">
-            <div class="photo"><img src="aa_hot.png" class="coffee_img" id="aa_img"></div>
+            <div class="photo"><img src="assets/americano-hot" class="coffee_img" id="aa_img"></div>
             <p class="name">아메리카노</p>
             <p class="eng">CAFFE AMERICANO</p>
 
@@ -737,7 +740,7 @@ color: 또는 background-color: 등으로 사용
 
         <!-- 돌체라떼 -->
         <div class="item">
-            <div class="photo"><img src="dol_hot.png" class="coffee_img" id="dol_img"></div>
+            <div class="photo"><img src="assets/dolce-hot" class="coffee_img" id="dol_img"></div>
             <p class="name">돌체라떼</p>
             <p class="eng">DOLCE LATTE</p>
 
@@ -845,9 +848,9 @@ color: 또는 background-color: 등으로 사용
     function aaimg(type) {
         const img = document.getElementById('aa_img');
         if(type === 'hot') {
-            img.src = 'aa_hot.png';
+            img.src = 'assets/americano-hot';
         } else {
-            img.src = 'aa_ice.png';
+            img.src = 'assets/americano-ice';
         }
         aa_total(); // 💡 HOT/ICE 바뀔 때마다 즉시 가격 재계산
     }
@@ -891,9 +894,9 @@ color: 또는 background-color: 등으로 사용
     function dolimg(type) {
         const img = document.getElementById('dol_img');
         if(type === 'hot') {
-            img.src = 'dol_hot.png';
+            img.src = 'assets/dolce-hot';
         } else {
-            img.src = 'dol_ice.png';
+            img.src = 'assets/dolce-ice';
         }
         dol_total(); // 💡 HOT/ICE 바뀔 때마다 즉시 가격 재계산
     }
