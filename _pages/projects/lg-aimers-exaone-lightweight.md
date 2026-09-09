@@ -7,6 +7,8 @@ toc: true
 toc_sticky: true
 ---
 
+> [GitHub에서 코드와 노트북 보기 →](https://github.com/SeokHwanHong/Projects/tree/main/lg-aimers-8-exaone-lightweight)
+
 LG Aimers 8기 모델 경량화 온라인 해커톤에서 **EXAONE 4.0-1.2B**를 대상으로, 제한된 자원에서도 성능과 추론 효율의 균형을 찾는 경량화 파이프라인을 설계했다. LG Aimers 6기의 난임 예측 프로젝트와는 별개의 프로젝트다.
 
 ## 프로젝트 한눈에 보기
