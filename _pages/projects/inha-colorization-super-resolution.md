@@ -7,6 +7,8 @@ toc: true
 toc_sticky: true
 ---
 
+> [GitHub에서 코드와 노트북 보기 →](https://github.com/SeokHwanHong/Projects/tree/main/inha-colorization-super-resolution)
+
 2025 인하 인공지능 챌린지 대학원 부문에서 수행한 멀티모달 이미지 생성 프로젝트다. 흑백 이미지와 자연어 캡션을 입력받아 색을 입힌 뒤, 초해상도로 세부 질감을 복원했다. 팀은 **대학원 부문 우수상**을 수상했다.
 
 ## 프로젝트 한눈에 보기
