@@ -14,7 +14,7 @@ layout: default
         </div>
       </div>
       <div class="post-list">
-        {% for post in site.posts limit: 12 %}
+        {% for post in site.posts limit: 5 %}
           <article class="post-list__item">
             <div class="post-list__meta">
               <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
