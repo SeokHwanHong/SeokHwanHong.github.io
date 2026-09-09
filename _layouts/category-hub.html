@@ -14,8 +14,7 @@ layout: default
   {% include sidebar.html %}
   <main class="archive taxonomy-page category-detail">
     <header class="page-heading">
-      <p class="section-kicker">Category</p>
-      <p class="category-detail__back"><a href="{{ '/categories/' | relative_url }}">카테고리</a>{% if page.parent_url %} <span aria-hidden="true">/</span> <a href="{{ page.parent_url | relative_url }}">{{ page.category }}</a>{% endif %}</p>
+      <p class="section-kicker"><a href="{{ '/categories/' | relative_url }}">Category</a>{% if page.parent_url %} <span aria-hidden="true">/</span> <a href="{{ page.parent_url | relative_url }}">{{ page.category }}</a>{% endif %}</p>
       <h1 id="page-title" class="page__title">{{ page.title }}</h1>
       <p>{{ page.description }}</p>
     </header>

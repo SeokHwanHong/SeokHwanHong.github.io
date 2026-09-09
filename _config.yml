@@ -19,7 +19,7 @@ locale                   : "ko-KR"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "Seokhwan Hong"
 title_separator          : "-"
-subtitle                 : "Data & Engineering Notes"
+subtitle                 : "AI Projects & Learning Notes"
 name                     : "SeokHwan Hong"
 description              : "데이터와 AI를 공부하고, 데이터 엔지니어링과 서비스 구현으로 확장해 가는 과정을 기록합니다."
 url                      : "https://seokhwanhong.github.io"
@@ -118,9 +118,6 @@ author:
  location: "Republic of Korea"
  email: "angelsh0103@gmail.com"
  links:
-  - label: "Email"
-    icon: "fas fa-fw fa-envelope-square"
-    url: "mailto:angelsh0103@gmail.com"
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
     #   url: "https://your-website.com"
