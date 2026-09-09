@@ -7,6 +7,8 @@ toc: true
 toc_sticky: true
 ---
 
+> [GitHub에서 코드와 노트북 보기 →](https://github.com/SeokHwanHong/Projects/tree/main/lg-aimers-6-infertility)
+
 난임 시술 데이터를 바탕으로 **임신 성공 여부를 예측**한 LG Aimers 6기 AI 해커톤 프로젝트다. 임상 의사결정을 대신하는 모델이 아니라, 대회 데이터에서 예측 성능을 높이는 것을 목표로 했다. 팀은 예선 **상위 3%**로 오프라인 본선에 진출했다.
 
 ## 프로젝트 한눈에 보기
