@@ -8,7 +8,7 @@
 
 - name: "Deep Learning"
   slug: "deep-learning"
-  description: "신경망의 기초부터 생성 모델과 Transformer까지 학습합니다."
+  description: "인공신경망의 기초부터 생성 모델의 아키텍쳐를 정리합니다."
 
 - name: "Computer Vision"
   slug: "computer-vision"
