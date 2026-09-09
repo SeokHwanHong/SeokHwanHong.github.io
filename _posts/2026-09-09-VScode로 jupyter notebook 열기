@@ -1,6 +1,25 @@
+---
+layout: single
+title: "뒤에 있는 큰 수 찾기 — 단조 스택으로 다음 큰 수 찾기"
+categories:
+  - "Programming"
+author_profile: true
+toc: true
+toc_sticky: true
+permalink: /programming/test/lv2/뒤에-있는-큰-수-찾기/
+---
+
+
+
 # 1. visual studio code extension에서 python 검색 -> python extenstion pack 설치
 
 
+<p align="center">
+  <a href="#">
+    <img src="images//11.png" width="100" />
+  </a>
+  <br>
+</p>
 
 
 # 2. 시작 -> anaconda prompt 입력
