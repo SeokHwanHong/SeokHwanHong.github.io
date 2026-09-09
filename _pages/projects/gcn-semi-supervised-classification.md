@@ -8,6 +8,8 @@ toc_sticky: true
 use_math: true
 ---
 
+> [GitHub에서 코드와 노트북 보기 →](https://github.com/SeokHwanHong/Projects/tree/main/gcn-semi-supervised-classification)
+
 Kipf와 Welling의 *Semi-Supervised Classification with Graph Convolutional Networks*를 구현해 GEMSEC Facebook 페이지 네트워크에 적용한 프로젝트다. 논문 수식을 재현하는 데서 멈추지 않고, 노드 속성이 없는 대규모 그래프에서 특징을 만들고 학습 곡선과 임베딩까지 확인했다.
 
 ## 프로젝트 한눈에 보기
