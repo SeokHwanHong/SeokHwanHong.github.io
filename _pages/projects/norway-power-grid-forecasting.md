@@ -7,6 +7,8 @@ toc: true
 toc_sticky: true
 ---
 
+> [GitHub에서 코드와 노트북 보기 →](https://github.com/SeokHwanHong/Projects/tree/main/norway-power-grid-forecasting)
+
 재생에너지 비중이 높은 노르웨이의 전력망 데이터를 바탕으로, 세 전력망의 시간별 손실량을 예측한 프로젝트다. 통계적 시계열 모델과 트리 기반 모델을 모두 적용해 보며, 계절성을 설명하는 일과 실제 예측 오차를 낮추는 일이 반드시 같은 결과로 이어지지는 않는다는 점을 확인했다.
 
 ## 프로젝트 한눈에 보기
