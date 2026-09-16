@@ -42,9 +42,10 @@ toc_sticky: true
 
 OSI 모델은 네트워크 통신을 일곱 개의 역할로 나눈 개념적 모델이고, TCP/IP 모델은 인터넷에서 실제로 널리 사용하는 네 개의 계층 모델이다.
 
-![OSI 7계층과 TCP/IP 4계층의 대응 관계]({{ '/images/bootcamp/2026-09-16/network-layers.svg' | relative_url }})
-
-*OSI 7계층과 TCP/IP 4계층, 그리고 계층별 대표 프로토콜*
+<figure class="align-center">
+  <img src="{{ '/images/bootcamp/2026-09-16/network-layers.svg' | relative_url }}" alt="OSI 7계층과 TCP/IP 4계층의 대응 관계">
+  <figcaption>OSI 7계층과 TCP/IP 4계층, 그리고 계층별 대표 프로토콜</figcaption>
+</figure>
 
 OSI의 응용·표현·세션 계층은 TCP/IP의 응용 계층으로 묶인다. 전송 계층은 TCP와 UDP처럼 데이터 전달 방식을 담당하고, 네트워크 계층은 IP 주소를 바탕으로 목적지까지의 경로를 결정한다. 데이터링크와 물리 계층은 이더넷과 같은 실제 전송 매체·프레임 처리를 담당한다.
 
