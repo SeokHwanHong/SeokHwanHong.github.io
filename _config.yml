@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "ko-KR"
@@ -20,7 +20,7 @@ title                    : "Storage for Study"
 title_separator          : "|"
 subtitle                 : "Statistics, Mathematics, Computer Engineering, and Data Science"
 name                     : "SeokHwan Hong"
-description              : "dd"
+description              : "oo"
 url                      : "https://seokhwanhong.github.io"
 baseurl                  : # "/seokhwanhong.github.io"
 repository               : "SeokHwanHong/SeokHwanHong.github.io"
@@ -298,7 +298,6 @@ compress_html:
   ignore:
     envs: development
 
-
 # Defaults
 defaults:
   # _posts
@@ -307,10 +306,19 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: # true
       share: false
       related: true
-      toc: true
-      toc_sticky: true
+      show_date: true # 포스트에 날짜 표시
+
+
+date_format: "%Y-%m-%d" # 표시된 날짜의 형식(폰트)
+
+
+
+## category 추가 설정
+category_list: [statistics, mathematics, computer engineering, data science, jekyll]
+
+

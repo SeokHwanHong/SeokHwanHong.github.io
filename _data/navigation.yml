@@ -3,7 +3,30 @@ main:
     url: /
   - title: "카테고리"
     url: /categories/
-  - title: "프로젝트"
-    url: /projects/
-  - title: "소개"
-    url: /about/
+  - title: "Tag"
+    url: /tags/
+
+  - title: "Study"
+    sublinks:
+    - title: Statistics
+      url: /study/statistics
+    - title: Mathematics
+      url: /study/mathematics
+    - title: Computer Engineering
+      url: /study/computer_engineering
+    - title: Data Science
+      url: /study/data_science
+
+      
+      
+
+
+
+  # - title: "About"
+  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
