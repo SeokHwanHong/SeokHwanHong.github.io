@@ -1,43 +1,25 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<div id="main" role="main">
+  {% include sidebar.html %}
+  <main class="archive taxonomy-page">
+    <header class="page-heading">
+      <p class="section-kicker">Knowledge map</p>
+      <h1 id="page-title" class="page__title">{{ page.title }}</h1>
+      <p>공부 기록을 주제별로 모았습니다. 카테고리를 선택하면 해당 주제의 글 목록을 확인할 수 있습니다.</p>
+    </header>
 
-{% assign categories_max = 0 %}
-{% for category in site.categories %}
-  {% if category[1].size > categories_max %}
-    {% assign categories_max = category[1].size %}
-  {% endif %}
-{% endfor %}
-
-<ul class="taxonomy__index">
-  {% for i in (1..categories_max) reversed %}
-    {% for category in site.categories %}
-      {% if category[1].size == i %}
-        <li>
-          <a href="#{{ category[0] | slugify }}">
-            <strong>{{ category[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-</ul>
-
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-{% for i in (1..categories_max) reversed %}
-  {% for category in site.categories %}
-    {% if category[1].size == i %}
-      <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ category[0] }}</h2>
-        <div class="entries-{{ entries_layout }}">
-          {% for post in category.last %}
-            {% include archive-single.html type=entries_layout %}
-          {% endfor %}
-        </div>
-        <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
-      </section>
-    {% endif %}
-  {% endfor %}
-{% endfor %}
+    <nav class="category-grid category-grid--index" aria-label="카테고리 목록">
+      {% for category in site.data.categories %}
+        {% assign category_posts = site.categories[category.name] %}
+        <a class="category-card{% if category.children %} category-card--featured{% endif %}" href="{{ '/categories/' | append: category.slug | append: '/' | relative_url }}">
+          <span class="category-card__name">{{ category.name }}</span>
+          <span class="category-card__description">{{ category.description }}</span>
+          <span class="category-card__count">{{ category_posts | size }}개의 글 · 항목 보기</span>
+        </a>
+      {% endfor %}
+    </nav>
+  </main>
+</div>

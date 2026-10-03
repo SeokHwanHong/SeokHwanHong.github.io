@@ -1,7 +1,7 @@
 ---
-title: "Category"
+title: "카테고리"
 layout: categories
 permalink: /categories/
-author_proffile: true
-sidebar_main: true
+author_profile: false
+classes: wide
 ---

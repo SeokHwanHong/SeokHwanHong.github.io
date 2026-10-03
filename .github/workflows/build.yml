@@ -1,0 +1,33 @@
+name: Validate Jekyll
+
+on:
+  push:
+    branches:
+      - master
+      - blog-renewal
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Check blog content
+        run: python blog-management/check_blog.py
+
+      - name: Build site
+        run: bundle exec jekyll build --trace
