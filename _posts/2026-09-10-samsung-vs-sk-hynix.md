@@ -7,7 +7,6 @@ author_profile: true
 toc: true
 toc_sticky: true
 ---
-
 삼성전자와 SK하이닉스는 모두 한국을 대표하는 반도체 기업이지만, 현재의 사업구조와 AI 시대의 전략은 꽤 다르다.
 
 가장 간단하게 정리하면 다음과 같다.
@@ -22,15 +21,15 @@ toc_sticky: true
 
 하지만 이후 경로는 크게 갈렸다.
 
-| 구분 | 삼성전자 | SK하이닉스 |
-| --- | --- | --- |
-| 반도체 진입 | 1974년 | 1983년 현대전자 |
-| 본격 DRAM | 1983년 | 1980년대 |
-| 1990년대 | DRAM 세계 1위 | 현대전자·LG반도체 경쟁 후 통합 |
-| 2000년대 | NAND·Logic 확대 | 파산위기·채권단 관리 |
-| 핵심 역사적 전략 | 선행투자 | 생존·제조효율 |
-| 2010년대 | System LSI·Foundry 확대 | SK 편입·HBM 투자 |
-| 2020년대 | 종합 AI 반도체 | HBM 중심 AI Memory |
+| 구분             | 삼성전자                 | SK하이닉스                      |
+| ---------------- | ------------------------ | ------------------------------- |
+| 반도체 진입      | 1974년                   | 1983년 현대전자                 |
+| 본격 DRAM        | 1983년                   | 1980년대                        |
+| 1990년대         | DRAM 세계 1위            | 현대전자·LG반도체 경쟁 후 통합 |
+| 2000년대         | NAND·Logic 확대         | 파산위기·채권단 관리           |
+| 핵심 역사적 전략 | 선행투자                 | 생존·제조효율                  |
+| 2010년대         | System LSI·Foundry 확대 | SK 편입·HBM 투자               |
+| 2020년대         | 종합 AI 반도체           | HBM 중심 AI Memory              |
 
 삼성은 메모리에서 성공한 뒤 사업영역을 계속 넓혔고, SK하이닉스는 위기 이후 메모리에 더 집중하면서 HBM과 AI Memory에 강점을 만들었다.
 
@@ -448,21 +447,21 @@ Total AI Solution
 
 ## 15. 현재 분야별 경쟁력을 정리하면
 
-| 분야 | 우위/특징 | 이유 |
-| --- | --- | --- |
-| 전체 DRAM | 삼성전자 | 시장점유율·규모 우위 |
-| Server DRAM | 삼성전자 | 대규모 공급능력 |
-| HBM 전체 | SK하이닉스 | 양산·고객·공급 선두 |
-| HBM4 | 경쟁 심화 | 삼성 빠른 회복, SK 전체 HBM 우위 |
-| HBM Packaging | SK하이닉스 | MR-MUF·TSV·열관리 축적 |
-| NAND | 삼성전자 | 세계 1위 |
-| Enterprise SSD | 삼성전자 | 시장 1위 |
-| 초고용량 QLC eSSD | SK하이닉스/Solidigm 강점 | Solidigm 포트폴리오 |
-| Logic | 삼성전자 | System LSI 보유 |
-| Foundry | 삼성전자만 보유 | 2nm GAA 등 선단공정 |
-| 전체 Advanced Packaging | 삼성전자 | Logic+HBM+Chiplet 통합 |
-| AI Memory 전문성 | SK하이닉스 | Full-Stack AI Memory |
-| 사업 포트폴리오 폭 | 삼성전자 | Memory+Logic+Foundry+Packaging |
+| 분야                    | 우위/특징                | 이유                             |
+| ----------------------- | ------------------------ | -------------------------------- |
+| 전체 DRAM               | 삼성전자                 | 시장점유율·규모 우위            |
+| Server DRAM             | 삼성전자                 | 대규모 공급능력                  |
+| HBM 전체                | SK하이닉스               | 양산·고객·공급 선두            |
+| HBM4                    | 경쟁 심화                | 삼성 빠른 회복, SK 전체 HBM 우위 |
+| HBM Packaging           | SK하이닉스               | MR-MUF·TSV·열관리 축적         |
+| NAND                    | 삼성전자                 | 세계 1위                         |
+| Enterprise SSD          | 삼성전자                 | 시장 1위                         |
+| 초고용량 QLC eSSD       | SK하이닉스/Solidigm 강점 | Solidigm 포트폴리오              |
+| Logic                   | 삼성전자                 | System LSI 보유                  |
+| Foundry                 | 삼성전자만 보유          | 2nm GAA 등 선단공정              |
+| 전체 Advanced Packaging | 삼성전자                 | Logic+HBM+Chiplet 통합           |
+| AI Memory 전문성        | SK하이닉스               | Full-Stack AI Memory             |
+| 사업 포트폴리오 폭      | 삼성전자                 | Memory+Logic+Foundry+Packaging   |
 
 ## 16. 삼성전자의 강점과 과제
 
