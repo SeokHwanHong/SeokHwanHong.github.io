@@ -29,8 +29,8 @@ toc_sticky: true
 프레스 공정이란 평평한 금속 판재를 입체적인 부품으로 만드는 과정이다. 자동차의 문, 후드, 지붕, 바닥 등이 이 과정을 통해 생성된다. 이 공정에서 프레스 설비란 금속을 가공할 힘과 움직임을 제공하는 기계, 금형은 금속을 원하는 모양으로 만들기 위한 도구를 의미한다. 동일한 프레스 설비라도 금형을 바꾸면 다른 형상의 부품을 생산 가능하다.
 
 <figure style="text-align: center;">
-  <img src="https://global.toyota/pages/global_toyota/company/plant-tours/_assets/images/production-process/press01-icon04-flowList.png" alt="프레스 성형 공정 그림" style="width: 100%; max-width: 480px; height: auto;" loading="lazy">
-  <figcaption>금속 판재를 금형으로 눌러 입체적인 패널 형상을 만드는 프레스 성형.<br>그림 출처: <a href="https://global.toyota/en/company/plant-tours/stamping/">Toyota Virtual Plant Tour</a></figcaption>
+  <img src="{{ '/assets/images/automotive-manufacturing/press.svg' | relative_url }}" alt="프레스 공정 설명 그림" style="width: 100%; max-width: 900px; height: auto;" loading="lazy">
+  <figcaption>단계별로 판재에 구멍을 내고 성형한 뒤 가장자리를 다듬는 가공 예시. 자동차 패널 전체의 공정 순서를 그대로 나타낸 그림은 아니다.</figcaption>
 </figure>
 
 #### 2.1.2. 작업 순서
@@ -64,8 +64,8 @@ toc_sticky: true
 차체 공정이란 개별 부품을 정확히 연결해 자동차의 골격을 만드는 과정이다. 프레서에서 나온 부품인 바닥, 측면, 지붕 등과 부분 조립체를 연결해 차체의 구조와 형상을 만든다. 도장 천 차체를 BIW(Body In White)라고도 한다.
 
 <figure style="text-align: center;">
-  <img src="https://global.toyota/pages/global_toyota/company/plant-tours/_assets/images/production-process/welding/welding01-icon01-flowList.png" alt="차체 조립 공정 그림" style="width: 100%; max-width: 480px; height: auto;" loading="lazy">
-  <figcaption>개별 패널과 부분 조립체를 연결해 자동차의 골격을 만드는 차체 공정.<br>그림 출처: <a href="https://global.toyota/en/company/plant-tours/welding/">Toyota Virtual Plant Tour</a></figcaption>
+  <img src="{{ '/assets/images/automotive-manufacturing/body-welding.svg' | relative_url }}" alt="차체 용접 공정 설명 그림" style="width: 100%; max-width: 900px; height: auto;" loading="lazy">
+  <figcaption>차체 접합 위치와 저항 점용접·아크용접·레이저용접의 적용 예시. 적용 위치와 방식은 차체 설계에 따라 달라진다.</figcaption>
 </figure>
 
 #### 2.2.2. 작업
@@ -96,8 +96,8 @@ toc_sticky: true
 도장 공정이란 색을 입히는 것뿐 아니라, 부식을 방지, 표변 보호, 외관 품질을 확보하는 과정이다. 금속 표면에 바로 색칠하면 오염으로 인해 도료가 잘 붙지 않거나, 필요한 보호 성능을 얻지 못하는 경우가 발생한다. 이를 방지하기 위해 표면 준비와 여러 층의 도막 형성이 필요하다.
 
 <figure style="text-align: center;">
-  <img src="https://global.toyota/pages/global_toyota/company/plant-tours/_assets/images/production-process/painting/painting01-icon05-flowList.png" alt="도장 공정의 상도 도포 그림" style="width: 100%; max-width: 480px; height: auto;" loading="lazy">
-  <figcaption>차체에 도료를 분사하는 상도 작업 예시. 도장에는 전처리·전착·건조 등의 단계도 포함된다.<br>그림 출처: <a href="https://global.toyota/en/company/plant-tours/painting/">Toyota Virtual Plant Tour</a></figcaption>
+  <img src="{{ '/assets/images/automotive-manufacturing/painting.svg' | relative_url }}" alt="도장 공정 설명 그림" style="width: 100%; max-width: 900px; height: auto;" loading="lazy">
+  <figcaption>전착·세척·도료 도포·건조·검사 등을 보여주는 도장 라인 예시. 출처: 그림 내 PPG Industries 표기. 단계 구성은 공법에 따라 달라진다.</figcaption>
 </figure>
 
 #### 2.3.2. 작업순서
@@ -131,8 +131,8 @@ toc_sticky: true
 의장 공정이란 차체에 부품과 시스템을 조립해 차량을 완성하는 과정이다. 해당 공정에 들어오는 차체는 외형과 도장은 갖췄지만, 운행이 가능한 수준은 아니다. 내장재, 유리, 시트, 배선, 구동계 등 여러 부품을 조립함으로써 비로소 한 대의 차량이 완성된다. 전기차의 경우 구동계 구성이 모터와 배터리 등 차량 구조에 따라 상이한 부품으로 이루어진다.
 
 <figure style="text-align: center;">
-  <img src="https://global.toyota/pages/global_toyota/company/plant-tours/_assets/images/production-process/assembly/assembly01-icon02-flowList.png" alt="의장 부품 장착 공정 그림" style="width: 100%; max-width: 480px; height: auto;" loading="lazy">
-  <figcaption>차체에 각종 부품을 장착해 차량을 완성하는 의장 공정.<br>그림 출처: <a href="https://global.toyota/en/company/plant-tours/assembly/">Toyota Virtual Plant Tour</a></figcaption>
+  <img src="{{ '/assets/images/automotive-manufacturing/assembly.svg' | relative_url }}" alt="의장 조립 공정 설명 그림" style="width: 100%; max-width: 900px; height: auto;" loading="lazy">
+  <figcaption>부품 장착과 최종 조립으로 차량을 완성해 가는 흐름을 보여주는 개념도. 차체 용접도 함께 그려져 있어 실제 의장 공정의 범위와 구분해 읽는다.</figcaption>
 </figure>
 
 #### 2.4.2. 작업 범주
