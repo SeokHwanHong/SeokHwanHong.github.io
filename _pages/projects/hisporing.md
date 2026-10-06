@@ -28,7 +28,7 @@ toc_sticky: true
 따라서 지역 현황을 보여주는 대시보드와 프로그램·시설 조회를 하나의 설계 흐름 안에 배치했다. AI는 제공된 근거를 해석하고 보완할 점을 제안하며, 최종 프로그램 운영 여부는 담당자가 판단하도록 범위를 정했다.
 
 <figure>
-  <a href="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}" alt="서울 행정구역 선택과 시설·강좌·신청 실적, 종목 분포를 보여주는 Hi스포링 대시보드" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
+  <a href="https://seokhwanhong.github.io/images/projects/hisporing/dashboard.png"><img src="https://seokhwanhong.github.io/images/projects/hisporing/dashboard.png" alt="서울 행정구역 선택과 시설·강좌·신청 실적, 종목 분포를 보여주는 Hi스포링 대시보드" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
   <figcaption>
     지역 조회와 종목 분포를 프로그램 설계의 출발점으로 배치했다. 화면의 숫자는 저장소 캡처 당시 집계이며 현재 통계나 서비스 성과를 뜻하지 않는다. 이미지를 누르면 원본을 볼 수 있다.
   </figcaption>
@@ -67,7 +67,7 @@ toc_sticky: true
 월간 배치는 매월 1일 01시에 원본 변경과 서비스 파일 상태를 확인하고, 필요하면 서울 데이터를 추출·검증해 발행한다. 다만 외부 최신 원본을 자동 다운로드하는 기능은 구현되어 있지 않다. 운영자가 새 원본을 확보해야 서비스도 새 자료를 반영할 수 있다.
 
 <figure>
-  <a href="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}" alt="원본 확보, 변경 확인, 서울 추출과 검증, 서비스 파일 발행, 메모리 적재, 조회로 이어지는 데이터 갱신 흐름" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
+  <a href="https://seokhwanhong.github.io/images/projects/hisporing/data-refresh-flow.png"><img src="https://seokhwanhong.github.io/images/projects/hisporing/data-refresh-flow.png" alt="원본 확보, 변경 확인, 서울 추출과 검증, 서비스 파일 발행, 메모리 적재, 조회로 이어지는 데이터 갱신 흐름" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
   <figcaption>
     원본 확보는 수동이며 서비스 반영은 배치로 수행한다. 월간 실행 자체가 데이터 최신성을 보장하지는 않는다.
   </figcaption>
@@ -89,7 +89,7 @@ toc_sticky: true
 서버는 응답의 JSON 구조, 근거 키와 점수를 검증하고 종합 점수·등급을 계산한다. 평가할 수 있는 점수가 모두 없으면 판단 자료 부족으로 표시한다. 계획서 생성·인쇄·복원에서는 AI를 다시 호출하지 않고, 생성 당시 선택한 결과를 유지한다.
 
 <figure>
-<a href="{{ '/images/projects/hisporing/plan-step-03-ai-review.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/plan-step-03-ai-review.png' | relative_url }}" alt="프로그램 운영 정보 입력과 AI 강점·위험요인·개선 제안을 확인하는 화면" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
+<a href="https://seokhwanhong.github.io/images/projects/hisporing/plan-step-03-ai-review.png"><img src="https://seokhwanhong.github.io/images/projects/hisporing/plan-step-03-ai-review.png" alt="프로그램 운영 정보 입력과 AI 강점·위험요인·개선 제안을 확인하는 화면" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
 <figcaption>입력한 프로그램과 AI 검토 결과를 같은 단계에서 확인한다. 점수는 해당 입력의 검토 예시로 실제 정책 효과나 모델 정확도가 아니다. 시설 이미지는 대표 이미지다.</figcaption>
 </figure>
 
