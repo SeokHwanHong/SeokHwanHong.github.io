@@ -7,20 +7,7 @@ main:
     url: /tags/
 
   - title: "Study"
-    sublinks:
-    - title: Statistics
-      url: /study/statistics
-    - title: Mathematics
-      url: /study/mathematics
-    - title: Computer Engineering
-      url: /study/computer_engineering
-    - title: Data Science
-      url: /study/data_science
-
-      
-      
-
-
+    url: /categories/
 
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
