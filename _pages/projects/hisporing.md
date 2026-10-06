@@ -7,7 +7,7 @@ toc: true
 toc_sticky: true
 ---
 
-> [GitHub에서 코드와 README 보기](https://github.com/SeokHwanHong/kspo) · [프로젝트 목록으로 돌아가기](/projects/)
+> [GitHub에서 코드와 README 보기](https://github.com/SeokHwanHong/kspo)
 
 **Hi스포링**은 공공기관 체육복지 담당자가 지역별 이용 현황, 기존 프로그램과 시설 정보를 함께 확인하고 체육 프로그램 운영안을 작성하도록 돕는 서비스다. 지역 데이터를 조회하는 데서 끝나지 않고 **시설 선택 → 운영 정보 입력 → AI 검토 → 계획서 생성**까지 연결했다.
 
