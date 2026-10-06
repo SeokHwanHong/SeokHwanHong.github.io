@@ -16,12 +16,10 @@ toc_sticky: true
 | 항목 | 내용 |
 | --- | --- |
 | 팀 | 설홍길 · 3인 팀 프로젝트 |
-| 개발 기록 | README WBS 기준 2026년 9월 15일~23일 |
 | 목표 | 서울 지역 공공데이터를 프로그램 기획과 운영 계획서 작성에 연결 |
 | 내 역할 | 팀장, 지역 대시보드, 프로그램 설계, 입력 예외처리, AI UI와 사용자 흐름 보완 |
 | 기술 | Python, Django, JavaScript, HTMX, ECharts, CSV·메모리 캐시, Gemini API, Render |
 | 구현 결과 | 지역·프로그램·시설 조회, AI 검토, 계획서 생성·인쇄·최근 5건 복원 |
-| 검증 범위 | README의 화면·시연·테스트 기록 기준. 실제 기관 도입 효과는 미검증 |
 
 ## 1. 지역 데이터를 실제 기획으로 연결하기
 
@@ -30,13 +28,15 @@ toc_sticky: true
 따라서 지역 현황을 보여주는 대시보드와 프로그램·시설 조회를 하나의 설계 흐름 안에 배치했다. AI는 제공된 근거를 해석하고 보완할 점을 제안하며, 최종 프로그램 운영 여부는 담당자가 판단하도록 범위를 정했다.
 
 <figure>
-<a href="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}" alt="서울 행정구역 선택과 시설·강좌·신청 실적, 종목 분포를 보여주는 Hi스포링 대시보드" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
-<figcaption>지역 조회와 종목 분포를 프로그램 설계의 출발점으로 배치했다. 화면의 숫자는 저장소 캡처 당시 집계이며 현재 통계나 서비스 성과를 뜻하지 않는다. 이미지를 누르면 원본을 볼 수 있다.</figcaption>
+  <a href="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/dashboard.png' | relative_url }}" alt="서울 행정구역 선택과 시설·강좌·신청 실적, 종목 분포를 보여주는 Hi스포링 대시보드" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
+  <figcaption>
+    지역 조회와 종목 분포를 프로그램 설계의 출발점으로 배치했다. 화면의 숫자는 저장소 캡처 당시 집계이며 현재 통계나 서비스 성과를 뜻하지 않는다. 이미지를 누르면 원본을 볼 수 있다.
+  </figcaption>
 </figure>
 
 ## 2. 담당 기능: 단계 사이의 입력과 상태를 연결하기
 
-나는 팀장으로서 지역 현황 대시보드와 프로그램 설계 기능을 개발하고, 설계 과정의 예외처리와 AI 결과 UI를 보완했다. 팀원은 시설 조회·AI 서버 연동·배포와 프로그램 조회·CSV 정제를 나누어 맡았다. 아래 데이터·AI·배포 구조는 팀 전체 구현이며, 모든 구성요소를 개인 작업으로 보지는 않는다.
+지역 현황 대시보드와 프로그램 설계 기능을 개발하고, 설계 과정의 예외처리와 AI 결과 UI를 보완했다. 팀원은 시설 조회·AI 서버 연동·배포와 프로그램 조회·CSV 정제를 나누어 맡았다. 아래 데이터·AI·배포 구조는 팀 전체 구현이며, 모든 구성요소를 개인 작업으로 보지는 않는다.
 
 프로그램 설계는 다음 단계로 구성했다.
 
@@ -67,8 +67,10 @@ toc_sticky: true
 월간 배치는 매월 1일 01시에 원본 변경과 서비스 파일 상태를 확인하고, 필요하면 서울 데이터를 추출·검증해 발행한다. 다만 외부 최신 원본을 자동 다운로드하는 기능은 구현되어 있지 않다. 운영자가 새 원본을 확보해야 서비스도 새 자료를 반영할 수 있다.
 
 <figure>
-<a href="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}" alt="원본 확보, 변경 확인, 서울 추출과 검증, 서비스 파일 발행, 메모리 적재, 조회로 이어지는 데이터 갱신 흐름" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
-<figcaption>원본 확보는 수동이며 서비스 반영은 배치로 수행한다. 월간 실행 자체가 데이터 최신성을 보장하지는 않는다.</figcaption>
+  <a href="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}"><img src="{{ '/images/projects/hisporing/data-refresh-flow.png' | relative_url }}" alt="원본 확보, 변경 확인, 서울 추출과 검증, 서비스 파일 발행, 메모리 적재, 조회로 이어지는 데이터 갱신 흐름" loading="lazy" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
+  <figcaption>
+    원본 확보는 수동이며 서비스 반영은 배치로 수행한다. 월간 실행 자체가 데이터 최신성을 보장하지는 않는다.
+  </figcaption>
 </figure>
 
 정제 결과는 임시 파일에서 검증한 뒤 서비스 파일로 교체하고, 마지막으로 manifest에 세대와 파일 정보를 기록한다. 메모리 재적재가 실패하면 기존 정상 캐시가 있는 경우 이를 유지한다. 파일별 교체 방식이므로 여러 CSV 전체의 일괄 롤백은 보장하지 않는다는 한계도 남아 있다.
