@@ -1,6 +1,10 @@
 ---
 title: "Hi스포링: 공공데이터 기반 체육복지 프로그램 설계"
 layout: single
+date: 2026-10-06 17:03:17 +0900
+categories:
+  - "SK Encore DE 2기"
+subcategory: "프로젝트"
 permalink: /projects/hisporing/
 author_profile: false
 toc: true
