@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[SK네트웍스 Family 엔코아AI캠퍼스] AI 레디 데이터 엔지니어링 캠프 2기_10월 2주차 회고"
+title: "[SK엔코아 DE 2기] 10월 3주차 회고"
 date: 2026-10-16 17:00:00 +0900
 categories:
   - "SK Encore DE 2기"
@@ -110,3 +110,4 @@ README와 발표자료는 산출물을 예쁘게 소개하는 작업만은 아�
 - [SQL 수업 정리]({% post_url 2026-10-16-mysql-analysis-basics %})
 - [Medallion 프로젝트와 개인 분석]({{ '/projects/medallion-emr/' | relative_url }})
 - [팀 저장소 — 검토한 develop 스냅샷](https://github.com/SeokHwanHong/Medallion/tree/944986c7f124eca2774af2093bc45cd2962dda4d)
+
