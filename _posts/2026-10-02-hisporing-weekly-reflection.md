@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[WIL] 기능을 구현하는 것에서 하나의 서비스를 만드는 것으로"
+title: "[SK엔코아 DE 2기] 10월 1주차 회고"
 date: 2026-10-02 22:00:00 +0900
 categories:
   - "SK Encore DE 2기"
@@ -75,3 +75,4 @@ AI를 활용한 바이브 코딩은 익숙하지 않은 기술에 접근하고 �
 이번 경험을 바탕으로 데이터를 분석하는 데서 더 나아가, 분석 결과가 사용자의 판단과 행동에 도움이 되는 서비스로 이어지도록 고민하고 싶다.
 
 프로젝트 저장소: [Hi스포링 GitHub](https://github.com/SeokHwanHong/kspo)
+

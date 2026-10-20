@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[WIL] 계산되는 결과에서 믿을 수 있는 데이터로"
+title: "[SK엔코아 DE 2기] 10월 2주차 회고"
 date: 2026-10-09 19:00:00 +0900
 categories:
   - "SK Encore DE 2기"
@@ -81,3 +81,4 @@ CSV를 저장하고 다시 읽어 열과 합계를 확인하는 과정도 같은
 
 - [10월 6일: pandas 선택·정제·결합·집계]({% post_url 2026-10-06-python-pandas-pipeline %})
 - [10월 7일: 오류 데이터 격리와 매출 파이프라인]({% post_url 2026-10-07-python-json-pandas-part2 %})
+
