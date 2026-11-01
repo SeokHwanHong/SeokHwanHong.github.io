@@ -58,15 +58,13 @@ $$
 
 클래스별로 학습·검증 표본을 추출해 마스크를 구성했다. 모델은 전체 그래프의 특징과 연결을 사용해 출력을 만들고, 학습 마스크에 속한 노드에서만 NLL 손실을 계산한다. 검증 마스크의 정확도와 손실은 매 epoch 기록했다.
 
-<figure class="project-figure">
-  <img src="{{ '/images/projects/gcn/training-loss.png' | relative_url }}" alt="GCN 학습·검증 손실 곡선" loading="lazy">
-  <figcaption>학습 이력 CSV로 그린 손실 곡선. 학습이 진행되면서 손실이 감소했다.</figcaption>
-</figure>
+![GCN 학습·검증 손실 곡선](/images/projects/gcn/training-loss.png)
 
-<figure class="project-figure">
-  <img src="{{ '/images/projects/gcn/training-accuracy.png' | relative_url }}" alt="GCN 학습·검증 정확도 곡선" loading="lazy">
-  <figcaption>학습·검증 정확도 변화. 학습 후반에는 검증 정확도의 변화 폭이 줄었다.</figcaption>
-</figure>
+*학습 이력 CSV로 그린 손실 곡선. 학습이 진행되면서 손실이 감소했다.*
+
+![GCN 학습·검증 정확도 곡선](/images/projects/gcn/training-accuracy.png)
+
+*학습·검증 정확도 변화. 학습 후반에는 검증 정확도의 변화 폭이 줄었다.*
 
 학습 노트북의 마지막 저장 로그는 Train Accuracy 0.6130, Validation Accuracy 0.6815다. 손실과 정확도 곡선을 함께 보며 학습 진행에 따른 변화를 살펴봤다.
 
