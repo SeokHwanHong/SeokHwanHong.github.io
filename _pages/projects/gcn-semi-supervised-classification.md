@@ -37,7 +37,7 @@ $$
 논문에서 설명하는 층별 전파 규칙은 다음과 같다.
 
 $$
-\hat{A}=\tilde{D}^{-\frac12}(A+I)\tilde{D}^{-\frac12},
+\hat{A}=\tilde{D}^{-\frac{1}{2}}(A+I)\tilde{D}^{-\frac{1}{2}},
 \qquad
 H^{(l+1)}=\sigma(\hat{A}H^{(l)}W^{(l)})
 $$
