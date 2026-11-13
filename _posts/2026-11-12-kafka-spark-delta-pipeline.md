@@ -15,7 +15,7 @@ toc_sticky: true
 
 STEP 12~17과 종합 문제는 Kafka 읽기 → 시간 창 집계 → 결과 재전송 → Bronze·Silver·Gold → 튜닝으로 이어진다. 11월 12일은 이 범위를 묶은 복습 정리 날짜다.
 
-앞 파트와 같은 합성 교통카드 로그를 사용한다. `lab`에는 배치 읽기·JSON 펼치기와 일부 스트리밍 코드가 작성돼 있고, 후반 파이프라인·튜닝은 미작성 칸이 남아 있다. 아래 전체 흐름은 lab과 answer를 함께 읽어 정리한 학습 내용이다.
+앞 파트와 같은 합성 교통카드 로그를 사용한다. Kafka 레코드를 업무 이벤트로 해석한 뒤, 시간 창 집계와 이동 단위 테이블로 확장하는 흐름을 살펴본다.
 
 ## 1. Spark·Kafka·Delta 준비
 
@@ -46,7 +46,7 @@ station_id STRING, tag_time TIMESTAMP, fare INT, recv_time TIMESTAMP
 
 PySpark와 Kafka connector는 자료의 4.1.3, Scala binary 버전은 2.13에 맞춘다. Kafka 브로커 버전과 Spark connector 버전은 서로 다른 구성요소의 버전이다.
 
-원본은 `jars/*.jar`, 없으면 `ivy/jars/*.jar`를 읽고 둘 다 없으면 의존성을 내려받는다. 캐시는 실행 성과의 증거로 사용하지 않는다. 이미 실행 중인 Spark 세션이 있다면 세션을 새로 만들어 connector 설정을 적용한다.
+원본은 `jars/*.jar`, 없으면 `ivy/jars/*.jar`를 읽고 둘 다 없으면 의존성을 내려받는다. 이미 실행 중인 Spark 세션이 있다면 세션을 새로 만들어 connector 설정을 적용한다.
 
 ## 2. Kafka 레코드와 업무 이벤트의 열 구분하기
 
@@ -66,10 +66,10 @@ Kafka의 key·value는 binary이므로 문자열로 바꾼 뒤 `from_json`으로
 
 <figure>
 <a href="/images/lessons/kafka/kafka-to-dataframe.png"><img src="/images/lessons/kafka/kafka-to-dataframe.png" alt="Kafka key와 value를 문자열·JSON 변환으로 DataFrame 열에 펼치는 과정" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
-<figcaption>첨부 reference/image8.png의 설명용 도식. 변환 전 레코드 위치와 변환 후 업무 열을 구분한다.</figcaption>
+<figcaption>Kafka 레코드의 key·value를 DataFrame의 업무 열로 펼치는 과정</figcaption>
 </figure>
 
-단순 재생 한 번의 기준은 2,008행, IN 1,012행·OUT 996행, 고유 event_id 1,988개다. 이는 첨부 원문 집계이며 실제 토픽은 이전 재생 이력에 따라 달라질 수 있다. 필요한 파티션의 범위를 배치로 읽을 때 `endingOffsets=10`은 끝 10을 포함하지 않아 0~9를 읽는 형태다.
+단순 재생 한 번의 기준은 2,008행, IN 1,012행·OUT 996행, 고유 event_id 1,988개다. 이는 첨부 원문 집계이며 실제 토픽은 이전 재생 이력에 따라 달라질 수 있다. 배치 읽기에서 오프셋 범위는 파티션별 JSON으로 지정한다. 예를 들어 `.option("startingOffsets", '{"tags":{"0":0}}')`와 `.option("endingOffsets", '{"tags":{"0":10}}')`을 사용하면 `tags`의 0번 파티션에서 오프셋 0~9를 읽는다. 끝 오프셋 10은 포함하지 않는다.
 
 ## 3. 이벤트 시간 창과 워터마크
 
@@ -100,7 +100,7 @@ append는 확정된 창 결과를 내보낸다. 아직 닫히지 않은 끝부�
 
 <figure>
 <a href="/images/lessons/kafka/event-time-watermark.png"><img src="/images/lessons/kafka/event-time-watermark.png" alt="5분 집계 창과 이벤트 시간 기준 워터마크, 늦은 이벤트의 관계" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
-<figcaption>첨부 reference/image9.png의 워터마크 개념도. 실제 워터마크와 제외 건수는 쿼리 진행 기록으로 확인한다.</figcaption>
+<figcaption>5분 집계 창과 이벤트 시간 기준 워터마크의 관계</figcaption>
 </figure>
 
 자료는 `recentProgress`, `eventTime.watermark`, `numRowsDroppedByWatermark`를 함께 확인한다. `availableNow` 종료가 모든 창을 무조건 확정한다는 뜻은 아니다. 빈 입력 재실행에서는 진행 기록이 없을 수 있어 목록의 마지막 원소를 바로 꺼내는 진단 코드도 보완할 필요가 있다.
@@ -118,7 +118,7 @@ out = boards.select(F.col("station_id").alias("key"),
     .option("topic", "station_cnt").save())
 ```
 
-Kafka sink에는 string 또는 binary인 **value** 열이 필요하다. JSON 열을 만들기만 하고 `.alias("value")`를 빼면 출력 계약이 맞지 않는다. `lab/s14`의 해당 누락과 `staiton_cnt` 오타는 설명용 예제에서 바로잡았다.
+Kafka sink에는 string 또는 binary인 **value** 열이 필요하다. JSON 열을 만들기만 하고 `.alias("value")`를 빼면 출력 계약이 맞지 않는다. 토픽명도 생성·쓰기·조회 단계에서 모두 `station_cnt`로 일치시켜야 한다.
 
 `win5`의 update 모드는 바뀐 창 값을 다시 메시지로 보낸다. 같은 창이 여러 레코드로 나올 수 있으므로 모든 count를 합쳐 최종 이용량으로 보면 안 된다. 다운스트림에서 창 식별자별 최신 상태를 관리해야 한다. 자료의 `HH:mm` 키는 하루 예제용이므로 여러 날짜로 확장한다면 날짜·창 시작·종료를 포함한 키가 필요하다.
 
@@ -151,7 +151,7 @@ result = spark.read.format("delta").load(path)
 result.count()
 ```
 
-최초 테이블은 따로 생성하고, 이후 `foreachBatch`에서 위 upsert를 호출한다. 본문은 `execute()`의 반환형에 특정 출력 API를 연결하지 않고 결과 테이블을 다시 읽어 검증한다. 임의 정정 데이터에 대한 최신 값 선택까지 해결한 규칙은 아니므로 충돌 정책은 별도로 정한다.
+최초 테이블은 따로 생성하고, 이후 `foreachBatch`에서 위 upsert를 호출한다. MERGE 후에는 결과 테이블을 다시 읽어 행 수와 내용을 검증한다. 임의 정정 데이터에 대한 최신 값 선택까지 해결한 규칙은 아니므로 충돌 정책은 별도로 정한다.
 
 ## 6. 재처리 결과를 읽는 두 가지 기준
 
@@ -184,7 +184,7 @@ STEP 17은 설정을 하나씩 바꾸고 진행 기록을 비교한다.
 | `linger.ms` 0 / 50 | 전송 묶음과 개별 메시지 대기를 어떻게 조정할까? |
 | numInputRows·처리율·배치 시간 | 실행 중 실제로 데이터를 읽고 처리하는가? |
 
-자료의 지연 측정은 ‘처리 시각 − Kafka timestamp’다. 최종 앱 화면 표시까지 잰 서비스 전체 지연은 아니다. 원래 이벤트 시각도 과거 날짜이므로 같은 지연 지표에 섞지 않는다. 측정 예시의 속도 배수는 개인 성과로 옮기지 않고, lab에 비어 있는 측정표는 후속 실험으로 남긴다.
+자료의 지연 측정은 ‘처리 시각 − Kafka timestamp’다. 최종 앱 화면 표시까지 잰 서비스 전체 지연은 아니다. 원래 이벤트 시각도 과거 날짜이므로 같은 지연 지표에 섞지 않는다. 설정별 성능은 같은 입력·실행 조건에서 측정하고 최종 건수도 함께 대조한다.
 
 종합 문제는 `alert_s99`로 미등록 역 태그를 보내는 경보, Bronze 파티션별 위치 대조, 노선별 Gold 집계를 묻는다. 파이프라인을 확장할 때 어느 계층의 어떤 행을 세는지 점검하는 연습이다.
 
@@ -192,7 +192,7 @@ STEP 17은 설정을 하나씩 바꾸고 진행 기록을 비교한다.
 
 Kafka는 이벤트 보관·전달과 독립 소비를, Spark는 해석·상태 집계·변환을, Delta는 테이블 저장·변경 관리를 맡는다. 입력 위치와 업무 키, 체크포인트와 멱등 쓰기를 구분하면 단계 사이의 복구를 더 구체적으로 설계할 수 있다.
 
-작성 근거: STEP 12~17·종합 문제의 lab·answer, 데이터, reference 이미지. Spark·Kafka·Delta 전체 실행은 별도 검증 대상이다. 원본의 명령·경로는 유지하고 설명에 필요한 축약·오류 보완만 반영했다.
+작성 근거: STEP 12~17·종합 문제의 lab·answer, 데이터, reference 이미지. Spark·Kafka·Delta 전체 실행은 별도 검증 대상이다.
 
 참고: [Spark 4.1.3 Kafka 연계](https://spark.apache.org/docs/4.1.3/streaming/structured-streaming-kafka-integration.html), [Structured Streaming](https://spark.apache.org/docs/4.1.3/streaming/apis-on-dataframes-and-datasets.html).
 

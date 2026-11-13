@@ -15,7 +15,7 @@ toc_sticky: true
 
 Spark 수업에서는 파일을 읽어 표로 만들었다. Kafka 수업은 그 앞단에서 데이터가 어떻게 전달되고, 여러 프로그램이 어디까지 읽었는지 어떻게 관리하는지를 다룬다. 첫 파트는 STEP 02~05의 Docker 실행, 콘솔 송수신, 파티션과 컨슈머 그룹이다.
 
-네 편은 `kafkacamp` 자료를 **11월 9~12일 복습 정리**로 재구성했다. 압축파일에는 10월 26~27일 수정 기록과 10월 날짜의 출력 예시가 있다. 아래 날짜를 실제 수업일이나 모든 실습의 완료일로 사용하지 않는다.
+네 편은 `kafkacamp` 자료를 **11월 9~12일 복습 정리**로 재구성했다. 압축파일에는 10월 26~27일 수정 기록과 10월 날짜의 출력 예시가 있다. 게시 날짜는 실제 수업일이 아닌 복습 정리 날짜다.
 
 ## 1. 실습 데이터와 실행 환경
 
@@ -28,9 +28,9 @@ Spark 수업에서는 파일을 읽어 표로 만들었다. Kafka 수업은 그 
 | `data/tags_day.jsonl` | 하루 이벤트 | 2,008행, 고유 이벤트 1,988개 |
 | `data/stream_src/part_*.jsonl` | 단계별 재생 입력 | 10개 파일 |
 
-중복 이벤트를 일부러 넣었기 때문에 ‘Kafka에 들어간 레코드 수’와 ‘고유 이벤트 수’가 같지 않다. 본문에서 데이터 건수는 첨부 원문을 별도로 읽어 확인한 값이며, Kafka 출력은 자료의 예시 또는 실행 후 확인할 항목으로 구분한다.
+중복 이벤트를 일부러 넣었기 때문에 ‘Kafka에 들어간 레코드 수’와 ‘고유 이벤트 수’가 같지 않다. 표의 건수는 첨부 데이터 파일을 집계한 값이다.
 
-실습 경로는 `C:\kafkacamp`, Docker 이미지는 `apache/kafka:4.3.1`이다. requirements에는 `confluent-kafka==2.16.0`, `pyspark==4.1.3`, `delta-spark==4.4.1`, `pandas==2.3.3`, `pyarrow==26.0.0`, `ipykernel==7.4.0`이 지정돼 있다. 여기서는 원본의 버전 기록을 유지하며 실제 설치·기동은 별도로 확인한다.
+실습 경로는 `C:\kafkacamp`, Docker 이미지는 `apache/kafka:4.3.1`이다. requirements에는 `confluent-kafka==2.16.0`, `pyspark==4.1.3`, `delta-spark==4.4.1`, `pandas==2.3.3`, `pyarrow==26.0.0`, `ipykernel==7.4.0`이 지정돼 있다.
 
 ## 2. 어느 터미널에서 실행하는가
 
@@ -128,7 +128,7 @@ docker exec -it kafka bash
 
 <figure>
 <a href="/images/lessons/kafka/group-offsets.png"><img src="/images/lessons/kafka/group-offsets.png" alt="파티션의 커밋 오프셋·끝 오프셋과 그룹의 분담을 설명하는 도식" style="width:100%;height:auto;max-height:none;object-fit:contain;"></a>
-<figcaption>첨부 reference/image4.png의 설명용 도식. 개인 환경의 실행 로그가 아니다.</figcaption>
+<figcaption>컨슈머 그룹의 파티션 분담과 커밋 위치·로그 끝 위치의 관계</figcaption>
 </figure>
 
 `CURRENT-OFFSET`은 커밋한 다음 읽기 위치, `LOG-END-OFFSET`은 로그 끝 위치다. 자료의 예처럼 9와 12라면 lag는 3이다. 이는 미소비 진행 차이의 단서이지 최종 DB 저장 성공을 직접 보증하는 지표는 아니다.
@@ -139,13 +139,13 @@ docker exec -it kafka bash
 ./kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group g05 --topic tags3 --reset-offsets --to-earliest --dry-run
 ```
 
-실제로 되돌리는 `--execute`는 해당 그룹을 재처리할 의도가 확인된 실습에서만 이어서 사용한다.
+`--dry-run`은 변경 계획만 보여 준다. 컨슈머를 멈춘 상태에서 계획을 확인한 뒤 `--execute`로 바꾸면 그룹의 읽기 위치가 초기화되어 기존 메시지를 다시 처리하게 된다.
 
 ## 정리
 
 Kafka에서 메시지를 읽는다는 것은 로그를 지우는 것이 아니라 읽기 위치를 이동하는 일이다. 다음 파트에서는 이 과정을 Python으로 옮기고 키 분배와 로그 재생을 확인한다.
 
-작성 근거: `kafka1.yml`, STEP 02~05의 lab·answer, `reference/image4.png`, 첨부 데이터. 명령은 정답 흐름의 `tags3`로 통일했다. lab의 `tag3`·`tage3` 표기 차이는 별도 검토 메모에 남겼다.
+작성 근거: `kafka1.yml`, STEP 02~05의 lab·answer, `reference/image4.png`, 첨부 데이터. 명령의 토픽명은 `tags3`로 통일했다.
 
 
 ## 함께 읽기
