@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "[SK엔코아 DE 2기] 11월 2주차 회고"
-date: 2026-11-13 19:00:00 +0900
+date: 2026-11-13 09:00:00 +0900
 permalink: /sk-encore-de-2/november-week2-reflection/
 categories:
   - "SK Encore DE 2기"
